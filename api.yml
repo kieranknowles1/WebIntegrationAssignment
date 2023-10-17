@@ -1,13 +1,15 @@
-openapi: '3.0.2'
+openapi: "3.0.2"
 info:
   title: Web Integration Assignment API
   description: |
     API for the Web Integration Assignment \
     Author: Kieran Knowles \
     Generated with assistance from GitHub Copilot
-  version: '1.0'
+  version: "1.0"
+
 servers:
   - url: https://w20013000.nuwebspace.co.uk/api
+
 paths:
   # TODO: This shouldn't require including the .php extension
   /developer.php:
@@ -15,13 +17,12 @@ paths:
       summary: Get developer information
       description: Return name and student ID of the developer
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/developerInformation'
-
+                $ref: "#/components/schemas/developerInformation"
 
 components:
   schemas:
@@ -33,4 +34,4 @@ components:
           example: John Smith
         student_id:
           type: string
-          pattern: 'w[0-9]{8}'
+          pattern: "w[0-9]{8}"
