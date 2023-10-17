@@ -11,11 +11,10 @@ servers:
   - url: https://w20013000.nuwebspace.co.uk/api
 
 paths:
-  # TODO: This shouldn't require including the .php extension
-  /developer.php:
+  /developer:
     get:
       summary: Get developer information
-      description: Return name and student ID of the developer
+      description: Returns name and student ID of the developer
       responses:
         "200":
           description: OK
@@ -23,6 +22,43 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/developerInformation"
+
+  /country:
+    get:
+      summary: Get all countries referenced in the database
+      description: Returns only the country names
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/country"
+
+  /preview:
+    get:
+      summary: Get preview videos and the title of their associated content
+      description: |
+        Returns the title of the content and the preview video URL \
+        Results are returned in a random order
+      parameters:
+        - in: query
+          name: limit
+          description: "Maximum number of results to return, default: unlimited"
+          schema:
+            type: integer
+          required: false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/preview"
 
 components:
   schemas:
@@ -35,3 +71,19 @@ components:
         student_id:
           type: string
           pattern: "w[0-9]{8}"
+
+    country:
+      type: string
+      example: United Kingdom
+
+    preview:
+      type: object
+      properties:
+        title:
+          # TODO: Mando probably isn't the best example
+          type: string
+          example: The Mandalorian
+        url:
+          type: string
+          format: uri
+          example: https://www.youtube.com/watch?v=XmI7WKrAtqs
