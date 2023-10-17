@@ -1,0 +1,36 @@
+openapi: '3.0.2'
+info:
+  title: Web Integration Assignment API
+  description: |
+    API for the Web Integration Assignment \
+    Author: Kieran Knowles \
+    Generated with assistance from GitHub Copilot
+  version: '1.0'
+servers:
+  - url: https://w20013000.nuwebspace.co.uk/api
+paths:
+  # TODO: This shouldn't require including the .php extension
+  /developer.php:
+    summary: Get developer information
+    description: Test
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/developerInformation'
+
+
+components:
+  schemas:
+    developerInformation:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Smith
+        student_id:
+          type: string
+          pattern: 'w[0-9]{8}'
