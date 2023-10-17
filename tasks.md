@@ -73,7 +73,7 @@ for each endpoint is given below:
 
 #### Endpoints
 See [KF6012 Assessment Brief](KF6012%20-%20CIS%20Assessment%202023-24.pdf) for endpoint details
-- [ ] developer
+- [x] developer
 - [ ] country
 - [ ] preview
 - [ ] author-and-affiliation
