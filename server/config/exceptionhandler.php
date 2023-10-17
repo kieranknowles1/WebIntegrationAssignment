@@ -1,6 +1,8 @@
 <?php
+
 require_once "autoloader.php";
 
+// TODO: Should this be in its own file?
 /**
  * Endpoint to log an exception
  * NOTE: This does not handle setting the response code
@@ -8,14 +10,17 @@ require_once "autoloader.php";
  * @generated GitHub Copilot was used to assist in writing this code
  * @author Kieran Knowles
  */
-class ExceptionEndpoint extends Endpoint {
+class ExceptionEndpoint extends Endpoint
+{
     private Exception $exception;
 
-    public function __construct(Exception $exception) {
+    public function __construct(Exception $exception)
+    {
         $this->exception = $exception;
     }
 
-    protected function processRequest(): mixed {
+    protected function processRequest(): mixed
+    {
         return [
             'error' => $this->exception->getMessage(),
             'file' => $this->exception->getFile(),
