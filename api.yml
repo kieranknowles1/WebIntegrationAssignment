@@ -11,9 +11,9 @@ servers:
 paths:
   # TODO: This shouldn't require including the .php extension
   /developer.php:
-    summary: Get developer information
-    description: Test
     get:
+      summary: Get developer information
+      description: Return name and student ID of the developer
       responses:
         '200':
           description: OK
