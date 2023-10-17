@@ -46,9 +46,13 @@ paths:
       parameters:
         - in: query
           name: limit
-          description: "Maximum number of results to return, default: unlimited"
+          description: |
+            Maximum number of results to return \
+            Default: infinity \
+            Minimum: 1
           schema:
             type: integer
+            minimum: 1
           required: false
       responses:
         "200":

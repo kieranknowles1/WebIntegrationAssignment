@@ -12,7 +12,7 @@ consideration in the grade descriptors for the quality requirements and for task
 to meet any of these essential requirements your marks for part 1 are unlikely to exceed 40% and may
 be zero.
 
-- [ ] The web API must be deployed on the nuwebspace webserver.
+- [ ] The web API must be deployed on the nuwebspace web server.
 - [ ] The web API must be implemented using object-oriented PHP and must not use a third-party
       framework or library except the JWT library specified for task 1. 2.
 - [ ] The coursework must use the _chi2023.sqlite_ database provided and must not modify this. The
@@ -116,7 +116,7 @@ to meet any of these essential requirements your marks for part 2 will be unlike
 may be zero.
 
 
-- [ ] The application must be deployed on the nuwebspace webserver.
+- [ ] The application must be deployed on the nuwebspace web server.
 - [ ] The application must be implemented using React. It must be a ‘front-end’ application and not
       use server-side React components. You can use any appropriate build tools and third-party
       components you wish. You should use JavaScript (not TypeScript).

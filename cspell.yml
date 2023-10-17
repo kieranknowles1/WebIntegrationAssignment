@@ -1,0 +1,6 @@
+language: en-GB
+
+words:
+  - nuwebspace
+
+allowCompoundWords: true
