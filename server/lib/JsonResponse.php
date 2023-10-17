@@ -1,5 +1,6 @@
 <?php
 
+// TODO: Should this accept an endpoint instead of data?
 /**
  * A response from an endpoint encoded as JSON
  *
