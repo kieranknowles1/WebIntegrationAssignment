@@ -7,4 +7,6 @@ require_once "../config/autoloader.php";
 require_once "../config/exceptionhandler.php";
 
 $endpoint = new DeveloperEndpoint();
-$endpoint->run();
+$response = new JsonResponse($endpoint->getData());
+
+$response->outputData();

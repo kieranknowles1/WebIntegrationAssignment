@@ -19,7 +19,7 @@ class ExceptionEndpoint extends Endpoint
         $this->exception = $exception;
     }
 
-    protected function processRequest(): mixed
+    public function getData(): mixed
     {
         return [
             'error' => $this->exception->getMessage(),
@@ -39,7 +39,8 @@ class ExceptionEndpoint extends Endpoint
 set_exception_handler(function (Throwable $exception): void {
     http_response_code(500);
     $endpoint = new ExceptionEndpoint($exception);
-    $endpoint->run();
+    $response = new JsonResponse($endpoint->getData());
+    $response->outputData();
 });
 
 /**
