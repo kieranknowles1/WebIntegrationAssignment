@@ -48,6 +48,10 @@ paths:
                 type: array
                 items:
                   type: string
+                example:
+                  - United Kingdom
+                  - France
+                  - Germany
 
   /preview:
     get:
