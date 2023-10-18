@@ -1,0 +1,429 @@
+{
+	"info": {
+		"_postman_id": "a52e6864-3c0d-4b31-91b1-63d5a5c32645",
+		"name": "API",
+		"description": "API for the Web Integration Assignment \\\nAuthor: Kieran Knowles \\\nGenerated with assistance from GitHub Copilot\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "13372409-a52e6864-3c0d-4b31-91b1-63d5a5c32645"
+	},
+	"item": [
+		{
+			"name": "content",
+			"item": [
+				{
+					"name": "country",
+					"item": [
+						{
+							"name": "Get all countries referenced in the database",
+							"id": "9be96672-49a3-49b1-a8dc-052774250aa5",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/content/country",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"content",
+										"country"
+									]
+								},
+								"description": "Returns the country names contained in the affiliation database table.\nThe name of each country is returned only once\n"
+							},
+							"response": [
+								{
+									"id": "cadd78a4-4ac8-4dbe-a3b4-1536a9704534",
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/content/country",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"content",
+												"country"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  \"<string>\",\n  \"<string>\"\n]"
+								}
+							]
+						}
+					],
+					"id": "853409ad-6cc0-4063-b36b-c50e84ec1359"
+				},
+				{
+					"name": "preview",
+					"item": [
+						{
+							"name": "Get preview videos and the title of their associated content",
+							"id": "101533a5-4886-4c84-9474-0fa794262b27",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/content/preview?limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"content",
+										"preview"
+									],
+									"query": [
+										{
+											"description": "Maximum number of results to return. Items will still be returned in a random order. \\\nDefault: infinity \\\nMinimum: 1\n",
+											"key": "limit",
+											"value": "<integer>"
+										}
+									]
+								},
+								"description": "Returns links to preview videos together with the associated content title.\nAny content that does not have a preview video is not.\nThe data is returned in a random order.\n"
+							},
+							"response": [
+								{
+									"id": "21b205f7-f5c2-449d-84e4-f7b32edd9a4c",
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/content/preview?limit=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"content",
+												"preview"
+											],
+											"query": [
+												{
+													"description": "Maximum number of results to return. Items will still be returned in a random order. \\\nDefault: infinity \\\nMinimum: 1\n",
+													"key": "limit",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"title\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  {\n    \"title\": \"<string>\",\n    \"url\": \"<uri>\"\n  }\n]"
+								}
+							]
+						}
+					],
+					"id": "25135878-2bdf-4fa1-89da-51d5feba42cf"
+				},
+				{
+					"name": "author_and_affiliation",
+					"item": [
+						{
+							"name": "Get authors and their affiliations",
+							"id": "880f120a-3506-4c9d-aa0c-805efbe10925",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/content/author_and_affiliation?content=<integer>&country=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"content",
+										"author_and_affiliation"
+									],
+									"query": [
+										{
+											"description": "The id of the content to return authors for. \\\nMutually exclusive with `country`\n",
+											"key": "content",
+											"value": "<integer>"
+										},
+										{
+											"description": "The name of the country to return authors for. \\\nMutually exclusive with `content`\n",
+											"key": "country",
+											"value": "<string>"
+										}
+									]
+								},
+								"description": "Returns the country, city and institution each author is affiliated with for each publication\nthey are associated with. \\\nFor each of these affiliations the author id, author name, content id and content name\nis also returned.\nAuthors can have more than one affiliation for each item of content and that authors\ncan have different affiliations on different items of content. \\\nTherefore, authors may have multiple records returned by this endpoint.\n"
+							},
+							"response": [
+								{
+									"id": "3b313060-6899-4187-b6c8-85960f543b2d",
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/content/author_and_affiliation?content=<integer>&country=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"content",
+												"author_and_affiliation"
+											],
+											"query": [
+												{
+													"description": "The id of the content to return authors for. \\\nMutually exclusive with `country`\n",
+													"key": "content",
+													"value": "<integer>"
+												},
+												{
+													"description": "The name of the country to return authors for. \\\nMutually exclusive with `content`\n",
+													"key": "country",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"author\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"content\": [\n      {\n        \"id\": \"<integer>\",\n        \"title\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"title\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"author\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"content\": [\n      {\n        \"id\": \"<integer>\",\n        \"title\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"title\": \"<string>\"\n      }\n    ]\n  }\n]"
+								}
+							]
+						}
+					],
+					"id": "fa451020-5c82-4703-be06-56183837f7d2"
+				},
+				{
+					"name": "list",
+					"item": [
+						{
+							"name": "Get information about all research content",
+							"id": "53c24e6b-e11f-4f86-8941-79d94b5c51b9",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/content/list?page=<integer>&type=course",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"content",
+										"list"
+									],
+									"query": [
+										{
+											"description": "The 'page' of 20 results to return, after `type` is considered. \\\nIf not specified, all results are returned\n",
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"description": "The type of content to return. \\\nIf not specified, all content is allowed\n",
+											"key": "type",
+											"value": "course"
+										}
+									]
+								},
+								"description": "Return information about all research content at the conference. \\\nData contains the title, the abstract, and the content type.\n"
+							},
+							"response": [
+								{
+									"id": "a8984ca5-4005-4972-ad14-5aa7c9d6affd",
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/content/list?page=<integer>&type=course",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"content",
+												"list"
+											],
+											"query": [
+												{
+													"description": "The 'page' of 20 results to return, after `type` is considered. \\\nIf not specified, all results are returned\n",
+													"key": "page",
+													"value": "<integer>"
+												},
+												{
+													"description": "The type of content to return. \\\nIf not specified, all content is allowed\n",
+													"key": "type",
+													"value": "course"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\",\n    \"abstract\": \"<string>\",\n    \"type\": \"course\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\",\n    \"abstract\": \"<string>\",\n    \"type\": \"course\"\n  }\n]"
+								}
+							]
+						}
+					],
+					"id": "4d4675cd-5494-43f8-afa4-e2a30eae06f7"
+				}
+			],
+			"id": "078085ed-805c-4e58-8179-a54221cf89d1"
+		},
+		{
+			"name": "developer",
+			"item": [
+				{
+					"name": "Get developer information",
+					"id": "7d9e87ba-8269-42a0-ae10-a25e1bb643de",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/developer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"developer"
+							]
+						},
+						"description": "Returns name and student ID of the developer"
+					},
+					"response": [
+						{
+							"id": "204348f3-6a24-4acc-98e7-11c6bad8f554",
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/developer",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"developer"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"name\": \"<string>\",\n  \"student_id\": \"w51379757\"\n}"
+						}
+					]
+				}
+			],
+			"id": "5e3cb944-7df1-4fab-9f84-929c2639f11d"
+		}
+	],
+	"variable": [
+		{
+			"id": "3064d630-c616-4ce1-b1ab-375476ae5d25",
+			"key": "baseUrl",
+			"value": "https://w20013000.nuwebspace.co.uk/api"
+		}
+	]
+}
