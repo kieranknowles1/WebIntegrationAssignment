@@ -356,6 +356,18 @@
 			"item": [
 				{
 					"name": "Get developer information",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "75934fbd-91d9-4a61-91fc-7c8a225708cd",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "85d1d91e-9d00-454c-b28b-e84e9d580c3a",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -419,9 +431,33 @@
 			"id": "ffac4e8e-c3b2-4055-b2a3-7bf609ac8899"
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "126fc1c8-7d6d-4e51-adec-0890d33d6a69",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a579be2c-df4a-46af-ae14-1671ec65c2dc",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Test that all responses are JSON\", function() {",
+					"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+					"})"
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"id": "843981be-95d7-494c-aece-3fb4174dd629",
+			"id": "ff627075-5428-4ff8-abbe-6ca39fac8f72",
 			"key": "baseUrl",
 			"value": "https://w20013000.nuwebspace.co.uk/api"
 		}
