@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "a52e6864-3c0d-4b31-91b1-63d5a5c32645",
+		"_postman_id": "4e4f9c25-9d63-40b1-ad12-28ea70ac0de3",
 		"name": "API",
 		"description": "API for the Web Integration Assignment \\\nAuthor: Kieran Knowles \\\nGenerated with assistance from GitHub Copilot\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "13372409-a52e6864-3c0d-4b31-91b1-63d5a5c32645"
+		"_uid": "13372409-4e4f9c25-9d63-40b1-ad12-28ea70ac0de3"
 	},
 	"item": [
 		{
@@ -15,7 +15,7 @@
 					"item": [
 						{
 							"name": "Get all countries referenced in the database",
-							"id": "9be96672-49a3-49b1-a8dc-052774250aa5",
+							"id": "6da84de5-1c39-471e-a5f1-0d94e5e107e3",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -41,7 +41,7 @@
 							},
 							"response": [
 								{
-									"id": "cadd78a4-4ac8-4dbe-a3b4-1536a9704534",
+									"id": "6bb48d89-b121-4072-8e0a-4b11b0a9bb18",
 									"name": "OK",
 									"originalRequest": {
 										"method": "GET",
@@ -77,14 +77,14 @@
 							]
 						}
 					],
-					"id": "853409ad-6cc0-4063-b36b-c50e84ec1359"
+					"id": "c63efee8-5a42-4a73-a957-ea2c8a9de4a6"
 				},
 				{
 					"name": "preview",
 					"item": [
 						{
 							"name": "Get preview videos and the title of their associated content",
-							"id": "101533a5-4886-4c84-9474-0fa794262b27",
+							"id": "28349960-2106-46a6-9d39-259f2e5c26b9",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -117,7 +117,7 @@
 							},
 							"response": [
 								{
-									"id": "21b205f7-f5c2-449d-84e4-f7b32edd9a4c",
+									"id": "2601b514-4a3f-4485-9df5-e5f91c69ab91",
 									"name": "OK",
 									"originalRequest": {
 										"method": "GET",
@@ -160,14 +160,14 @@
 							]
 						}
 					],
-					"id": "25135878-2bdf-4fa1-89da-51d5feba42cf"
+					"id": "dee0932a-d3ca-46e1-9e18-3721a74c32ad"
 				},
 				{
 					"name": "author_and_affiliation",
 					"item": [
 						{
 							"name": "Get authors and their affiliations",
-							"id": "880f120a-3506-4c9d-aa0c-805efbe10925",
+							"id": "3008868e-c473-4d62-8e14-ab8e6399d970",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -205,7 +205,7 @@
 							},
 							"response": [
 								{
-									"id": "3b313060-6899-4187-b6c8-85960f543b2d",
+									"id": "1ec6821c-f1cb-4b09-a0b8-3225a02960b0",
 									"name": "OK",
 									"originalRequest": {
 										"method": "GET",
@@ -253,14 +253,14 @@
 							]
 						}
 					],
-					"id": "fa451020-5c82-4703-be06-56183837f7d2"
+					"id": "6bc7adc9-6339-441f-8cca-36399028f49a"
 				},
 				{
 					"name": "list",
 					"item": [
 						{
 							"name": "Get information about all research content",
-							"id": "53c24e6b-e11f-4f86-8941-79d94b5c51b9",
+							"id": "5f956eb3-0d18-43f1-9012-24a33c467a98",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -298,7 +298,7 @@
 							},
 							"response": [
 								{
-									"id": "a8984ca5-4005-4972-ad14-5aa7c9d6affd",
+									"id": "2ca60a36-8a34-406f-bf4c-a6b3d7f37d84",
 									"name": "OK",
 									"originalRequest": {
 										"method": "GET",
@@ -346,17 +346,17 @@
 							]
 						}
 					],
-					"id": "4d4675cd-5494-43f8-afa4-e2a30eae06f7"
+					"id": "05140525-5d8b-47e4-a045-62ca38e4469b"
 				}
 			],
-			"id": "078085ed-805c-4e58-8179-a54221cf89d1"
+			"id": "b77609d2-9292-4975-aa71-fa43088b9163"
 		},
 		{
 			"name": "developer",
 			"item": [
 				{
 					"name": "Get developer information",
-					"id": "7d9e87ba-8269-42a0-ae10-a25e1bb643de",
+					"id": "85d1d91e-9d00-454c-b28b-e84e9d580c3a",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -381,7 +381,7 @@
 					},
 					"response": [
 						{
-							"id": "204348f3-6a24-4acc-98e7-11c6bad8f554",
+							"id": "27687783-fa06-4242-82a5-adde9c4b74a4",
 							"name": "OK",
 							"originalRequest": {
 								"method": "GET",
@@ -411,17 +411,17 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n  \"name\": \"<string>\",\n  \"student_id\": \"w51379757\"\n}"
+							"body": "{\n  \"name\": \"<string>\",\n  \"student_id\": \"w68179894\"\n}"
 						}
 					]
 				}
 			],
-			"id": "5e3cb944-7df1-4fab-9f84-929c2639f11d"
+			"id": "ffac4e8e-c3b2-4055-b2a3-7bf609ac8899"
 		}
 	],
 	"variable": [
 		{
-			"id": "3064d630-c616-4ce1-b1ab-375476ae5d25",
+			"id": "843981be-95d7-494c-aece-3fb4174dd629",
 			"key": "baseUrl",
 			"value": "https://w20013000.nuwebspace.co.uk/api"
 		}
