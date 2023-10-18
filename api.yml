@@ -10,6 +10,14 @@ info:
 servers:
   - url: https://w20013000.nuwebspace.co.uk/api
 
+tags:
+  - name: Content
+    description: |
+      Information about research content at the conference
+  - name: User
+    description: |
+      User specific information. Requires authentication
+
 paths:
   /developer:
     get:
@@ -25,6 +33,8 @@ paths:
 
   /country:
     get:
+      tags:
+        - Content
       summary: Get all countries referenced in the database
       description: |
         Returns the country names contained in the affiliation database table.
@@ -41,6 +51,8 @@ paths:
 
   /preview:
     get:
+      tags:
+        - Content
       summary: Get preview videos and the title of their associated content
       description: |
         Returns links to preview videos together with the associated content title.
@@ -69,6 +81,8 @@ paths:
 
   /author_and_affiliation:
     get:
+      tags:
+        - Content
       summary: Get authors and their affiliations
       description: |
         Returns the country, city and institution each author is affiliated with for each publication
@@ -107,6 +121,8 @@ paths:
 
   /content:
     get:
+      tags:
+        - Content
       summary: Get information about all research content
       description: |
         Return information about all research content at the conference. \
@@ -138,7 +154,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/contentFull"
-
 
 components:
   schemas:
