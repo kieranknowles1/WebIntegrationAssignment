@@ -19,19 +19,7 @@ tags:
       User specific information. Requires authentication
 
 paths:
-  /developer:
-    get:
-      summary: Get developer information
-      description: Returns name and student ID of the developer
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/developerInformation"
-
-  /country:
+  /content/country:
     get:
       tags:
         - Content
@@ -53,7 +41,7 @@ paths:
                   - France
                   - Germany
 
-  /preview:
+  /content/preview:
     get:
       tags:
         - Content
@@ -83,7 +71,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/preview"
 
-  /author_and_affiliation:
+  /content/author_and_affiliation:
     get:
       tags:
         - Content
@@ -123,7 +111,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/affiliationInformation"
 
-  /content:
+  /content/list:
     get:
       tags:
         - Content
@@ -158,6 +146,18 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/contentFull"
+
+  /developer:
+    get:
+      summary: Get developer information
+      description: Returns name and student ID of the developer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/developerInformation"
 
 components:
   schemas:
