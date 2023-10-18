@@ -26,7 +26,9 @@ paths:
   /country:
     get:
       summary: Get all countries referenced in the database
-      description: Returns only the country names
+      description: |
+        Returns the country names contained in the affiliation database table.
+        The name of each country is returned only once
       responses:
         "200":
           description: OK
@@ -35,25 +37,26 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/country"
+                  type: string
 
   /preview:
     get:
       summary: Get preview videos and the title of their associated content
       description: |
-        Returns the title of the content and the preview video URL \
-        Results are returned in a random order
+        Returns links to preview videos together with the associated content title.
+        Any content that does not have a preview video is not.
+        The data is returned in a random order.
       parameters:
         - in: query
           name: limit
+          required: false
           description: |
-            Maximum number of results to return \
+            Maximum number of results to return. Items will still be returned in a random order. \
             Default: infinity \
             Minimum: 1
           schema:
             type: integer
             minimum: 1
-          required: false
       responses:
         "200":
           description: OK
@@ -64,8 +67,123 @@ paths:
                 items:
                   $ref: "#/components/schemas/preview"
 
+  /author_and_affiliation:
+    get:
+      summary: Get authors and their affiliations
+      description: |
+        Returns the country, city and institution each author is affiliated with for each publication
+        they are associated with. \
+        For each of these affiliations the author id, author name, content id and content name
+        is also returned.
+        Authors can have more than one affiliation for each item of content and that authors
+        can have different affiliations on different items of content. \
+        Therefore, authors may have multiple records returned by this endpoint.
+      parameters:
+        - in: query
+          name: content
+          required: false
+          description: |
+            The id of the content to return authors for. \
+            Mutually exclusive with `country`
+          schema:
+            type: integer
+        - in: query
+          required: false
+          name: country
+          description: |
+            The name of the country to return authors for. \
+            Mutually exclusive with `content`
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/affiliationInformation"
+
+  /content:
+    get:
+      summary: Get information about all research content
+      description: |
+        Return information about all research content at the conference. \
+        Data contains the title, the abstract, and the content type.
+      parameters:
+        - in: query
+          name: page
+          required: false
+          description: |
+            The 'page' of 20 results to return, after `type` is considered. \
+            If not specified, all results are returned
+          schema:
+            type: integer
+            minimum: 1
+        - in: query
+          name: type
+          required: false
+          description: |
+            The type of content to return. \
+            If not specified, all content is allowed
+          schema:
+            $ref: "#/components/schemas/contentType"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/contentFull"
+
+
 components:
   schemas:
+    author:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          example: John Smith
+
+    contentBrief:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+          # TODO: Mando probably isn't the best example
+          example: The Mandalorian
+
+    contentFull:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+          # TODO: Fill in with actual title
+          example: The Mandalorian
+        abstract:
+          type: string
+          example: |
+            A guy who never takes off his helmet goes on adventures with baby Yoda
+            Seems pretty irresponsible to me, but what do I know?
+            I guess he also adopts him and it turns out some Mandalorians put their surname first
+        type:
+          $ref: "#/components/schemas/contentType"
+
+    contentType:
+      enum:
+        # TODO: Fill in with actual content types
+        - course
+
     developerInformation:
       type: object
       properties:
@@ -75,10 +193,6 @@ components:
         student_id:
           type: string
           pattern: "w[0-9]{8}"
-
-    country:
-      type: string
-      example: United Kingdom
 
     preview:
       type: object
@@ -91,3 +205,13 @@ components:
           type: string
           format: uri
           example: https://www.youtube.com/watch?v=XmI7WKrAtqs
+
+    affiliationInformation:
+      type: object
+      properties:
+        author:
+          $ref: "#/components/schemas/author"
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/contentBrief"
