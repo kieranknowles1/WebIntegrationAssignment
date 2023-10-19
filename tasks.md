@@ -72,12 +72,29 @@ for each endpoint is given below:
 - [ ] An endpoint should work whether or not there is a trailing slash at the end of the URL.
 
 #### Endpoints
-See [KF6012 Assessment Brief](KF6012%20-%20CIS%20Assessment%202023-24.pdf) for endpoint details
+
 - [x] developer
+  - [x] Return name and student ID
 - [ ] country
+  - [ ] Return country names in the affiliation table
 - [ ] preview
+  - [ ] Return links to preview videos along with their content title
+  - [ ] Do not return content with no preview
+  - [ ] Return items in a random order
+  - [ ] Limit parameter
 - [ ] author-and-affiliation
+  - [ ] Return the country, city, and institution each author is affiliated with for each publication they are
+        associated with
+  - [ ] Handle authors having multiple affiliations for each item of content
+  - [ ] Handle authors having different affiliation on different items of content
+  - [ ] Content ID parameter, mutually exclusive with country
+  - [ ] Country name parameter, mutually exclusive with content
+  - [ ] Return the author ID, author name, content ID, and content name for each affiliation
 - [ ] content
+  - [ ] Return information about all research content
+  - [ ] return the title, abstract, and content type
+  - [ ] Page parameter, if specified, return a page of 20 items after type filtering
+  - [ ] Type name parameter, if specified, return only content with matching type
 
 ### Task 1. 2
 (20 marks)
@@ -99,7 +116,31 @@ make a new database table. A list of general requirements for each endpoint is g
 See [KF6012 Assessment Brief](KF6012%20-%20CIS%20Assessment%202023-24.pdf) for endpoint details
 
 - [ ] token
+  - [ ] Accept a username and password in the headers
+  - [ ] If username and password are valid, create return a JWT token
+  - [ ] Tokens must contain user ID
+  - [ ] Tokens must not contain private data (e.g., password)
+  - [ ] Token should not transfer data needed by the client
+  - [ ] Token should be valid for 30 minutes
 - [ ] note
+  - [ ] GET
+    - [ ] Get all notes for a user
+    - [ ] Users must be authenticated with a valid JWT token
+    - [ ] Return the note ID, content ID, and note text
+    - [ ] Only return notes for the user specified in the token
+  - [ ] POST
+    - [ ] Create a new note
+    - [ ] Take the content ID and the note text as parameters
+    - [ ] Users must be authenticated with a valid JWT token
+    - [ ] Return the new note ID
+  - [ ] PUT
+    - [ ] Update an existing note
+    - [ ] Take the note ID and the note text as parameters
+    - [ ] Users must be authenticated with a valid JWT token
+  - [ ] DELETE
+    - [ ] Delete an existing note
+    - [ ] Take the note ID as a parameter
+    - [ ] Users must be authenticated with a valid JWT token
 
 # Part 2 : Web application
 
