@@ -1,6 +1,6 @@
 <?php
 
-// TODO: Should this accept an endpoint instead of data?
+// TODO: Should this allow setting the response code?
 /**
  * A response from an endpoint encoded as JSON
  *
@@ -9,16 +9,16 @@
  */
 class JsonResponse
 {
-    private mixed $data;
+    private Endpoint $endpoint;
 
-    public function __construct(mixed $data)
+    public function __construct(Endpoint $endpoint)
     {
-        $this->data = $data;
+        $this->endpoint = $endpoint;
     }
 
     public function outputData()
     {
         header('Content-Type: application/json');
-        echo json_encode($this->data);
+        echo json_encode($this->endpoint->getData());
     }
 }

@@ -1,4 +1,6 @@
 <?php
+
+// TODO: Check parameters and throw if out of expected range. What is the best way to do this?
 /**
  * Base class for all API endpoints
  *

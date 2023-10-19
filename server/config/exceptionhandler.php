@@ -11,7 +11,7 @@ require_once "autoloader.php";
 set_exception_handler(function (Throwable $exception): void {
     http_response_code(500);
     $endpoint = new ExceptionEndpoint($exception);
-    $response = new JsonResponse($endpoint->getData());
+    $response = new JsonResponse($endpoint);
     $response->outputData();
 });
 
