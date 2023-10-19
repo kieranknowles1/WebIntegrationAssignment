@@ -16,7 +16,7 @@ tags:
       Information about research content at the conference
   - name: User
     description: |
-      User specific information. Requires authentication
+      User specific information. All endpoints except `/user/token` require authentication
 
 paths:
   /content/country:
@@ -147,6 +147,116 @@ paths:
                 items:
                   $ref: "#/components/schemas/contentFull"
 
+  /user/token:
+    get:
+      tags:
+        - User
+      summary: Authenticate with a username and password
+      description: |
+        Returns a token that can be used to authenticate with the API.
+        The token is valid for 30 minutes after being issued.
+      parameters:
+        - in: query
+          name: username
+          required: true
+          description: |
+            The username of the user to authenticate
+          schema:
+            type: string
+        - in: query
+          name: password
+          required: true
+          description: |
+            The password of the user to authenticate
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/token"
+
+  /user/note:
+    get:
+      tags:
+        - User
+      summary: Get all notes
+      description: |
+        Returns all notes associated with the authenticated user
+      parameters:
+        - $ref: "#/components/parameters/token"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/note"
+        # TODO: Not authorized response
+    post:
+      tags:
+        - User
+      summary: Create a new note
+      description: |
+        Creates a new note associated with the specified content and authenticated user
+      parameters:
+        - $ref: "#/components/parameters/token"
+        - in: query
+          name: content
+          required: true
+          description: |
+            The id of the content to create a note for
+          schema:
+            type: integer
+        - in: query
+          name: text
+          required: true
+          description: |
+            The text of the note
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                description: |
+                  The id of the note that was created
+    # TODO: Not authorized response
+
+    put:
+      tags:
+        - User
+      summary: Update an existing note
+      description: |
+        Updates the specified user
+      parameters:
+        - $ref: "#/components/parameters/token"
+        - in: query
+          name: id
+          required: true
+          description: |
+            The id of the note to update
+          schema:
+            type: integer
+        - in: query
+          name: text
+          required: true
+          description: |
+            The new text of the note
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        # TODO: Error responses
+
   /developer:
     get:
       summary: Get developer information
@@ -160,7 +270,22 @@ paths:
                 $ref: "#/components/schemas/developerInformation"
 
 components:
+  parameters:
+    token:
+      in: header
+      name: token
+      required: true
+      description: |
+        The token to authenticate with. \
+        This is returned by the `/user/token` endpoint
+      schema:
+        $ref: "#/components/schemas/token"
+
   schemas:
+    # TODO: Fill in with actual token
+    token:
+      type: object
+
     author:
       type: object
       properties:
@@ -234,3 +359,17 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/contentBrief"
+
+    note:
+      type: object
+      properties:
+        id:
+          type: integer
+        content_id:
+          type: integer
+        text:
+          type: string
+          # TODO: Mando again
+          example: |
+            This is a note about the Mandalorian
+            I think it's a pretty good show
