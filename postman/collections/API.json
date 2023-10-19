@@ -352,32 +352,398 @@
 			"id": "b77609d2-9292-4975-aa71-fa43088b9163"
 		},
 		{
-			"name": "developer",
+			"name": "user",
 			"item": [
 				{
-					"name": "Get developer information",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "75934fbd-91d9-4a61-91fc-7c8a225708cd",
-								"exec": [
-									"pm.test(\"Test that resposne is the expected value\", function() {\r",
-									"    pm.expect(pm.response.json()).to.eql({\r",
-									"        \"name\": \"Kieran Knowles\",\r",
-									"        \"student_id\": \"w20013000\",\r",
-									"    });\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "85d1d91e-9d00-454c-b28b-e84e9d580c3a",
+					"name": "Authenticate with a username and password",
+					"id": "2e3fe5d6-134f-43cb-8e9e-0b584f9d6dec",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/token?username=<string>&password=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"token"
+							],
+							"query": [
+								{
+									"description": "(Required) The username of the user to authenticate\n",
+									"key": "username",
+									"value": "<string>"
+								},
+								{
+									"description": "(Required) The password of the user to authenticate\n",
+									"key": "password",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Returns a token that can be used to authenticate with the API.\nThe token is valid for 30 minutes after being issued.\n"
+					},
+					"response": [
+						{
+							"id": "9e5e7ede-8197-442a-85cf-4df0a5df0380",
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/user/token?username=<string>&password=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"token"
+									],
+									"query": [
+										{
+											"description": "(Required) The username of the user to authenticate\n",
+											"key": "username",
+											"value": "<string>"
+										},
+										{
+											"description": "(Required) The password of the user to authenticate\n",
+											"key": "password",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "Get all notes",
+					"id": "ab1a6ea4-6faa-41f8-8c35-b5dc09f7e659",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) The token to authenticate with. \\\nThis is returned by the `/user/token` endpoint\n",
+								"key": "token",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/note",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"note"
+							]
+						},
+						"description": "Returns all notes associated with the authenticated user\n"
+					},
+					"response": [
+						{
+							"id": "5b7502a8-f32e-4189-af38-f1cf484e7b47",
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "(Required) The token to authenticate with. \\\nThis is returned by the `/user/token` endpoint\n",
+										"key": "token",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/user/note",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"note"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"<integer>\",\n    \"content_id\": \"<integer>\",\n    \"text\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"content_id\": \"<integer>\",\n    \"text\": \"<string>\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create a new note",
+					"id": "a318c0ef-2cfa-460e-9495-43215a6e9bf3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) The token to authenticate with. \\\nThis is returned by the `/user/token` endpoint\n",
+								"key": "token",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/note?content=<integer>&text=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"note"
+							],
+							"query": [
+								{
+									"description": "(Required) The id of the content to create a note for\n",
+									"key": "content",
+									"value": "<integer>"
+								},
+								{
+									"description": "(Required) The text of the note\n",
+									"key": "text",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Creates a new note associated with the specified content and authenticated user\n"
+					},
+					"response": [
+						{
+							"id": "bab06d6b-d8ee-4629-8cb9-4de9e2027f16",
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) The token to authenticate with. \\\nThis is returned by the `/user/token` endpoint\n",
+										"key": "token",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/user/note?content=<integer>&text=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"note"
+									],
+									"query": [
+										{
+											"description": "(Required) The id of the content to create a note for\n",
+											"key": "content",
+											"value": "<integer>"
+										},
+										{
+											"description": "(Required) The text of the note\n",
+											"key": "text",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "<integer>"
+						}
+					]
+				},
+				{
+					"name": "Update an existing note",
+					"id": "7b59f411-c5d0-444b-81c3-11591020e981",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"description": "(Required) The token to authenticate with. \\\nThis is returned by the `/user/token` endpoint\n",
+								"key": "token",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/note?id=<integer>&text=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"note"
+							],
+							"query": [
+								{
+									"description": "(Required) The id of the note to update\n",
+									"key": "id",
+									"value": "<integer>"
+								},
+								{
+									"description": "(Required) The new text of the note\n",
+									"key": "text",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Updates the specified user\n"
+					},
+					"response": [
+						{
+							"id": "9a170089-b35c-4517-af54-552ba742fe28",
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "(Required) The token to authenticate with. \\\nThis is returned by the `/user/token` endpoint\n",
+										"key": "token",
+										"value": ""
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/user/note?id=<integer>&text=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"note"
+									],
+									"query": [
+										{
+											"description": "(Required) The id of the note to update\n",
+											"key": "id",
+											"value": "<integer>"
+										},
+										{
+											"description": "(Required) The new text of the note\n",
+											"key": "text",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				}
+			],
+			"id": "c50870bc-8b81-4c78-93ce-98076b1c10f7"
+		},
+		{
+			"name": "Get developer information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "75934fbd-91d9-4a61-91fc-7c8a225708cd",
+						"exec": [
+							"pm.test(\"Test that resposne is the expected value\", function() {\r",
+							"    pm.expect(pm.response.json()).to.eql({\r",
+							"        \"name\": \"Kieran Knowles\",\r",
+							"        \"student_id\": \"w20013000\",\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "85d1d91e-9d00-454c-b28b-e84e9d580c3a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/developer",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"developer"
+					]
+				},
+				"description": "Returns name and student ID of the developer"
+			},
+			"response": [
+				{
+					"id": "27687783-fa06-4242-82a5-adde9c4b74a4",
+					"name": "OK",
+					"originalRequest": {
 						"method": "GET",
 						"header": [
 							{
@@ -393,47 +759,21 @@
 							"path": [
 								"developer"
 							]
-						},
-						"description": "Returns name and student ID of the developer"
-					},
-					"response": [
-						{
-							"id": "27687783-fa06-4242-82a5-adde9c4b74a4",
-							"name": "OK",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/developer",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"developer"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"name\": \"<string>\",\n  \"student_id\": \"w68179894\"\n}"
 						}
-					]
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"name\": \"<string>\",\n  \"student_id\": \"w68179894\"\n}"
 				}
-			],
-			"id": "ffac4e8e-c3b2-4055-b2a3-7bf609ac8899"
+			]
 		}
 	],
 	"event": [
@@ -464,7 +804,8 @@
 		{
 			"id": "b61a4f3c-d09b-423e-93a4-5d2ae28cdb04",
 			"key": "baseUrl",
-			"value": "https://w20013000.nuwebspace.co.uk/api"
+			"value": "https://w20013000.nuwebspace.co.uk/api",
+			"type": "string"
 		}
 	]
 }
