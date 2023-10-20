@@ -38,14 +38,14 @@ graded for how well you meet these requirements.
       you have used AI tools you must state this with use of the @generated tag followed by a short
       explanation. You do not need to produce any documentation for your code, just include
       comments using the ‘doc comments’ format.
-- [ ] Your code must make use of an autoloader.
+- [x] Your code must make use of an autoloader.
 - [ ] Your code must make use of an exception handler.
 - [ ] The web API must use clean URLs. No API endpoint should require use of a .php or other file
       extension within the URL.
-- [ ] An .htaccess file must be used to enforce the single point of entry pattern covered in the
-      module. All requests must be handled by a single ‘front door’ script (typically called index.php
-      or api.php). It should not be possible to directly access any other files or folders via HTTP
-      requests.
+- [ ] An .htaccess file must be used to enforce the single point of entry pattern covered in the module.
+  - [ ] All requests must be handled by a single ‘front door’ script (typically called index.php
+          or api.php).
+  - [x] It should not be possible to directly access any other files or folders via HTTP requests.
 
 ### Task 1.
 (20 marks)
