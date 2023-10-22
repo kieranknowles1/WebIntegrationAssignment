@@ -12,7 +12,7 @@ consideration in the grade descriptors for the quality requirements and for task
 to meet any of these essential requirements your marks for part 1 are unlikely to exceed 40% and may
 be zero.
 
-- [ ] The web API must be deployed on the nuwebspace web server.
+- [x] The web API must be deployed on the nuwebspace web server.
 - [ ] The web API must be implemented using object-oriented PHP and must not use a third-party
       framework or library except the JWT library specified for task 1. 2.
 - [ ] The coursework must use the _chi2023.sqlite_ database provided and must not modify this. The
@@ -61,6 +61,8 @@ for each endpoint is given below:
       invalid values, server errors (e.g. database errors), or any other error should be responded to
       with a relevant HTTP status code and, where appropriate, an error message in JSON format.
 - [ ] Endpoints and parameter names and values should not be case sensitive.
+  - [x] Endpoints should be case insensitive.
+  - [ ] Parameter names and values should be case insensitive.
 - [ ] Additional endpoints can be created if you wish. Additional parameters can be supported if you
       wish. The endpoints listed below can also return more data than is specified if you wish. Any
       additional endpoints, parameters and data must be appropriate to the purposes of the API.
@@ -69,7 +71,7 @@ for each endpoint is given below:
       'developer' might have the URL https://nuwebspace.co.uk/kf6012/coursework/api/developer
 - [ ] The full URL for each endpoint should be given in the readme file. For each parameter
       supported there should also be a clear example (see appendix 1).
-- [ ] An endpoint should work whether or not there is a trailing slash at the end of the URL.
+- [x] An endpoint should work whether or not there is a trailing slash at the end of the URL.
 
 #### Endpoints
 

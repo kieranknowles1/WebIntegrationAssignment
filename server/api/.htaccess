@@ -1,0 +1,6 @@
+# Author: Kieran Knowles
+# Generated with assistance from GitHub Copilot
+
+# Redirect all requests to api.php
+RewriteEngine On
+RewriteRule ^(.*)$ api.php [QSA,L]
