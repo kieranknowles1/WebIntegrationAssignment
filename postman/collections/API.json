@@ -780,7 +780,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "137c36da-f3e5-4679-b64a-27bef900ab87",
+				"id": "d8b92e9f-def7-44c4-bcf6-ba25f7297956",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -790,11 +790,19 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "8f266f6d-d0b2-4324-b7a3-00d05b923673",
+				"id": "12548c32-f9a7-4ea9-92d9-06e6ba11e3e7",
 				"type": "text/javascript",
 				"exec": [
-					"pm.test(\"Test that all responses are JSON\", function() {",
+					"pm.test(\"Test that all responses are valid JSON\", function() {",
+					"    // Check that the header indicates JSON",
 					"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+					"",
+					"    // Decode the resposne to check that it is valid JSON",
+					"    pm.response.json();",
+					"});",
+					"",
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
 					"});"
 				]
 			}
@@ -802,7 +810,7 @@
 	],
 	"variable": [
 		{
-			"id": "b61a4f3c-d09b-423e-93a4-5d2ae28cdb04",
+			"id": "0aad7241-48d6-4ea9-a2b7-99b965d43022",
 			"key": "baseUrl",
 			"value": "https://w20013000.nuwebspace.co.uk/api",
 			"type": "string"
