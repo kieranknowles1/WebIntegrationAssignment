@@ -42,8 +42,8 @@ graded for how well you meet these requirements.
 - [ ] Your code must make use of an exception handler.
 - [ ] The web API must use clean URLs. No API endpoint should require use of a .php or other file
       extension within the URL.
-- [ ] An .htaccess file must be used to enforce the single point of entry pattern covered in the module.
-  - [ ] All requests must be handled by a single ‘front door’ script (typically called index.php
+- [x] An .htaccess file must be used to enforce the single point of entry pattern covered in the module.
+  - [x] All requests must be handled by a single ‘front door’ script (typically called index.php
           or api.php).
   - [x] It should not be possible to directly access any other files or folders via HTTP requests.
 
