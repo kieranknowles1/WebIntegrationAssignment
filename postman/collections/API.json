@@ -21,9 +21,7 @@
 									"script": {
 										"id": "cb19bfaf-3e7f-4ca8-93cf-c48de92aac73",
 										"exec": [
-											"pm.test(\"Test that the response matches the expected schema\", () => {\r",
-											"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
-											"});"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -91,7 +89,47 @@
 							]
 						}
 					],
-					"id": "c63efee8-5a42-4a73-a957-ea2c8a9de4a6"
+					"id": "c63efee8-5a42-4a73-a957-ea2c8a9de4a6",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c6108d36-7ac9-43e7-aeb8-cf99d9c36a85",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ef7373f6-7080-4952-b944-526e31043fb9",
+								"type": "text/javascript",
+								"exec": [
+									"const schema = {",
+									"    type: \"array\",",
+									"    items: { type: \"string\" }",
+									"};",
+									"",
+									"const json = pm.response.json();",
+									"",
+									"pm.test(\"Test that the response matches the expected schema\", () => {",
+									"    pm.response.to.have.jsonSchema(schema);",
+									"});",
+									"",
+									"pm.test(\"Test that all elements are unique\", () => {",
+									"    const set = new Set();",
+									"    // https://www.w3schools.com/jsref/jsref_foreach.asp",
+									"    json.forEach((item) => {",
+									"        pm.expect(set.has(item), `${item} appears multiple times`).to.be.eql(false);",
+									"        set.add(item);",
+									"    })",
+									"})"
+								]
+							}
+						}
+					]
 				},
 				{
 					"name": "preview",
