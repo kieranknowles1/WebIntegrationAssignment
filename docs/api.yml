@@ -253,9 +253,27 @@ paths:
           schema:
             type: string
       responses:
-        "200":
-          description: OK
+        "204":
+          description: No Content
         # TODO: Error responses
+    delete:
+      tags:
+        - User
+      summary: Delete an existing note
+      description: |
+        Deletes the specified note
+      parameters:
+        - $ref: "#/components/parameters/token"
+        - in: query
+          name: id
+          required: true
+          description: |
+            The id of the note to delete
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: No Content
 
   /developer:
     get:
