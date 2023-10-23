@@ -40,7 +40,7 @@ graded for how well you meet these requirements.
       comments using the ‘doc comments’ format.
 - [x] Your code must make use of an autoloader.
 - [ ] Your code must make use of an exception handler.
-- [ ] The web API must use clean URLs. No API endpoint should require use of a .php or other file
+- [x] The web API must use clean URLs. No API endpoint should require use of a .php or other file
       extension within the URL.
 - [x] An .htaccess file must be used to enforce the single point of entry pattern covered in the module.
   - [x] All requests must be handled by a single ‘front door’ script (typically called index.php
@@ -57,11 +57,15 @@ for each endpoint is given below:
       code.
 - [ ] Set the Access-Control-Allow-Origin header
 - [ ] Set the Access-Control-Allow-Methods header
-- [ ] All responses from the API that contain data must return this in valid JSON format.
+- [x] All responses from the API that contain data must return this in valid JSON format.
 - [ ] All endpoints created for this task must support the request method GET.
-- [ ] Requests to invalid endpoints, use of invalid parameters, invalid combinations of parameters,
-      invalid values, server errors (e.g. database errors), or any other error should be responded to
-      with a relevant HTTP status code and, where appropriate, an error message in JSON format.
+- [ ] Error handling with a relevant HTTP status code and, where appropriate, an error message in JSON format.
+  - [ ] Requests to invalid endpoints - return 404,
+  - [ ] use of invalid parameters,
+  - [ ] invalid combinations of parameters,
+  - [ ] invalid values,
+  - [x] server errors (e.g. database errors) - return 500
+  - [ ] any other error should be responded to
 - [ ] Endpoints and parameter names and values should not be case sensitive.
   - [x] Endpoints should be case insensitive.
   - [ ] Parameter names and values should be case insensitive.
@@ -79,8 +83,9 @@ for each endpoint is given below:
 
 - [x] developer
   - [x] Return name and student ID
-- [ ] country
-  - [ ] Return country names in the affiliation table
+- [x] country
+  - [x] Return country names in the affiliation table
+  - [x] Distinct elements only
 - [ ] preview
   - [ ] Return links to preview videos along with their content title
   - [ ] Do not return content with no preview
