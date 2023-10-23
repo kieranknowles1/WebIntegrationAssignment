@@ -7,9 +7,6 @@
  * @generated GitHub Copilot was used to assist in writing this code
  */
 
-
-// TODO: Is there a better way to include these files?
-// TODO: Document API in postman
 require_once "../config/autoloader.php";
 require_once "../config/exceptionhandler.php";
 
@@ -41,7 +38,7 @@ function preprocessUrl(string $url): string
 
 /**
  * Get the endpoint for the given URL
- * // TODO: Check the request method and support methods other than GET
+ * // TODO: Check the request method and support methods other than GET in Endpoint
  * @param string $url The pre-processed URL
  * @return Endpoint The endpoint for the given URL
  * // TODO: This should return 404 instead of throwing an exception
@@ -50,12 +47,13 @@ function preprocessUrl(string $url): string
 function getEndpoint(string $url): Endpoint
 {
     switch ($url) {
+        case "/content/country": return new CountryEndpoint(ChiDatabase::getInstance());
         case "/developer": return new DeveloperEndpoint();
         default: throw new Exception("Endpoint not found");
     }
 }
 
-// TODO: Consider using DI to inject the response object
+// TODO: Consider using DI to inject the response object here
 $endpoint = getEndpoint(preprocessUrl($_SERVER['REQUEST_URI']));
 $response = new JsonResponse($endpoint);
 $response->outputData();
