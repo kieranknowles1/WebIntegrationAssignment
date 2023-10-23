@@ -55,6 +55,8 @@ for each endpoint is given below:
 
 - [ ] All responses from the API must contain relevant headers, including a relevant HTTP status
       code.
+- [ ] Set the Access-Control-Allow-Origin header
+- [ ] Set the Access-Control-Allow-Methods header
 - [ ] All responses from the API that contain data must return this in valid JSON format.
 - [ ] All endpoints created for this task must support the request method GET.
 - [ ] Requests to invalid endpoints, use of invalid parameters, invalid combinations of parameters,
