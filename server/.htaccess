@@ -1,15 +1,11 @@
 # Author: Kieran Knowles
 # Generated with assistance from GitHub Copilot
 
-# Based on the following StackOverflow answer:
-# https://stackoverflow.com/questions/7649794/htaccess-deny-root-allow-specific-subfolder-possible
-
 RewriteEngine On
 
 # Allow access to the whitelisted subdirectories, case-insensitive
-RewriteCond %{REQUEST_URI} !^/api/ [NC]
-RewriteCond %{REQUEST_URI} !^/app/ [NC]
+RewriteRule api/ - [NC,L]
+RewriteRule app/ - [NC,L]
 
 # Return 404 for all other requests
 RewriteRule ^ - [R=404,L]
-

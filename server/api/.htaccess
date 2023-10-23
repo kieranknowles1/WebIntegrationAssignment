@@ -1,6 +1,8 @@
 # Author: Kieran Knowles
 # Generated with assistance from GitHub Copilot
 
-# Redirect all requests to api.php
+# Enable the rewriting system, required to use RewriteRule
 RewriteEngine On
-RewriteRule ^(.*)$ api.php [QSA,L]
+# Add a rule to rewrite all requests to api.php using a regex that matches anything
+# QSA - Query String Append, keeps the query string (e.g. ?id=1) intact
+RewriteRule ^(.*)$ api.php [QSA]
