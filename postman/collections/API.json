@@ -15,6 +15,20 @@
 					"item": [
 						{
 							"name": "Get all countries referenced in the database",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "cb19bfaf-3e7f-4ca8-93cf-c48de92aac73",
+										"exec": [
+											"pm.test(\"Test that the response matches the expected schema\", () => {\r",
+											"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "6da84de5-1c39-471e-a5f1-0d94e5e107e3",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -84,6 +98,20 @@
 					"item": [
 						{
 							"name": "Get preview videos and the title of their associated content",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7383fc68-bc4a-4cf2-8ec3-b0b41d848689",
+										"exec": [
+											"pm.test(\"Test that the response matches the expected schema\", () => {\r",
+											"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "28349960-2106-46a6-9d39-259f2e5c26b9",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -107,9 +135,9 @@
 									],
 									"query": [
 										{
-											"description": "Maximum number of results to return. Items will still be returned in a random order. \\\nDefault: infinity \\\nMinimum: 1\n",
 											"key": "limit",
-											"value": "<integer>"
+											"value": "<integer>",
+											"description": "Maximum number of results to return. Items will still be returned in a random order. \\\nDefault: infinity \\\nMinimum: 1\n"
 										}
 									]
 								},
@@ -167,6 +195,20 @@
 					"item": [
 						{
 							"name": "Get authors and their affiliations",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f7619fd0-6e30-43fb-ad45-7437eb0bacaa",
+										"exec": [
+											"pm.test(\"Test that the response matches the expected schema\", () => {\r",
+											"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "3008868e-c473-4d62-8e14-ab8e6399d970",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -190,14 +232,14 @@
 									],
 									"query": [
 										{
-											"description": "The id of the content to return authors for. \\\nMutually exclusive with `country`\n",
 											"key": "content",
-											"value": "<integer>"
+											"value": "<integer>",
+											"description": "The id of the content to return authors for. \\\nMutually exclusive with `country`\n"
 										},
 										{
-											"description": "The name of the country to return authors for. \\\nMutually exclusive with `content`\n",
 											"key": "country",
-											"value": "<string>"
+											"value": "<string>",
+											"description": "The name of the country to return authors for. \\\nMutually exclusive with `content`\n"
 										}
 									]
 								},
@@ -260,6 +302,20 @@
 					"item": [
 						{
 							"name": "Get information about all research content",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f1c3d04c-e83d-42e5-934c-bd85bc8164ba",
+										"exec": [
+											"pm.test(\"Test that the response matches the expected schema\", () => {\r",
+											"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "5f956eb3-0d18-43f1-9012-24a33c467a98",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -283,14 +339,14 @@
 									],
 									"query": [
 										{
-											"description": "The 'page' of 20 results to return, after `type` is considered. \\\nIf not specified, all results are returned\n",
 											"key": "page",
-											"value": "<integer>"
+											"value": "<integer>",
+											"description": "The 'page' of 20 results to return, after `type` is considered. \\\nIf not specified, all results are returned\n"
 										},
 										{
-											"description": "The type of content to return. \\\nIf not specified, all content is allowed\n",
 											"key": "type",
-											"value": "course"
+											"value": "course",
+											"description": "The type of content to return. \\\nIf not specified, all content is allowed\n"
 										}
 									]
 								},
@@ -356,6 +412,20 @@
 			"item": [
 				{
 					"name": "Authenticate with a username and password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f61de26e-b632-4dee-9f38-74ab43c08a87",
+								"exec": [
+									"pm.test(\"Test that the response matches the expected schema\", () => {\r",
+									"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "2e3fe5d6-134f-43cb-8e9e-0b584f9d6dec",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -379,14 +449,14 @@
 							],
 							"query": [
 								{
-									"description": "(Required) The username of the user to authenticate\n",
 									"key": "username",
-									"value": "<string>"
+									"value": "<string>",
+									"description": "(Required) The username of the user to authenticate\n"
 								},
 								{
-									"description": "(Required) The password of the user to authenticate\n",
 									"key": "password",
-									"value": "<string>"
+									"value": "<string>",
+									"description": "(Required) The password of the user to authenticate\n"
 								}
 							]
 						},
@@ -443,6 +513,20 @@
 				},
 				{
 					"name": "Get all notes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6d44c36f-9cbf-47b8-b988-564cb01932c3",
+								"exec": [
+									"pm.test(\"Test that the response matches the expected schema\", () => {\r",
+									"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "ab1a6ea4-6faa-41f8-8c35-b5dc09f7e659",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -516,6 +600,20 @@
 				},
 				{
 					"name": "Create a new note",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f158922b-a9c0-488c-a80b-42dd2c07bbe6",
+								"exec": [
+									"pm.test(\"Test that the response matches the expected schema\", () => {\r",
+									"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "a318c0ef-2cfa-460e-9495-43215a6e9bf3",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -544,14 +642,14 @@
 							],
 							"query": [
 								{
-									"description": "(Required) The id of the content to create a note for\n",
 									"key": "content",
-									"value": "<integer>"
+									"value": "<integer>",
+									"description": "(Required) The id of the content to create a note for\n"
 								},
 								{
-									"description": "(Required) The text of the note\n",
 									"key": "text",
-									"value": "<string>"
+									"value": "<string>",
+									"description": "(Required) The text of the note\n"
 								}
 							]
 						},
@@ -613,6 +711,20 @@
 				},
 				{
 					"name": "Update an existing note",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fee8b68a-379d-4fcf-8985-796b64eec2a8",
+								"exec": [
+									"pm.test(\"Test that the response matches the expected schema\", () => {\r",
+									"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "7b59f411-c5d0-444b-81c3-11591020e981",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -637,14 +749,14 @@
 							],
 							"query": [
 								{
-									"description": "(Required) The id of the note to update\n",
 									"key": "id",
-									"value": "<integer>"
+									"value": "<integer>",
+									"description": "(Required) The id of the note to update\n"
 								},
 								{
-									"description": "(Required) The new text of the note\n",
 									"key": "text",
-									"value": "<string>"
+									"value": "<string>",
+									"description": "(Required) The new text of the note\n"
 								}
 							]
 						},
