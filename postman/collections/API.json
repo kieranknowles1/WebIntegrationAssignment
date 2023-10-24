@@ -94,7 +94,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "c6108d36-7ac9-43e7-aeb8-cf99d9c36a85",
+								"id": "86efab2d-e3a1-45c7-aecd-d842bd3a19f1",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -104,7 +104,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ef7373f6-7080-4952-b944-526e31043fb9",
+								"id": "7444be30-0603-4332-8b1d-7ea4962481d0",
 								"type": "text/javascript",
 								"exec": [
 									"const schema = {",
@@ -112,13 +112,12 @@
 									"    items: { type: \"string\" }",
 									"};",
 									"",
-									"const json = pm.response.json();",
-									"",
 									"pm.test(\"Test that the response matches the expected schema\", () => {",
 									"    pm.response.to.have.jsonSchema(schema);",
 									"});",
 									"",
 									"pm.test(\"Test that all elements are unique\", () => {",
+									"    const json = pm.response.json();",
 									"    const set = new Set();",
 									"    // https://www.w3schools.com/jsref/jsref_foreach.asp",
 									"    json.forEach((item) => {",
