@@ -8,9 +8,9 @@
  */
 class ExceptionDataSource implements DataSource
 {
-    private Exception $exception;
+    private Throwable $exception;
 
-    public function __construct(Exception $exception)
+    public function __construct(Throwable $exception)
     {
         $this->exception = $exception;
     }
