@@ -16,6 +16,7 @@ abstract class Endpoint implements DataSource
     /**
      * Get the data returned by the endpoint
      * @return ResponseData bundled data and status code
+     * @throws ClientException if the request is invalid
      */
     protected function handleGetRequest(): ResponseData
     {
@@ -23,9 +24,52 @@ abstract class Endpoint implements DataSource
         throw new ClientException(ResponseCode::METHOD_NOT_ALLOWED);
     }
 
+    // TODO: 2 functions or 1 function with a parameter?
+    /**
+     * Check that a GET parameter is valid
+     * @param string $key the name of the parameter
+     * @param string $value the value of the parameter
+     * @param array<string, string> $allGet all GET parameters
+     * @param array<string, string> $allBody all POST parameters
+     * @throws ClientException if the parameter is invalid
+     */
+    protected function checkGetParameter(string $key, string $value, array $allGet, array $allBody): void
+    {
+        throw new ClientException(ResponseCode::BAD_REQUEST);
+    }
+
+    /**
+     * Check that a POST parameter is valid
+     * @param string $key the name of the parameter
+     * @param string $value the value of the parameter
+     * @param array<string, string> $allGet all GET parameters
+     * @param array<string, string> $allBody all POST parameters
+     * @throws ClientException if the parameter is invalid
+     */
+    protected function checkBodyParameter(string $key, string $value, array $allGet, array $allBody): void
+    {
+        throw new ClientException(ResponseCode::BAD_REQUEST);
+    }
+
+    private function checkParameters(): void
+    {
+        // TODO: Use DI to get the parameters
+        $getParameters = $_GET;
+        $bodyParameters = $_POST;
+
+        foreach ($getParameters as $key => $value) {
+            $this->checkGetParameter($key, $value, $getParameters, $bodyParameters);
+        }
+        foreach ($bodyParameters as $key => $value) {
+            $this->checkBodyParameter($key, $value, $getParameters, $bodyParameters);
+        }
+    }
+
     final public function handleRequest(): void
     {
         assert(!$this->handledRequest, "handleRequest called more than once");
+
+        $this->checkParameters();
 
         // TODO: Centralise the getMethod logic
         // TODO: Handle OPTIONS and other methods
