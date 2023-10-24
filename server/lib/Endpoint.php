@@ -12,5 +12,18 @@ abstract class Endpoint
     /**
      * Get the data returned by the endpoint
      */
-    abstract protected function getData(): mixed;
+    protected function handleGetRequest(): mixed
+    {
+        // TODO: BadMethodException extending ClientException
+        throw new Exception("GET requests are not supported for this endpoint");
+    }
+
+    public function getData($method): mixed
+    {
+        switch ($method) {
+            case "GET": return $this->handleGetRequest();
+                // TODO: BadMethodException extending ClientException
+            default: throw new Exception("Method not supported");
+        }
+    }
 }

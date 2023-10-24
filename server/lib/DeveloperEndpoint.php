@@ -8,7 +8,7 @@
  */
 class DeveloperEndpoint extends Endpoint
 {
-    public function getData(): mixed
+    protected function handleGetRequest(): mixed
     {
         return [
             'name' => 'Kieran Knowles',

@@ -55,5 +55,5 @@ function getEndpoint(string $url): Endpoint
 
 // TODO: Consider using DI to inject the response object here
 $endpoint = getEndpoint(preprocessUrl($_SERVER['REQUEST_URI']));
-$response = new JsonResponse($endpoint);
+$response = new JsonResponse($endpoint, $_SERVER['REQUEST_METHOD']);
 $response->outputData();

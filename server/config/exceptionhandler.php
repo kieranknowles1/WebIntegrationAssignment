@@ -11,7 +11,9 @@ require_once "autoloader.php";
 set_exception_handler(function (Throwable $exception): void {
     http_response_code(500);
     $endpoint = new ExceptionEndpoint($exception);
-    $response = new JsonResponse($endpoint);
+    // TODO: Centralise access to the response object and $_SERVER
+    // TODO: This isn't really an endpoint. See comment in ExceptionEndpoint.php
+    $response = new JsonResponse($endpoint, "GET");
     $response->outputData();
 });
 

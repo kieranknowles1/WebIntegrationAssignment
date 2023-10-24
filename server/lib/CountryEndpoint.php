@@ -17,7 +17,7 @@ class CountryEndpoint extends Endpoint
         $this->database = $database;
     }
 
-    public function getData(): mixed
+    protected function handleGetRequest(): mixed
     {
         return $this->database->getCountries();
     }
