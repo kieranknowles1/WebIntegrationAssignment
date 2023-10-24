@@ -1,14 +1,13 @@
 <?php
 
-// TODO: This isn't really an endpoint and should be a subclass of JsonResponse. Split JsonResponse into an abstract class and a subclass for EndpointResponse
 /**
  * Endpoint to log an exception
- * NOTE: This does not handle setting the response code
+ * // TODO: This does not handle setting the response code
  *
  * @generated GitHub Copilot was used to assist in writing this code
  * @author Kieran Knowles
  */
-class ExceptionEndpoint extends Endpoint
+class ExceptionDataSource implements DataSource
 {
     private Exception $exception;
 
@@ -17,7 +16,7 @@ class ExceptionEndpoint extends Endpoint
         $this->exception = $exception;
     }
 
-    protected function handleGetRequest(): mixed
+    public function getData(): mixed
     {
         return [
             'error' => $this->exception->getMessage(),

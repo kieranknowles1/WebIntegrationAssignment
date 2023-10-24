@@ -10,18 +10,17 @@
  */
 class JsonResponse
 {
-    private Endpoint $endpoint;
+    private DataSource $dataSource;
     private string $method;
 
-    public function __construct(Endpoint $endpoint, string $method)
+    public function __construct(DataSource $dataSource)
     {
-        $this->endpoint = $endpoint;
-        $this->method = $method;
+        $this->dataSource = $dataSource;
     }
 
     public function outputData()
     {
         header('Content-Type: application/json');
-        echo json_encode($this->endpoint->getData($this->method));
+        echo json_encode($this->dataSource->getData());
     }
 }

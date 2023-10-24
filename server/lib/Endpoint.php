@@ -7,7 +7,7 @@
  * @author Kieran Knowles
  * @generated GitHub Copilot was used to assist in writing this code
  */
-abstract class Endpoint
+abstract class Endpoint implements DataSource
 {
     /**
      * Get the data returned by the endpoint
@@ -18,9 +18,10 @@ abstract class Endpoint
         throw new Exception("GET requests are not supported for this endpoint");
     }
 
-    public function getData($method): mixed
+    public function getData(): mixed
     {
-        switch ($method) {
+        // TODO: Centralise the getMethod logic
+        switch ($_SERVER["REQUEST_METHOD"]) {
             case "GET": return $this->handleGetRequest();
                 // TODO: BadMethodException extending ClientException
             default: throw new Exception("Method not supported");
