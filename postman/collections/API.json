@@ -754,12 +754,12 @@
 							"listen": "test",
 							"script": {
 								"id": "fee8b68a-379d-4fcf-8985-796b64eec2a8",
+								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Test that the response matches the expected schema\", () => {\r",
 									"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
 									"});"
-								],
-								"type": "text/javascript"
+								]
 							}
 						}
 					],
@@ -787,14 +787,14 @@
 							],
 							"query": [
 								{
+									"description": "(Required) The id of the note to update\n",
 									"key": "id",
-									"value": "<integer>",
-									"description": "(Required) The id of the note to update\n"
+									"value": "<integer>"
 								},
 								{
+									"description": "(Required) The new text of the note\n",
 									"key": "text",
-									"value": "<string>",
-									"description": "(Required) The new text of the note\n"
+									"value": "<string>"
 								}
 							]
 						},
@@ -802,10 +802,70 @@
 					},
 					"response": [
 						{
-							"id": "9a170089-b35c-4517-af54-552ba742fe28",
-							"name": "OK",
+							"id": "e5056efc-4470-4400-8b0e-bb87a881addd",
+							"name": "No Content",
 							"originalRequest": {
 								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/note",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"note"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				},
+				{
+					"name": "Delete an existing note",
+					"id": "b01fc6c0-4da5-46bd-97ce-100c3245c4ba",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "(Required) The token to authenticate with. \\\nThis is returned by the `/user/token` endpoint\n",
+								"key": "token",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/note?id=<integer>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"note"
+							],
+							"query": [
+								{
+									"description": "(Required) The id of the note to delete\n",
+									"key": "id",
+									"value": "<integer>"
+								}
+							]
+						},
+						"description": "Deletes the specified note\n"
+					},
+					"response": [
+						{
+							"id": "cbe27e9b-4c26-43fd-88fa-70ac4d29d730",
+							"name": "No Content",
+							"originalRequest": {
+								"method": "DELETE",
 								"header": [
 									{
 										"description": "(Required) The token to authenticate with. \\\nThis is returned by the `/user/token` endpoint\n",
@@ -814,7 +874,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/user/note?id=<integer>&text=<string>",
+									"raw": "{{baseUrl}}/user/note?id=<integer>",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -824,20 +884,15 @@
 									],
 									"query": [
 										{
-											"description": "(Required) The id of the note to update\n",
+											"description": "(Required) The id of the note to delete\n",
 											"key": "id",
 											"value": "<integer>"
-										},
-										{
-											"description": "(Required) The new text of the note\n",
-											"key": "text",
-											"value": "<string>"
 										}
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
+							"status": "No Content",
+							"code": 204,
 							"_postman_previewlanguage": "Text",
 							"header": [],
 							"cookie": []
@@ -846,6 +901,172 @@
 				}
 			],
 			"id": "c50870bc-8b81-4c78-93ce-98076b1c10f7"
+		},
+		{
+			"name": "Invalid Requests",
+			"item": [
+				{
+					"name": "Extra GET Parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "80d5ad4d-7767-4037-872a-93b84e0a9bcf",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f35319d6-a33a-4f41-91aa-9f43443441ca",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/developer?option=12345",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"developer"
+							],
+							"query": [
+								{
+									"key": "option",
+									"value": "12345",
+									"description": "An unexpected parameter",
+									"type": "text"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Extra POST parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2128ac9b-e914-40ff-8fe4-bec415f78892",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "1c4b99e5-7d47-4acb-9b9c-26119953ec7a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "option",
+									"value": "12345",
+									"description": "Unexpected parameter",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/developer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"developer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "18bfd9a1-44e7-404e-bcc0-c7c4eb3aba4a",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "64542659-5c02-4db7-a25b-ad1112a92f01",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/developer_spelling_error",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"developer_spelling_error"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Wrong Method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf4e85aa-217d-4eec-8295-21fe0a0bd168",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "92666608-1c28-46c3-8bf2-29308f27e906",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/developer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"developer"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "a57cd37b-4ca7-4f44-8b4b-7448292aacfe",
+			"description": "Requests that are expected to fail in a certain way"
 		},
 		{
 			"name": "Get developer information",
@@ -930,7 +1151,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "d8b92e9f-def7-44c4-bcf6-ba25f7297956",
+				"id": "37eed7d5-b45f-420e-8739-21e4030eec2b",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -940,7 +1161,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "12548c32-f9a7-4ea9-92d9-06e6ba11e3e7",
+				"id": "c50bdf48-db2f-45ba-b674-b9b831b450b4",
 				"type": "text/javascript",
 				"exec": [
 					"pm.test(\"Test that all responses are valid JSON\", function() {",
@@ -951,6 +1172,7 @@
 					"    pm.response.json();",
 					"});",
 					"",
+					"// TODO: Move this to valid requests folder",
 					"pm.test(\"Status code is 200\", function () {",
 					"    pm.response.to.have.status(200);",
 					"});"
@@ -960,7 +1182,7 @@
 	],
 	"variable": [
 		{
-			"id": "0aad7241-48d6-4ea9-a2b7-99b965d43022",
+			"id": "2b68bb20-fd02-4741-be3c-0c87e99caa32",
 			"key": "baseUrl",
 			"value": "https://w20013000.nuwebspace.co.uk/api",
 			"type": "string"
