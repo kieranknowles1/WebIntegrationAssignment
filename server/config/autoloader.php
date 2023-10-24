@@ -7,5 +7,5 @@
  * @author Kieran Knowles
  */
 spl_autoload_register(function (string $class): void {
-    include __DIR__ . "/../lib/$class.php";
+    include __DIR__ . "/../src/$class.php";
 });
