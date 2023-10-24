@@ -51,11 +51,11 @@ function preprocessUrl(string $url): string
  */
 function getEndpoint(string $url): Endpoint
 {
-    switch ($url) {
-        case "/content/country": return new CountryEndpoint(ChiDatabase::getInstance());
-        case "/developer": return new DeveloperEndpoint();
-        default: throw new Exception("Endpoint not found");
-    }
+    return match($url) {
+        "/content/country" => new CountryEndpoint(ChiDatabase::getInstance()),
+        "/developer" => new DeveloperEndpoint(),
+        default => throw new ClientException(ResponseCode::NOT_FOUND),
+    };
 }
 
 // TODO: Consider using DI to inject the response object here

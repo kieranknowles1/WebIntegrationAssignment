@@ -20,22 +20,19 @@ abstract class Endpoint implements DataSource
     protected function handleGetRequest(): ResponseData
     {
         // TODO: BadMethodException extending ClientException
-        throw new Exception("GET requests are not supported for this endpoint");
+        throw new ClientException(ResponseCode::METHOD_NOT_ALLOWED);
     }
 
     final public function handleRequest(): void
     {
         assert(!$this->handledRequest, "handleRequest called more than once");
 
-        $response = null;
         // TODO: Centralise the getMethod logic
         // TODO: Handle OPTIONS and other methods
-        switch ($_SERVER["REQUEST_METHOD"]) {
-            case "GET": $response = $this->handleGetRequest();
-                break;
-                // TODO: BadMethodException extending ClientException
-            default: throw new Exception("Method not supported");
-        }
+        $response = match ($_SERVER["REQUEST_METHOD"]) {
+            "GET" => $this->handleGetRequest(),
+            default => throw new ClientException(ResponseCode::METHOD_NOT_ALLOWED),
+        };
 
         $this->data = $response->getData();
         $this->code = $response->getCode();

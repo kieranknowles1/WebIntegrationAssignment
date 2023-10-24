@@ -17,17 +17,28 @@ class ExceptionDataSource implements DataSource
 
     public function getResponseCode(): int
     {
-        // TODO: Handle other codes
-        return 500;
+        if ($this->exception instanceof ClientException) {
+            return $this->exception->getCode();
+        } else {
+            return 500;
+        }
     }
 
     public function getData(): mixed
     {
-        return [
-            'error' => $this->exception->getMessage(),
-            'file' => $this->exception->getFile(),
-            'line' => $this->exception->getLine(),
-            'trace' => $this->exception->getTrace(),
-        ];
+        if ($this->exception instanceof ClientException) {
+            // TODO: Should I return more information?
+            return [
+                'error' => $this->exception->getMessage(),
+            ];
+        } else {
+            // TODO: Should I be returning all this information?
+            return [
+                'error' => $this->exception->getMessage(),
+                'file' => $this->exception->getFile(),
+                'line' => $this->exception->getLine(),
+                'trace' => $this->exception->getTrace(),
+            ];
+        }
     }
 }
