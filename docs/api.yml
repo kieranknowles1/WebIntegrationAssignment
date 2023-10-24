@@ -359,7 +359,7 @@ components:
         title:
           type: string
           example: How to Never Give Up or Let Yourself Down
-        url:
+        preview_video:
           type: string
           format: uri
           pattern: "https://www.youtube.com/watch\\?v=[a-zA-Z0-9_-]{11}"

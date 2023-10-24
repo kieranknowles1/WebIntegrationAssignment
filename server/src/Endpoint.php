@@ -51,7 +51,6 @@ abstract class Endpoint implements DataSource
 
     private function checkParameters(Request $request): void
     {
-        // TODO: Use DI to get the parameters
         $queryParams = $request->getQueryParams();
         $bodyParameters = $request->getBodyParams();
 
@@ -71,7 +70,6 @@ abstract class Endpoint implements DataSource
 
         $this->checkParameters($request);
 
-        // TODO: Centralise the getMethod logic
         // TODO: Handle OPTIONS and other methods
         $response = match ($request->getMethod()) {
             "GET" => $this->handleGetRequest(),
