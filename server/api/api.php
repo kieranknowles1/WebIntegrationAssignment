@@ -16,12 +16,9 @@ require_once "../config/exceptionhandler.php";
 
 /**
  * Get the endpoint for the given URL
- * // TODO: Check the request method and support methods other than GET in Endpoint
- * // TODO: Should this be a factory?
  * @param string $url The pre-processed URL
  * @return Endpoint The endpoint for the given URL
- * // TODO: This should return 404 instead of throwing an exception
- * @throws Exception If the endpoint cannot be found
+ * @throws ClientException If the endpoint cannot be found
  */
 function getEndpoint(Request $request): Endpoint
 {
@@ -33,7 +30,8 @@ function getEndpoint(Request $request): Endpoint
 }
 
 // TODO: Consider using DI to inject the response object here
-$endpoint = getEndpoint(Request::fromGlobals());
-$endpoint->handleRequest();
+$request = Request::fromGlobals();
+$endpoint = getEndpoint($request);
+$endpoint->handleRequest($request);
 $response = new JsonResponse($endpoint);
 $response->outputData();

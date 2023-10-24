@@ -10,7 +10,7 @@ require_once "autoloader.php";
  */
 set_exception_handler(function (Throwable $exception): void {
     $dataSource = new ExceptionDataSource($exception);
-    // TODO: Centralise access to the response object and $_SERVER
+    // TODO: Centralise access to the response object
     $response = new JsonResponse($dataSource);
     $response->outputData();
 });

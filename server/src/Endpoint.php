@@ -31,7 +31,7 @@ abstract class Endpoint implements DataSource
      * @param array<string, string> $allBody all POST parameters
      * @throws ClientException if the parameter is invalid
      */
-    protected function checkGetParameter(string $key, string $value, array $allGet, array $allBody): void
+    protected function checkQueryParameter(string $key, string $value, array $allGet, array $allBody): void
     {
         throw new ClientException(ResponseCode::BAD_REQUEST);
     }
@@ -49,29 +49,31 @@ abstract class Endpoint implements DataSource
         throw new ClientException(ResponseCode::BAD_REQUEST);
     }
 
-    private function checkParameters(): void
+    private function checkParameters(Request $request): void
     {
         // TODO: Use DI to get the parameters
-        $getParameters = $_GET;
-        $bodyParameters = $_POST;
+        $queryParams = $request->getQueryParams();
+        $bodyParameters = $request->getBodyParams();
 
-        foreach ($getParameters as $key => $value) {
-            $this->checkGetParameter($key, $value, $getParameters, $bodyParameters);
+        foreach ($queryParams as $key => $value) {
+            $this->checkQueryParameter($key, $value, $queryParams, $bodyParameters);
         }
         foreach ($bodyParameters as $key => $value) {
-            $this->checkBodyParameter($key, $value, $getParameters, $bodyParameters);
+            $this->checkBodyParameter($key, $value, $queryParams, $bodyParameters);
         }
     }
 
-    final public function handleRequest(): void
+    final public function handleRequest(Request $request): void
     {
         assert(!$this->handledRequest, "handleRequest called more than once");
 
-        $this->checkParameters();
+        var_dump($request);
+
+        $this->checkParameters($request);
 
         // TODO: Centralise the getMethod logic
         // TODO: Handle OPTIONS and other methods
-        $response = match ($_SERVER["REQUEST_METHOD"]) {
+        $response = match ($request->getMethod()) {
             "GET" => $this->handleGetRequest(),
             default => throw new ClientException(ResponseCode::METHOD_NOT_ALLOWED),
         };
