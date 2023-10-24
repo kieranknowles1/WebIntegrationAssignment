@@ -140,12 +140,12 @@
 									"listen": "test",
 									"script": {
 										"id": "7383fc68-bc4a-4cf2-8ec3-b0b41d848689",
+										"type": "text/javascript",
 										"exec": [
 											"pm.test(\"Test that the response matches the expected schema\", () => {\r",
 											"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
 											"});"
-										],
-										"type": "text/javascript"
+										]
 									}
 								}
 							],
@@ -172,9 +172,9 @@
 									],
 									"query": [
 										{
+											"description": "Maximum number of results to return. Items will still be returned in a random order. \\\nDefault: infinity \\\nMinimum: 1\n",
 											"key": "limit",
-											"value": "<integer>",
-											"description": "Maximum number of results to return. Items will still be returned in a random order. \\\nDefault: infinity \\\nMinimum: 1\n"
+											"value": "<integer>"
 										}
 									]
 								},
@@ -212,7 +212,7 @@
 									},
 									"status": "OK",
 									"code": 200,
-									"_postman_previewlanguage": "json",
+									"_postman_previewlanguage": "Text",
 									"header": [
 										{
 											"key": "Content-Type",
@@ -220,7 +220,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "[\n  {\n    \"title\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  {\n    \"title\": \"<string>\",\n    \"url\": \"<uri>\"\n  }\n]"
+									"body": "[\n  {\n    \"title\": \"<string>\",\n    \"url\": \"https://wwwYyoutubepcom/watch?v=wLeNpfNcfu9\"\n  },\n  {\n    \"title\": \"<string>\",\n    \"url\": \"https://wwwTyoutube)com/watch?v=TNAi2pa32Z-\"\n  }\n]"
 								}
 							]
 						}
@@ -900,172 +900,6 @@
 				}
 			],
 			"id": "c50870bc-8b81-4c78-93ce-98076b1c10f7"
-		},
-		{
-			"name": "Invalid Requests",
-			"item": [
-				{
-					"name": "Extra GET Parameter",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "80d5ad4d-7767-4037-872a-93b84e0a9bcf",
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {\r",
-									"    pm.response.to.have.status(400);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "f35319d6-a33a-4f41-91aa-9f43443441ca",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/developer?option=12345",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"developer"
-							],
-							"query": [
-								{
-									"key": "option",
-									"value": "12345",
-									"description": "An unexpected parameter",
-									"type": "text"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Extra POST parameter",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "2128ac9b-e914-40ff-8fe4-bec415f78892",
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {\r",
-									"    pm.response.to.have.status(400);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "1c4b99e5-7d47-4acb-9b9c-26119953ec7a",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "option",
-									"value": "12345",
-									"description": "Unexpected parameter",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{baseUrl}}/developer",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"developer"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Invalid Endpoint",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "18bfd9a1-44e7-404e-bcc0-c7c4eb3aba4a",
-								"exec": [
-									"pm.test(\"Status code is 404\", function () {\r",
-									"    pm.response.to.have.status(404);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "64542659-5c02-4db7-a25b-ad1112a92f01",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/developer_spelling_error",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"developer_spelling_error"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Wrong Method",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "cf4e85aa-217d-4eec-8295-21fe0a0bd168",
-								"exec": [
-									"pm.test(\"Status code is 405\", function () {\r",
-									"    pm.response.to.have.status(405);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "92666608-1c28-46c3-8bf2-29308f27e906",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/developer",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"developer"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"id": "a57cd37b-4ca7-4f44-8b4b-7448292aacfe",
-			"description": "Requests that are expected to fail in a certain way"
 		},
 		{
 			"name": "Get developer information",
