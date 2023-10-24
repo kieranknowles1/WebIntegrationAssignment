@@ -60,8 +60,8 @@ for each endpoint is given below:
 - [x] All responses from the API that contain data must return this in valid JSON format.
 - [ ] All endpoints created for this task must support the request method GET.
 - [ ] Error handling with a relevant HTTP status code and, where appropriate, an error message in JSON format.
-  - [ ] Requests to invalid endpoints - return 404,
-  - [ ] use of invalid parameters,
+  - [x] Requests to invalid endpoints - return 404,
+  - [x] use of invalid parameters,
   - [ ] invalid combinations of parameters,
   - [ ] invalid values,
   - [x] server errors (e.g. database errors) - return 500

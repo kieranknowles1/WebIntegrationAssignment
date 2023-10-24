@@ -1,6 +1,5 @@
 <?php
 
-// TODO: Check parameters and throw if out of expected range. What is the best way to do this?
 /**
  * Base class for all API endpoints
  *
@@ -20,7 +19,6 @@ abstract class Endpoint implements DataSource
      */
     protected function handleGetRequest(): ResponseData
     {
-        // TODO: BadMethodException extending ClientException
         throw new ClientException(ResponseCode::METHOD_NOT_ALLOWED);
     }
 

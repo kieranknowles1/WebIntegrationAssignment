@@ -357,13 +357,13 @@ components:
       required: ["title", "url"]
       properties:
         title:
-          # TODO: Mando probably isn't the best example
           type: string
-          example: The Mandalorian
+          example: How to Never Give Up or Let Yourself Down
         url:
           type: string
           format: uri
-          example: https://www.youtube.com/watch?v=XmI7WKrAtqs
+          pattern: "https://www.youtube.com/watch\\?v=[a-zA-Z0-9_-]{11}"
+          example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
     affiliationInformation:
       type: object
