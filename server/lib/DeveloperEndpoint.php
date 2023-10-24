@@ -13,6 +13,6 @@ class DeveloperEndpoint extends Endpoint
         return new ResponseData([
             'name' => 'Kieran Knowles',
             'student_id' => 'w20013000',
-        ], 200);
+        ], ResponseCode::OK);
     }
 }

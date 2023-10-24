@@ -15,6 +15,8 @@ enum ResponseCode: int
     case NOT_FOUND = 404;
     case METHOD_NOT_ALLOWED = 405;
 
+    case INTERNAL_SERVER_ERROR = 500;
+
     public static function getMessage(ResponseCode $code): string
     {
         return match ($code) {
@@ -23,6 +25,8 @@ enum ResponseCode: int
             ResponseCode::BAD_REQUEST => "Bad Request",
             ResponseCode::NOT_FOUND => "Not Found",
             ResponseCode::METHOD_NOT_ALLOWED => "Method Not Allowed",
+
+            ResponseCode::INTERNAL_SERVER_ERROR => "Internal Server Error",
         };
     }
 }

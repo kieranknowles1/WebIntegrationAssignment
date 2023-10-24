@@ -9,9 +9,9 @@
 class ResponseData
 {
     private mixed $data;
-    private int $code;
+    private ResponseCode $code;
 
-    public function __construct(mixed $data, int $code)
+    public function __construct(mixed $data, ResponseCode $code)
     {
         $this->data = $data;
         $this->code = $code;
@@ -22,7 +22,7 @@ class ResponseData
         return $this->data;
     }
 
-    public function getCode(): int
+    public function getCode(): ResponseCode
     {
         return $this->code;
     }

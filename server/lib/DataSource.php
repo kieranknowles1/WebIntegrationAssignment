@@ -8,6 +8,6 @@
  */
 interface DataSource
 {
-    public function getResponseCode(): int;
+    public function getResponseCode(): ResponseCode;
     public function getData(): mixed;
 }

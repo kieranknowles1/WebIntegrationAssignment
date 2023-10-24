@@ -22,7 +22,7 @@ class JsonResponse
     {
         // TODO: Handle any other headers
         header('Content-Type: application/json');
-        http_response_code($this->dataSource->getResponseCode());
+        http_response_code($this->dataSource->getResponseCode()->value);
         echo json_encode($this->dataSource->getData());
     }
 }

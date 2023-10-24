@@ -19,6 +19,6 @@ class CountryEndpoint extends Endpoint
 
     protected function handleGetRequest(): ResponseData
     {
-        return new ResponseData($this->database->getCountries(), 200);
+        return new ResponseData($this->database->getCountries(), ResponseCode::OK);
     }
 }

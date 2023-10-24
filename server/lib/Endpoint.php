@@ -10,7 +10,7 @@
 abstract class Endpoint implements DataSource
 {
     private mixed $data;
-    private int $code;
+    private ResponseCode $code;
     private bool $handledRequest = false;
 
     /**
@@ -38,7 +38,7 @@ abstract class Endpoint implements DataSource
         $this->code = $response->getCode();
     }
 
-    public function getResponseCode(): int
+    public function getResponseCode(): ResponseCode
     {
         assert($this->handledRequest, "getResponseCode called before handleRequest");
         return $this->code;
