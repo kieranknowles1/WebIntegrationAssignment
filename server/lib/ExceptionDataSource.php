@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Endpoint to log an exception
- * // TODO: This does not handle setting the response code
+ * Data source from an exception
  *
  * @generated GitHub Copilot was used to assist in writing this code
  * @author Kieran Knowles
@@ -14,6 +13,12 @@ class ExceptionDataSource implements DataSource
     public function __construct(Exception $exception)
     {
         $this->exception = $exception;
+    }
+
+    public function getResponseCode(): int
+    {
+        // TODO: Handle other codes
+        return 500;
     }
 
     public function getData(): mixed

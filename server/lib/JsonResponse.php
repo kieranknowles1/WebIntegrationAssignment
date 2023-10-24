@@ -20,7 +20,9 @@ class JsonResponse
 
     public function outputData()
     {
+        // TODO: Handle any other headers
         header('Content-Type: application/json');
+        http_response_code($this->dataSource->getResponseCode());
         echo json_encode($this->dataSource->getData());
     }
 }

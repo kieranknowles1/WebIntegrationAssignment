@@ -8,11 +8,11 @@
  */
 class DeveloperEndpoint extends Endpoint
 {
-    protected function handleGetRequest(): mixed
+    protected function handleGetRequest(): ResponseData
     {
-        return [
+        return new ResponseData([
             'name' => 'Kieran Knowles',
             'student_id' => 'w20013000',
-        ];
+        ], 200);
     }
 }

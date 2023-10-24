@@ -43,6 +43,7 @@ function preprocessUrl(string $url): string
 /**
  * Get the endpoint for the given URL
  * // TODO: Check the request method and support methods other than GET in Endpoint
+ * // TODO: Should this be a factory?
  * @param string $url The pre-processed URL
  * @return Endpoint The endpoint for the given URL
  * // TODO: This should return 404 instead of throwing an exception
@@ -59,5 +60,6 @@ function getEndpoint(string $url): Endpoint
 
 // TODO: Consider using DI to inject the response object here
 $endpoint = getEndpoint(preprocessUrl($_SERVER['REQUEST_URI']));
+$endpoint->handleRequest();
 $response = new JsonResponse($endpoint);
 $response->outputData();

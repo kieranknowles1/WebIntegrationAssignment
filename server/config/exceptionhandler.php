@@ -9,7 +9,6 @@ require_once "autoloader.php";
  * @author Kieran Knowles
  */
 set_exception_handler(function (Throwable $exception): void {
-    http_response_code(500);
     $dataSource = new ExceptionDataSource($exception);
     // TODO: Centralise access to the response object and $_SERVER
     $response = new JsonResponse($dataSource);
