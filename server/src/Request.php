@@ -39,12 +39,13 @@ class Request
         return $url;
     }
 
-    private function __construct($url, $method, $bodyParams)
+    private function __construct($rawUrl, $method, $bodyParams)
     {
-        $this->url = $this->cleanUrl($url);
+        $parsed = parse_url($rawUrl);
+        $this->url = $this->cleanUrl($parsed["path"]);
         $this->method = $method;
         $this->queryParams = [];
-        parse_str($url, $this->queryParams);
+        parse_str($parsed["query"] ?? "", $this->queryParams);
         $this->bodyParams = $bodyParams;
     }
 
