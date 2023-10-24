@@ -17,30 +17,6 @@ require_once "../config/exceptionhandler.php";
 const API_ROOT_PATTERN = "/^\/api/i";
 
 /**
- * Pre-process the URL to a format that can be used to find the endpoint
- * Removes query parameters, trailing slashes, the root path, and converts to lowercase
- * @param string $url The URL to pre-process
- * @return string The pre-processed URL
- */
-function preprocessUrl(string $url): string
-{
-    // TODO: Is this the correct commenting style?
-    // Remove query parameters
-    $url = parse_url($url, PHP_URL_PATH);
-
-    // Trim any trailing slashes
-    $url = rtrim($url, '/');
-
-    // Remove the root path
-    $url = preg_replace(API_ROOT_PATTERN, '', $url);
-
-    // Convert to lowercase
-    $url = strtolower($url);
-
-    return $url;
-}
-
-/**
  * Get the endpoint for the given URL
  * // TODO: Check the request method and support methods other than GET in Endpoint
  * // TODO: Should this be a factory?
@@ -49,9 +25,9 @@ function preprocessUrl(string $url): string
  * // TODO: This should return 404 instead of throwing an exception
  * @throws Exception If the endpoint cannot be found
  */
-function getEndpoint(string $url): Endpoint
+function getEndpoint(Request $request): Endpoint
 {
-    return match($url) {
+    return match($request->getUrl()) {
         "/content/country" => new CountryEndpoint(ChiDatabase::getInstance()),
         "/developer" => new DeveloperEndpoint(),
         default => throw new ClientException(ResponseCode::NOT_FOUND),
@@ -59,7 +35,7 @@ function getEndpoint(string $url): Endpoint
 }
 
 // TODO: Consider using DI to inject the response object here
-$endpoint = getEndpoint(preprocessUrl($_SERVER['REQUEST_URI']));
+$endpoint = getEndpoint(Request::getInstance());
 $endpoint->handleRequest();
 $response = new JsonResponse($endpoint);
 $response->outputData();
