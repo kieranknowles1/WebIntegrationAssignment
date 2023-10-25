@@ -86,11 +86,11 @@ for each endpoint is given below:
 - [x] country
   - [x] Return country names in the affiliation table
   - [x] Distinct elements only
-- [ ] preview
+- [x] preview
   - [x] Return links to preview videos along with their content title
   - [x] Do not return content with no preview
   - [x] Return items in a random order
-  - [ ] Limit parameter
+  - [x] Limit parameter
 - [ ] author-and-affiliation
   - [ ] Return the country, city, and institution each author is affiliated with for each publication they are
         associated with

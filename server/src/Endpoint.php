@@ -23,8 +23,9 @@ abstract class Endpoint implements DataSource
     }
 
     // TODO: 2 functions or 1 function with a parameter?
+    // TODO: Different endpoints for mutually exclusive parameters? Would remove $allGet $allBody
     /**
-     * Parse a POST parameter and check that it is valid
+     * Parse a GET parameter and check that it is valid
      * @param string $key the name of the parameter
      * @param string $value the value of the parameter
      * @param array<string, string> $allGet all GET parameters

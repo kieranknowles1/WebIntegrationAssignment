@@ -9,9 +9,26 @@
  */
 class PreviewEndpoint extends ChiEndpoint
 {
+    private int $limit = PHP_INT_MAX;
+
+    protected function parseQueryParameter(string $key, string $value, array $allGet, array $allBody): void
+    {
+        if ($key === 'limit') {
+            // TODO: Should validation be done in a separate function?
+            if (!filter_var($value, FILTER_VALIDATE_INT)) {
+                throw new ClientException(ResponseCode::BAD_REQUEST);
+            }
+            $this->limit = intval($value);
+            if ($this->limit < 1) {
+                throw new ClientException(ResponseCode::BAD_REQUEST);
+            }
+        } else {
+            parent::parseQueryParameter($key, $value, $allGet, $allBody);
+        }
+    }
+
     protected function handleGetRequest(): ResponseData
     {
-        // TODO: Handle limit query parameter
-        return new ResponseData($this->getDatabase()->getRandomPreviews(PHP_INT_MAX), ResponseCode::OK);
+        return new ResponseData($this->getDatabase()->getRandomPreviews($this->limit), ResponseCode::OK);
     }
 }
