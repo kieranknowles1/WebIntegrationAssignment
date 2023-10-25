@@ -354,7 +354,7 @@ components:
     preview:
       type: object
       additionalProperties: false
-      required: ["title", "url"]
+      required: ["title", "preview_video"]
       properties:
         title:
           type: string
