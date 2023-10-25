@@ -24,41 +24,42 @@ abstract class Endpoint implements DataSource
 
     // TODO: 2 functions or 1 function with a parameter?
     /**
-     * Check that a GET parameter is valid
+     * Parse a POST parameter and check that it is valid
      * @param string $key the name of the parameter
      * @param string $value the value of the parameter
      * @param array<string, string> $allGet all GET parameters
      * @param array<string, string> $allBody all POST parameters
      * @throws ClientException if the parameter is invalid
      */
-    protected function checkQueryParameter(string $key, string $value, array $allGet, array $allBody): void
+    protected function parseQueryParameter(string $key, string $value, array $allGet, array $allBody): void
     {
         throw new ClientException(ResponseCode::BAD_REQUEST);
     }
 
+    // TODO: Am i using POST parameters at all? Would also remove $allBody and Request::bodyParams
     /**
-     * Check that a POST parameter is valid
+     * Parse a POST parameter and check that it is valid
      * @param string $key the name of the parameter
      * @param string $value the value of the parameter
      * @param array<string, string> $allGet all GET parameters
      * @param array<string, string> $allBody all POST parameters
      * @throws ClientException if the parameter is invalid
      */
-    protected function checkBodyParameter(string $key, string $value, array $allGet, array $allBody): void
+    protected function parseBodyParameter(string $key, string $value, array $allGet, array $allBody): void
     {
         throw new ClientException(ResponseCode::BAD_REQUEST);
     }
 
-    private function checkParameters(Request $request): void
+    private function parseParameters(Request $request): void
     {
         $queryParams = $request->getQueryParams();
         $bodyParameters = $request->getBodyParams();
 
         foreach ($queryParams as $key => $value) {
-            $this->checkQueryParameter($key, $value, $queryParams, $bodyParameters);
+            $this->parseQueryParameter($key, $value, $queryParams, $bodyParameters);
         }
         foreach ($bodyParameters as $key => $value) {
-            $this->checkBodyParameter($key, $value, $queryParams, $bodyParameters);
+            $this->parseBodyParameter($key, $value, $queryParams, $bodyParameters);
         }
     }
 
@@ -66,7 +67,7 @@ abstract class Endpoint implements DataSource
     {
         assert(!$this->handledRequest, "handleRequest called more than once");
 
-        $this->checkParameters($request);
+        $this->parseParameters($request);
 
         // TODO: Handle OPTIONS and other methods
         $response = match ($request->getMethod()) {
