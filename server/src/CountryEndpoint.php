@@ -7,18 +7,10 @@
  * @author Kieran Knowles
  * @generated GitHub Copilot was used to assist in writing this code
  */
-class CountryEndpoint extends Endpoint
+class CountryEndpoint extends ChiEndpoint
 {
-    private ChiDatabase $database;
-
-    // TODO: Is this, ChiDatabase, and DatabaseConnection good usage of DI?
-    public function __construct(ChiDatabase $database)
-    {
-        $this->database = $database;
-    }
-
     protected function handleGetRequest(): ResponseData
     {
-        return new ResponseData($this->database->getCountries(), ResponseCode::OK);
+        return new ResponseData($this->getDatabase()->getCountries(), ResponseCode::OK);
     }
 }

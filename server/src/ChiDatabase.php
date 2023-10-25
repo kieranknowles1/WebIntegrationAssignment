@@ -34,4 +34,31 @@ class ChiDatabase
         // Map to a flat array of country names
         return array_map(fn ($row) => $row["country"], $result);
     }
+
+    /**
+     * Get links to random preview videos and the title of their associated content
+     * Items are returned in a random order
+     * @param int $limit the maximum number of items to return
+     * @return array the video URLs and titles
+     * ```php
+     *  $result[n] = [
+     *      "title" => string,
+     *      "preview_video" => string
+     *  ];
+     * ```
+     */
+    public function getRandomPreviews(int $limit): array
+    {
+        $query = <<<SQL
+        SELECT
+            title,
+            preview_video
+        FROM content
+        WHERE preview_video IS NOT NULL
+        ORDER BY RANDOM()
+        LIMIT :limit
+        SQL;
+
+        return $this->connection->runSql($query, ["limit" => $limit]);
+    }
 }

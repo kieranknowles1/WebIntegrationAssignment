@@ -66,8 +66,6 @@ abstract class Endpoint implements DataSource
     {
         assert(!$this->handledRequest, "handleRequest called more than once");
 
-        var_dump($request);
-
         $this->checkParameters($request);
 
         // TODO: Handle OPTIONS and other methods

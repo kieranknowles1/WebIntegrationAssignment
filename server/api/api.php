@@ -24,6 +24,7 @@ function getEndpoint(Request $request): Endpoint
 {
     return match($request->getUrl()) {
         "/api/content/country" => new CountryEndpoint(ChiDatabase::getInstance()),
+        "/api/content/preview" => new PreviewEndpoint(ChiDatabase::getInstance()),
         "/api/developer" => new DeveloperEndpoint(),
         default => throw new ClientException(ResponseCode::NOT_FOUND),
     };
