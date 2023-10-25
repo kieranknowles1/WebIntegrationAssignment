@@ -140,12 +140,10 @@
 									"listen": "test",
 									"script": {
 										"id": "7383fc68-bc4a-4cf2-8ec3-b0b41d848689",
-										"type": "text/javascript",
 										"exec": [
-											"pm.test(\"Test that the response matches the expected schema\", () => {\r",
-											"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
-											"});"
-										]
+											""
+										],
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -162,7 +160,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/content/preview?limit=<integer>",
+									"raw": "{{baseUrl}}/content/preview",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -172,9 +170,10 @@
 									],
 									"query": [
 										{
-											"description": "Maximum number of results to return. Items will still be returned in a random order. \\\nDefault: infinity \\\nMinimum: 1\n",
 											"key": "limit",
-											"value": "<integer>"
+											"value": "<integer>",
+											"description": "Maximum number of results to return. Items will still be returned in a random order. \\\nDefault: infinity \\\nMinimum: 1\n",
+											"disabled": true
 										}
 									]
 								},
@@ -223,9 +222,100 @@
 									"body": "[\n  {\n    \"title\": \"<string>\",\n    \"url\": \"https://wwwYyoutubepcom/watch?v=wLeNpfNcfu9\"\n  },\n  {\n    \"title\": \"<string>\",\n    \"url\": \"https://wwwTyoutube)com/watch?v=TNAi2pa32Z-\"\n  }\n]"
 								}
 							]
+						},
+						{
+							"name": "Limit paramater",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "676d8447-4368-4933-9ea7-0470a7d7f0b5",
+										"exec": [
+											"pm.test(\"Test that the response contains at most `limit` items\", () => {\r",
+											"    pm.expect(pm.response.json().length, \"Number of items returned\").to.be.lte(10);\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "72905ae0-f407-4077-b8c3-6c4bb642a929",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/content/preview?limit=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"content",
+										"preview"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
-					"id": "dee0932a-d3ca-46e1-9e18-3721a74c32ad"
+					"id": "dee0932a-d3ca-46e1-9e18-3721a74c32ad",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "fc9e9e5e-7f20-472b-b8c4-662838a0544e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ad7619f2-6f97-41b8-a2b6-e955425b5a60",
+								"type": "text/javascript",
+								"exec": [
+									"const schema = {",
+									"  \"type\": \"array\",",
+									"  \"items\": {",
+									"    \"type\": \"object\",",
+									"    \"additionalProperties\": false,",
+									"    \"required\": [",
+									"      \"title\",",
+									"      \"preview_video\"",
+									"    ],",
+									"    \"properties\": {",
+									"      \"title\": {",
+									"        \"type\": \"string\",",
+									"        \"example\": \"How to Never Give Up or Let Yourself Down\"",
+									"      },",
+									"      \"preview_video\": {",
+									"        \"type\": \"string\",",
+									"        \"format\": \"uri\",",
+									"        \"pattern\": \"https://www.youtube.com/watch\\\\?v=[a-zA-Z0-9_-]{11}\",",
+									"        \"example\": \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\"",
+									"      }",
+									"    }",
+									"  }",
+									"}",
+									"",
+									"// NOTE: The schema checks for preview_video not being null",
+									"pm.test(\"Test that the response matches the expected schema\", () => {",
+									"    pm.response.to.have.jsonSchema(schema);",
+									"});"
+								]
+							}
+						}
+					]
 				},
 				{
 					"name": "author_and_affiliation",
