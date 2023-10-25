@@ -7,6 +7,54 @@
 	},
 	"item": [
 		{
+			"name": "preview",
+			"item": [
+				{
+					"name": "Invalid Limit Parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ecf9c52d-d4a1-4737-8457-7fa7f1338c9a",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "6214b4c3-50f3-48d8-862c-889d3d85099f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/content/preview?limit=0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"content",
+								"preview"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "7969ea66-2032-4b72-83fa-e158297af6d0"
+		},
+		{
 			"name": "Extra GET Parameter",
 			"event": [
 				{
