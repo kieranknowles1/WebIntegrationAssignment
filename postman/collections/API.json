@@ -1095,7 +1095,6 @@
 					"    pm.response.json();",
 					"});",
 					"",
-					"// TODO: Move this to valid requests folder",
 					"pm.test(\"Status code is 200\", function () {",
 					"    pm.response.to.have.status(200);",
 					"});"

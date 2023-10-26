@@ -23,7 +23,6 @@ abstract class Endpoint implements DataSource
     }
 
     // TODO: 2 functions or 1 function with a parameter?
-    // TODO: Different endpoints for mutually exclusive parameters?
     /**
      * Parse a GET parameter and check that it is valid
      * @param string $key the lower case name of the parameter

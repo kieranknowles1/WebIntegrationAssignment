@@ -10,7 +10,6 @@ class ChiEndpoint extends Endpoint
 {
     private ChiDatabase $database;
 
-    // TODO: Is this, ChiDatabase, and DatabaseConnection good usage of DI?
     public function __construct(ChiDatabase $database)
     {
         $this->database = $database;

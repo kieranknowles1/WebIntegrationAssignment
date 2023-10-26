@@ -74,7 +74,7 @@ for each endpoint is given below:
       wish. The endpoints listed below can also return more data than is specified if you wish. Any
       additional endpoints, parameters and data must be appropriate to the purposes of the API.
 - [ ] All endpoints except endpoint 1 must retrieve data from the _chi2023.sqlite_ database.
-- [ ] The name of the endpoint is what should appear in the URL path, for example the endpoint
+- [x] The name of the endpoint is what should appear in the URL path, for example the endpoint
       'developer' might have the URL https://nuwebspace.co.uk/kf6012/coursework/api/developer
 - [ ] The full URL for each endpoint should be given in the readme file. For each parameter
       supported there should also be a clear example (see appendix 1).
