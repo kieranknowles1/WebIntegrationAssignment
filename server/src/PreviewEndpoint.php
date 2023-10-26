@@ -11,7 +11,7 @@ class PreviewEndpoint extends ChiEndpoint
 {
     private int $limit = PHP_INT_MAX;
 
-    protected function parseQueryParameter(string $key, string $value, array $allGet, array $allBody): void
+    protected function parseQueryParameter(string $key, string $value): void
     {
         if ($key === 'limit') {
             // TODO: Should validation be done in a separate function?
@@ -23,7 +23,7 @@ class PreviewEndpoint extends ChiEndpoint
                 throw new ClientException(ResponseCode::BAD_REQUEST);
             }
         } else {
-            parent::parseQueryParameter($key, $value, $allGet, $allBody);
+            parent::parseQueryParameter($key, $value);
         }
     }
 

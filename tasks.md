@@ -63,12 +63,13 @@ for each endpoint is given below:
   - [x] Requests to invalid endpoints - return 404,
   - [x] use of invalid parameters,
   - [ ] invalid combinations of parameters,
-  - [ ] invalid values,
+  - [x] invalid values,
   - [x] server errors (e.g. database errors) - return 500
   - [ ] any other error should be responded to
 - [ ] Endpoints and parameter names and values should not be case sensitive.
   - [x] Endpoints should be case insensitive.
-  - [ ] Parameter names and values should be case insensitive.
+  - [x] Parameter names should be case insensitive.
+  - [ ] Parameter values should be case insensitive.
 - [ ] Additional endpoints can be created if you wish. Additional parameters can be supported if you
       wish. The endpoints listed below can also return more data than is specified if you wish. Any
       additional endpoints, parameters and data must be appropriate to the purposes of the API.

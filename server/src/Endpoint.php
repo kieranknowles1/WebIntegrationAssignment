@@ -23,30 +23,26 @@ abstract class Endpoint implements DataSource
     }
 
     // TODO: 2 functions or 1 function with a parameter?
-    // TODO: Different endpoints for mutually exclusive parameters? Would remove $allGet $allBody
+    // TODO: Different endpoints for mutually exclusive parameters?
     /**
      * Parse a GET parameter and check that it is valid
-     * @param string $key the name of the parameter
+     * @param string $key the lower case name of the parameter
      * @param string $value the value of the parameter
-     * @param array<string, string> $allGet all GET parameters
-     * @param array<string, string> $allBody all POST parameters
      * @throws ClientException if the parameter is invalid
      */
-    protected function parseQueryParameter(string $key, string $value, array $allGet, array $allBody): void
+    protected function parseQueryParameter(string $key, string $value): void
     {
         throw new ClientException(ResponseCode::BAD_REQUEST);
     }
 
-    // TODO: Am i using POST parameters at all? Would also remove $allBody and Request::bodyParams
+    // TODO: Am i using POST parameters at all? Would also remove Request::bodyParams
     /**
      * Parse a POST parameter and check that it is valid
-     * @param string $key the name of the parameter
+     * @param string $key the lower case name of the parameter
      * @param string $value the value of the parameter
-     * @param array<string, string> $allGet all GET parameters
-     * @param array<string, string> $allBody all POST parameters
      * @throws ClientException if the parameter is invalid
      */
-    protected function parseBodyParameter(string $key, string $value, array $allGet, array $allBody): void
+    protected function parseBodyParameter(string $key, string $value): void
     {
         throw new ClientException(ResponseCode::BAD_REQUEST);
     }
@@ -57,10 +53,10 @@ abstract class Endpoint implements DataSource
         $bodyParameters = $request->getBodyParams();
 
         foreach ($queryParams as $key => $value) {
-            $this->parseQueryParameter($key, $value, $queryParams, $bodyParameters);
+            $this->parseQueryParameter(strtolower($key), $value);
         }
         foreach ($bodyParameters as $key => $value) {
-            $this->parseBodyParameter($key, $value, $queryParams, $bodyParameters);
+            $this->parseBodyParameter(strtolower($key), $value);
         }
     }
 
