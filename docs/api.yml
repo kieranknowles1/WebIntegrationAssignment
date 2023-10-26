@@ -335,9 +335,9 @@ components:
           $ref: "#/components/schemas/contentType"
 
     contentType:
-      enum:
-        # TODO: Fill in with actual content types
-        - course
+      type: string
+      example: Event
+
 
     developerInformation:
       type: object

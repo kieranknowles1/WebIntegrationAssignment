@@ -101,10 +101,10 @@ for each endpoint is given below:
   - [ ] Country name parameter, mutually exclusive with content
   - [ ] Return the author ID, author name, content ID, and content name for each affiliation
 - [ ] content
-  - [ ] Return information about all research content
-  - [ ] return the title, abstract, and content type
-  - [ ] Page parameter, if specified, return a page of 20 items after type filtering
-  - [ ] Type name parameter, if specified, return only content with matching type
+  - [x] Return information about all research content
+  - [x] return the title, abstract, and content type
+  - [x] Page parameter, if specified, return a page of 20 items after type filtering
+  - [x] Type name parameter, if specified, return only content with matching type
 
 ### Task 1. 2
 (20 marks)
