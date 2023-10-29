@@ -264,6 +264,34 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Parameter Case Sensitivity",
+							"id": "05c8076e-b460-435f-80be-1031ee77c336",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/content/preview?LIMIT=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"content",
+										"preview"
+									],
+									"query": [
+										{
+											"key": "LIMIT",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"id": "dee0932a-d3ca-46e1-9e18-3721a74c32ad",
@@ -435,9 +463,7 @@
 									"script": {
 										"id": "f1c3d04c-e83d-42e5-934c-bd85bc8164ba",
 										"exec": [
-											"pm.test(\"Test that the response matches the expected schema\", () => {\r",
-											"    pm.expect(false, \"Define the expected shema.\").to.eql(true);\r",
-											"});"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -456,7 +482,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/content/list?page=<integer>&type=course",
+									"raw": "{{baseUrl}}/content/list",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -467,13 +493,15 @@
 									"query": [
 										{
 											"key": "page",
-											"value": "<integer>",
-											"description": "The 'page' of 20 results to return, after `type` is considered. \\\nIf not specified, all results are returned\n"
+											"value": "1",
+											"description": "The 'page' of 20 results to return, after `type` is considered. \\\nIf not specified, all results are returned\n",
+											"disabled": true
 										},
 										{
 											"key": "type",
-											"value": "course",
-											"description": "The type of content to return. \\\nIf not specified, all content is allowed\n"
+											"value": "paper",
+											"description": "The type of content to return. \\\nIf not specified, all content is allowed\n",
+											"disabled": true
 										}
 									]
 								},
@@ -527,9 +555,147 @@
 									"body": "[\n  {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\",\n    \"abstract\": \"<string>\",\n    \"type\": \"course\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\",\n    \"abstract\": \"<string>\",\n    \"type\": \"course\"\n  }\n]"
 								}
 							]
+						},
+						{
+							"name": "Page parameter",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "bd14dedb-4597-4120-98f9-18b5ab9b5ec3",
+										"exec": [
+											"pm.test(\"Test that pages are at most 20 items long\", () => {\r",
+											"    const json = pm.response.json();\r",
+											"    pm.expect(json.length).is.lte(20);\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "43350215-150b-4b87-bf6d-ed77d44a728a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/content/list?page=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"content",
+										"list"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Type parameter",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "02a9b7ca-8f90-4b2d-9bd0-2ca11b083110",
+										"exec": [
+											"pm.test(\"Test that all returned content has the expected type\", () => {\r",
+											"    const json = pm.response.json();\r",
+											"    json.forEach((item) => {\r",
+											"        pm.expect(item.type.toLowerCase()).eql(\"paper\")\r",
+											"    });\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "04c4bd5e-5af7-44dc-8cf3-8e5bbca8d4e4",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/content/list?type=paper",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"content",
+										"list"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "paper"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
-					"id": "05140525-5d8b-47e4-a045-62ca38e4469b"
+					"id": "05140525-5d8b-47e4-a045-62ca38e4469b",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3afadd60-38da-4f96-93e9-970293e1140c",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d1892df1-8f9c-47e5-95cd-1dfe1d809f97",
+								"type": "text/javascript",
+								"exec": [
+									"const schema = {",
+									"  \"type\": \"array\",",
+									"  \"items\": {",
+									"    \"type\": \"object\",",
+									"    \"additionalProperties\": false,",
+									"    \"required\": [",
+									"      \"title\",",
+									"      \"type\"",
+									"    ],",
+									"    \"properties\": {",
+									"      \"title\": {",
+									"        \"type\": \"string\",",
+									"        \"example\": \"The Mandalorian\"",
+									"      },",
+									"      \"abstract\": {",
+									"        \"type\": [\"string\", \"null\"],",
+									"        \"nullable\": \"true\",",
+									"        \"example\": \"A guy who never takes off his helmet goes on adventures with baby Yoda\\nSeems pretty irresponsible to me, but what do I know?\\nI guess he also adopts him and it turns out some Mandalorians put their surname first\\n\"",
+									"      },",
+									"      \"type\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    }",
+									"  }",
+									"}",
+									"",
+									"pm.test(\"Test that the response matches the expected schema\", () => {",
+									"    pm.response.to.have.jsonSchema(schema);",
+									"});"
+								]
+							}
+						}
+					]
 				}
 			],
 			"id": "b77609d2-9292-4975-aa71-fa43088b9163"
@@ -1095,6 +1261,7 @@
 					"    pm.response.json();",
 					"});",
 					"",
+					"// TODO: Move this to valid requests folder",
 					"pm.test(\"Status code is 200\", function () {",
 					"    pm.response.to.have.status(200);",
 					"});"
