@@ -110,7 +110,8 @@ paths:
       summary: Get information about all research content
       description: |
         Return information about all research content at the conference. \
-        Data contains the title, the abstract, and the content type.
+        Data contains the title, the abstract, and the content type. \
+        Content abstract can be null.
       parameters:
         - in: query
           name: page
@@ -317,20 +318,17 @@ components:
     contentFull:
       type: object
       additionalProperties: false
-      required: ["id", "title", "abstract", "type"]
+      required: ["title", "type"]
       properties:
-        id:
-          type: integer
         title:
           type: string
-          # TODO: Fill in with actual title
-          example: The Mandalorian
+          example: Why nullable types are better than null
         abstract:
           type: string
+          nullable: true
           example: |
-            A guy who never takes off his helmet goes on adventures with baby Yoda
-            Seems pretty irresponsible to me, but what do I know?
-            I guess he also adopts him and it turns out some Mandalorians put their surname first
+            This is an abstract about why nullable types are better than null
+            The main reason is that they are better is that you won't get null pointer exceptions
         type:
           $ref: "#/components/schemas/contentType"
 
