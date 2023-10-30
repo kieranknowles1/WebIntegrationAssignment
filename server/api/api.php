@@ -16,8 +16,6 @@ require_once "../config/exceptionhandler.php";
 
 /**
  * Get the endpoint for the given URL
- * @param string $url The pre-processed URL
- * @return Endpoint The endpoint for the given URL
  * @throws ClientException If the endpoint cannot be found
  */
 function getEndpoint(Request $request): Endpoint
