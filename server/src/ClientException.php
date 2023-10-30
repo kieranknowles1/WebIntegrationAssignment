@@ -9,10 +9,18 @@
  */
 class ClientException extends RuntimeException
 {
+    private ResponseCode $responseCode;
+
     public function __construct(ResponseCode $code)
     {
         parent::__construct(ResponseCode::getMessage($code));
-        // TODO: Can I cast in ExceptionDataSource instead?
-        $this->code = $code->value;
+
+        $this->responseCode = $code;
+    }
+
+    /** Get the HTTP response code of the exception */
+    public function getResponseCode(): ResponseCode
+    {
+        return $this->responseCode;
     }
 }

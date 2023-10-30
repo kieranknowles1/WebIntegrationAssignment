@@ -18,8 +18,9 @@ class ExceptionDataSource implements DataSource
     public function getResponseCode(): ResponseCode
     {
         if ($this->exception instanceof ClientException) {
-            // TODO: Find a way to get the response code from the exception rather than misusing getCode()
-            return ResponseCode::from($this->exception->getCode());
+            /** @var ClientException */
+            $clientException = $this->exception;
+            return $clientException->getResponseCode();
         } else {
             return ResponseCode::INTERNAL_SERVER_ERROR;
         }
