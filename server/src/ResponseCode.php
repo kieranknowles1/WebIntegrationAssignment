@@ -27,6 +27,8 @@ enum ResponseCode: int
             ResponseCode::METHOD_NOT_ALLOWED => "Method Not Allowed",
 
             ResponseCode::INTERNAL_SERVER_ERROR => "Internal Server Error",
+
+            default => throw new InvalidArgumentException("Invalid response code"),
         };
     }
 }
