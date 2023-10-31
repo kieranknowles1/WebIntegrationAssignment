@@ -13,6 +13,7 @@ ini_set('display_errors', '1');
 
 require_once "../config/autoloader.php";
 require_once "../config/exceptionhandler.php";
+require_once "../config/settings.php";
 
 /**
  * Get the endpoint for the given URL

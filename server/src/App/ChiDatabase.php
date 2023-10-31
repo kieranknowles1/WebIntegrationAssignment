@@ -3,8 +3,7 @@
 namespace App;
 
 // TODO: Router class
-// TODO: Settings file for constants
-// TODO: Should I put the queries in the endpoint classes?
+// TODO: Should I put the queries in the endpoint classes and remove this?
 /**
  * Interface for the `chi2023.sqlite` database
  *
@@ -17,7 +16,7 @@ class ChiDatabase
     public static function getInstance(): ChiDatabase
     {
         if (self::$instance === null) {
-            self::$instance = new ChiDatabase(new DatabaseConnection("../data/chi2023.sqlite"));
+            self::$instance = new ChiDatabase(new DatabaseConnection(\Settings::CHI_DATABASE_FILE));
         }
         return self::$instance;
     }
