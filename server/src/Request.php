@@ -45,6 +45,15 @@ class Request
     private function __construct(string $rawUrl, string $method, array $bodyParams)
     {
         $parsed = parse_url($rawUrl);
+
+        // Check for a malformed URL
+        if ($parsed === false) {
+            throw new InvalidArgumentException("Failed to parse URL");
+        }
+        if (!isset($parsed["path"])) {
+            throw new InvalidArgumentException("URL has no path");
+        }
+
         $this->url = $this->cleanUrl($parsed["path"]);
         $this->method = $method;
         $this->queryParams = [];
