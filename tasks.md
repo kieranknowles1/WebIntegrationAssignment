@@ -100,7 +100,7 @@ for each endpoint is given below:
   - [ ] Content ID parameter, mutually exclusive with country
   - [ ] Country name parameter, mutually exclusive with content
   - [ ] Return the author ID, author name, content ID, and content name for each affiliation
-- [ ] content
+- [x] content
   - [x] Return information about all research content
   - [x] return the title, abstract, and content type
   - [x] Page parameter, if specified, return a page of 20 items after type filtering
