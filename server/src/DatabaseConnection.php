@@ -20,7 +20,7 @@ class DatabaseConnection
     /**
      * Run a SQL query and return the result
      * @param string $sql The SQL query to run
-     * @param array<string, string> $params The parameters to pass to the query
+     * @param array<string, string|number|bool> $params The parameters to pass to the query
      * @return array[] The result of the query, as an array of associative arrays
      */
     public function runSql(string $sql, array $params = []): array
