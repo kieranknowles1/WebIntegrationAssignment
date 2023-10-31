@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Endpoints;
 
 /**
  * Bundled data and status code returned by an endpoint
@@ -11,9 +11,9 @@ namespace App;
 class ResponseData
 {
     private mixed $data;
-    private ResponseCode $code;
+    private \App\ResponseCode $code;
 
-    public function __construct(mixed $data, ResponseCode $code)
+    public function __construct(mixed $data, \App\ResponseCode $code)
     {
         $this->data = $data;
         $this->code = $code;
@@ -24,7 +24,7 @@ class ResponseData
         return $this->data;
     }
 
-    public function getCode(): ResponseCode
+    public function getCode(): \App\ResponseCode
     {
         return $this->code;
     }

@@ -28,8 +28,8 @@ class ContentList extends ChiEndpoint
         }
     }
 
-    protected function handleGetRequest(): \App\ResponseData
+    protected function handleGetRequest(): ResponseData
     {
-        return new \App\ResponseData($this->getDatabase()->getContent($this->page, $this->type), \App\ResponseCode::OK);
+        return new ResponseData($this->getDatabase()->getContent($this->page, $this->type), \App\ResponseCode::OK);
     }
 }

@@ -16,10 +16,10 @@ abstract class Endpoint implements \App\DataSource
 
     /**
      * Get the data returned by the endpoint
-     * @return \App\ResponseData bundled data and status code
+     * @return ResponseData bundled data and status code
      * @throws \App\ClientException if the request is invalid
      */
-    protected function handleGetRequest(): \App\ResponseData
+    protected function handleGetRequest(): ResponseData
     {
         throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED, "GET is not allowed for this endpoint");
     }
