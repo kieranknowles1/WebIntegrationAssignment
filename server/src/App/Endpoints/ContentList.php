@@ -17,14 +17,7 @@ class ContentList extends ChiEndpoint
     protected function parseQueryParameter(string $key, string $value): void
     {
         if ($key === 'page') {
-            // TODO: Should validation be done in a separate function?
-            if (!filter_var($value, FILTER_VALIDATE_INT)) {
-                throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST);
-            }
-            $this->page = intval($value);
-            if ($this->page < 1) {
-                throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST);
-            }
+            $this->page = \App\ArgumentParser::parseInt($value, 1, PHP_INT_MAX);
         } elseif ($key === 'type') {
             $this->type = $value;
             if (!$this->getDatabase()->typeExists($this->type)) {

@@ -16,14 +16,7 @@ class Preview extends ChiEndpoint
     protected function parseQueryParameter(string $key, string $value): void
     {
         if ($key === 'limit') {
-            // TODO: Should validation be done in a separate function?
-            if (!filter_var($value, FILTER_VALIDATE_INT)) {
-                throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST);
-            }
-            $this->limit = intval($value);
-            if ($this->limit < 1) {
-                throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST);
-            }
+            $this->limit = \App\ArgumentParser::parseInt($value, 1, PHP_INT_MAX);
         } else {
             parent::parseQueryParameter($key, $value);
         }
