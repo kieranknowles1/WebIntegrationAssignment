@@ -1,5 +1,8 @@
 <?php
 
+// TODO: Move to `App` namespace. Have subdirectory for endpoints
+// TODO: Router class
+// TODO: Settings file for constants
 /**
  * Interface for the `chi2023.sqlite` database
  *
@@ -32,7 +35,7 @@ class ChiDatabase
     {
         $result = $this->connection->runSql("SELECT DISTINCT country FROM affiliation ORDER BY country");
         // Map to a flat array of country names
-        return array_map(fn ($row) => $row["country"], $result);
+        return array_map(fn($row) => $row["country"], $result);
     }
 
     /**
