@@ -8,6 +8,7 @@ namespace App;
  *
  * @author Kieran Knowles
  * @generated GitHub Copilot was used to assist in writing this code
+ * @generated ChatGPT was used for additional guidance
  */
 class ChiDatabase
 {
@@ -35,7 +36,7 @@ class ChiDatabase
     {
         $result = $this->connection->runSql("SELECT DISTINCT country FROM affiliation ORDER BY country");
         // Map to a flat array of country names
-        return array_map(fn($row) => $row["country"], $result);
+        return array_map(fn ($row) => $row["country"], $result);
     }
 
     /**
@@ -124,5 +125,74 @@ class ChiDatabase
         }
 
         return $this->connection->runSql($query, $params);
+    }
+
+    // TODO: Check that this works
+    // TODO: Link to the API
+    // TODO: Update API docs
+    private const AFFILIATIONS_QUERY_HEAD = <<<SQL
+        SELECT
+            author.id AS author_id,
+            author.name AS author_name,
+            affiliation.country AS country,
+            affiliation.city AS city,
+            affiliation.institution AS institution,
+            json_group_array(json_object('id', content.id, 'title', content.title)) AS content
+        FROM affiliation
+            JOIN content ON content.id = affiliation.content
+            JOIN author ON author.id = affiliation.author
+    SQL;
+
+    private const AFFILIATIONS_QUERY_TAIL = <<<SQL
+        GROUP BY
+            affiliation.author,
+            affiliation.country,
+            affiliation.city,
+            affiliation.institution
+        ORDER BY
+            author.name,
+            affiliation.country,
+            affiliation.city,
+            affiliation.institution
+    SQL;
+
+    /**
+     * Run a query to get authors and their affiliations from the database
+     * @param string $middle the middle of the query, should be a WHERE clause with a trailing space or empty string
+     * @param array<string, string|int> $params the parameters to bind to the query
+     * @return array[] the results of the query
+     */
+    private function runAffiliationsQuery(string $middle, array $params): array
+    {
+        // WHERE needs to be between JOIN and GROUP BY, so splice it in the middle
+        $query = self::AFFILIATIONS_QUERY_HEAD . $middle . self::AFFILIATIONS_QUERY_TAIL;
+        $result = $this->connection->runSql($query, $params);
+        // Decode the content array
+        array_walk($result, function (&$row) {
+            $row["content"] = json_decode($row["content"]);
+        });
+        return $result;
+    }
+    public function getAffiliations(): array
+    {
+        // No filtering here, so just run the query with no WHERE clause
+        return self::runAffiliationsQuery("", []);
+    }
+
+    public function getAffiliationsByContent($contentId): array
+    {
+        return self::runAffiliationsQuery(
+            "WHERE affiliation.content = :content_id ",
+            ["content_id" => $contentId]
+        );
+    }
+
+    public function getAffiliationsByCountry($countryName): array
+    {
+        return self::runAffiliationsQuery(
+            "WHERE affiliation.country = :country_name ",
+            ["country_name" => $countryName
+        ]
+        );
     }
 }
