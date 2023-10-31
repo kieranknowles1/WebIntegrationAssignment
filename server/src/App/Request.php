@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 /**
  * Class for processing the request and extracting information from it
  *
@@ -48,10 +50,10 @@ class Request
 
         // Check for a malformed URL
         if ($parsed === false) {
-            throw new InvalidArgumentException("Failed to parse URL");
+            throw new \InvalidArgumentException("Failed to parse URL");
         }
         if (!isset($parsed["path"])) {
-            throw new InvalidArgumentException("URL has no path");
+            throw new \InvalidArgumentException("URL has no path");
         }
 
         $this->url = $this->cleanUrl($parsed["path"]);

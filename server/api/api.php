@@ -16,22 +16,22 @@ require_once "../config/exceptionhandler.php";
 
 /**
  * Get the endpoint for the given URL
- * @throws ClientException If the endpoint cannot be found
+ * @throws App\ClientException If the endpoint cannot be found
  */
-function getEndpoint(Request $request): Endpoint
+function getEndpoint(App\Request $request): App\Endpoints\Endpoint
 {
     return match($request->getUrl()) {
-        "/api/content/country" => new CountryEndpoint(ChiDatabase::getInstance()),
-        "/api/content/preview" => new PreviewEndpoint(ChiDatabase::getInstance()),
-        "/api/content/list" => new ContentListEndpoint(ChiDatabase::getInstance()),
-        "/api/developer" => new DeveloperEndpoint(),
-        default => throw new ClientException(ResponseCode::NOT_FOUND),
+        "/api/content/country" => new App\Endpoints\Country(App\ChiDatabase::getInstance()),
+        "/api/content/preview" => new App\Endpoints\Preview(App\ChiDatabase::getInstance()),
+        "/api/content/list" => new App\Endpoints\ContentList(App\ChiDatabase::getInstance()),
+        "/api/developer" => new App\Endpoints\Developer(),
+        default => throw new App\ClientException(App\ResponseCode::NOT_FOUND),
     };
 }
 
 // TODO: Consider using DI to inject the response object here
-$request = Request::fromGlobals();
+$request = App\Request::fromGlobals();
 $endpoint = getEndpoint($request);
 $endpoint->handleRequest($request);
-$response = new JsonResponse($endpoint);
+$response = new App\JsonResponse($endpoint);
 $response->outputData();

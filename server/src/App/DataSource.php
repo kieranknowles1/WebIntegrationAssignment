@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 /**
  * Data source for a response
  *

@@ -1,8 +1,10 @@
 <?php
 
-// TODO: Move to `App` namespace. Have subdirectory for endpoints
+namespace App;
+
 // TODO: Router class
 // TODO: Settings file for constants
+// TODO: Should I put the queries in the endpoint classes?
 /**
  * Interface for the `chi2023.sqlite` database
  *

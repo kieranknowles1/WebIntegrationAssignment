@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Endpoints;
+
 /**
  * Base class for endpoints using the CHI database
  *
@@ -8,14 +10,14 @@
  */
 abstract class ChiEndpoint extends Endpoint
 {
-    private ChiDatabase $database;
+    private \App\ChiDatabase $database;
 
-    public function __construct(ChiDatabase $database)
+    public function __construct(\App\ChiDatabase $database)
     {
         $this->database = $database;
     }
 
-    protected function getDatabase(): ChiDatabase
+    protected function getDatabase(): \App\ChiDatabase
     {
         return $this->database;
     }

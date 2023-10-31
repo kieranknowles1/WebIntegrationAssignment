@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 /**
  * Bundled data and status code returned by an endpoint
  *

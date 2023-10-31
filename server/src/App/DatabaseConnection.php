@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 /**
  * Represnets a connection to a SQLite database
  *
@@ -8,13 +10,13 @@
  */
 class DatabaseConnection
 {
-    private PDO $pdo;
+    private \PDO $pdo;
 
     public function __construct(string $file)
     {
-        $this->pdo = new PDO("sqlite:$file");
+        $this->pdo = new \PDO("sqlite:$file");
         // Throw exceptions on error
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
 
     /**
@@ -27,6 +29,6 @@ class DatabaseConnection
     {
         $statement = $this->pdo->prepare($sql);
         $statement->execute($params);
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

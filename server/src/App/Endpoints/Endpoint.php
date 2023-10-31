@@ -1,25 +1,27 @@
 <?php
 
+namespace App\Endpoints;
+
 /**
  * Base class for all API endpoints
  *
  * @author Kieran Knowles
  * @generated GitHub Copilot was used to assist in writing this code
  */
-abstract class Endpoint implements DataSource
+abstract class Endpoint implements \App\DataSource
 {
     private mixed $data;
-    private ResponseCode $code;
+    private \App\ResponseCode $code;
     private bool $handledRequest = false;
 
     /**
      * Get the data returned by the endpoint
-     * @return ResponseData bundled data and status code
-     * @throws ClientException if the request is invalid
+     * @return \App\ResponseData bundled data and status code
+     * @throws \App\ClientException if the request is invalid
      */
-    protected function handleGetRequest(): ResponseData
+    protected function handleGetRequest(): \App\ResponseData
     {
-        throw new ClientException(ResponseCode::METHOD_NOT_ALLOWED);
+        throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED);
     }
 
     // TODO: 2 functions or 1 function with a parameter?
@@ -27,11 +29,11 @@ abstract class Endpoint implements DataSource
      * Parse a GET parameter and check that it is valid
      * @param string $key the lower case name of the parameter
      * @param string $value the value of the parameter
-     * @throws ClientException if the parameter is invalid
+     * @throws \App\ClientException if the parameter is invalid
      */
     protected function parseQueryParameter(string $key, string $value): void
     {
-        throw new ClientException(ResponseCode::BAD_REQUEST);
+        throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST);
     }
 
     // TODO: Am i using POST parameters at all? Would also remove Request::bodyParams
@@ -39,14 +41,14 @@ abstract class Endpoint implements DataSource
      * Parse a POST parameter and check that it is valid
      * @param string $key the lower case name of the parameter
      * @param string $value the value of the parameter
-     * @throws ClientException if the parameter is invalid
+     * @throws \App\ClientException if the parameter is invalid
      */
     protected function parseBodyParameter(string $key, string $value): void
     {
-        throw new ClientException(ResponseCode::BAD_REQUEST);
+        throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST);
     }
 
-    private function parseParameters(Request $request): void
+    private function parseParameters(\App\Request $request): void
     {
         $queryParams = $request->getQueryParams();
         $bodyParameters = $request->getBodyParams();
@@ -59,7 +61,7 @@ abstract class Endpoint implements DataSource
         }
     }
 
-    final public function handleRequest(Request $request): void
+    final public function handleRequest(\App\Request $request): void
     {
         assert(!$this->handledRequest, "handleRequest called more than once");
 
@@ -68,14 +70,14 @@ abstract class Endpoint implements DataSource
         // TODO: Handle OPTIONS and other methods
         $response = match ($request->getMethod()) {
             "GET" => $this->handleGetRequest(),
-            default => throw new ClientException(ResponseCode::METHOD_NOT_ALLOWED),
+            default => throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED),
         };
 
         $this->data = $response->getData();
         $this->code = $response->getCode();
     }
 
-    public function getResponseCode(): ResponseCode
+    public function getResponseCode(): \App\ResponseCode
     {
         assert($this->handledRequest, "getResponseCode called before handleRequest");
         return $this->code;

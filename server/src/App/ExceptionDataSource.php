@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 /**
  * Data source from an exception
  *
@@ -8,9 +10,9 @@
  */
 class ExceptionDataSource implements DataSource
 {
-    private Throwable $exception;
+    private \Throwable $exception;
 
-    public function __construct(Throwable $exception)
+    public function __construct(\Throwable $exception)
     {
         $this->exception = $exception;
     }
