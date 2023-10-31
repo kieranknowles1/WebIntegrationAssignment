@@ -21,7 +21,7 @@ abstract class Endpoint implements \App\DataSource
      */
     protected function handleGetRequest(): \App\ResponseData
     {
-        throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED);
+        throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED, "GET is not allowed for this endpoint");
     }
 
     // TODO: 2 functions or 1 function with a parameter?
@@ -33,7 +33,7 @@ abstract class Endpoint implements \App\DataSource
      */
     protected function parseQueryParameter(string $key, string $value): void
     {
-        throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST);
+        throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Unknown parameter '$key'");
     }
 
     // TODO: Am i using POST parameters at all? Would also remove Request::bodyParams
@@ -45,7 +45,7 @@ abstract class Endpoint implements \App\DataSource
      */
     protected function parseBodyParameter(string $key, string $value): void
     {
-        throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST);
+        throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Unknown parameter '$key'");
     }
 
     private function parseParameters(\App\Request $request): void
@@ -70,7 +70,7 @@ abstract class Endpoint implements \App\DataSource
         // TODO: Handle OPTIONS and other methods
         $response = match ($request->getMethod()) {
             "GET" => $this->handleGetRequest(),
-            default => throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED),
+            default => throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED, "Method '{$request->getMethod()}' is not allowed for this endpoint"),
         };
 
         $this->data = $response->getData();

@@ -17,11 +17,11 @@ class ContentList extends ChiEndpoint
     protected function parseQueryParameter(string $key, string $value): void
     {
         if ($key === 'page') {
-            $this->page = \App\ArgumentParser::parseInt($value, 1, PHP_INT_MAX);
+            $this->page = \App\ArgumentParser::parseInt($key, $value, 1, PHP_INT_MAX);
         } elseif ($key === 'type') {
             $this->type = $value;
             if (!$this->getDatabase()->typeExists($this->type)) {
-                throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST);
+                throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Type '$value' does not exist");
             }
         } else {
             parent::parseQueryParameter($key, $value);

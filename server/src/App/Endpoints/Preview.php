@@ -16,7 +16,7 @@ class Preview extends ChiEndpoint
     protected function parseQueryParameter(string $key, string $value): void
     {
         if ($key === 'limit') {
-            $this->limit = \App\ArgumentParser::parseInt($value, 1, PHP_INT_MAX);
+            $this->limit = \App\ArgumentParser::parseInt($key, $value, 1, PHP_INT_MAX);
         } else {
             parent::parseQueryParameter($key, $value);
         }

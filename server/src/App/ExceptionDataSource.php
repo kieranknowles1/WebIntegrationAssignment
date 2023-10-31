@@ -31,9 +31,11 @@ class ExceptionDataSource implements DataSource
     public function getData(): mixed
     {
         if ($this->exception instanceof ClientException) {
-            // TODO: Should I return more information?
+            /** @var ClientException */
+            $clientException = $this->exception;
             return [
-                'error' => $this->exception->getMessage(),
+                'error' => $clientException->getMessage(),
+                'detail' => $clientException->getDetail(),
             ];
         } else {
             // TODO: Should I be returning all this information?

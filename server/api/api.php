@@ -26,7 +26,7 @@ function getEndpoint(App\Request $request): App\Endpoints\Endpoint
         "/api/content/preview" => new App\Endpoints\Preview(App\ChiDatabase::getInstance()),
         "/api/content/list" => new App\Endpoints\ContentList(App\ChiDatabase::getInstance()),
         "/api/developer" => new App\Endpoints\Developer(),
-        default => throw new App\ClientException(App\ResponseCode::NOT_FOUND),
+        default => throw new App\ClientException(App\ResponseCode::NOT_FOUND, "The endpoint ${$request->getUrl()} does not exist."),
     };
 }
 
