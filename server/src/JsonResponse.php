@@ -10,7 +10,6 @@
 class JsonResponse
 {
     private DataSource $dataSource;
-    private string $method;
 
     public function __construct(DataSource $dataSource)
     {
