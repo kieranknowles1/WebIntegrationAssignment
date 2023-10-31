@@ -32,14 +32,17 @@ class Request
     /**
      * Clean the URL to be in lowercase and without any trailing /
      */
-    private function cleanUrl($raw): string
+    private function cleanUrl(string $raw): string
     {
         $url = strtolower($raw);
         $url = rtrim($url, '/');
         return $url;
     }
 
-    private function __construct($rawUrl, $method, $bodyParams)
+    /**
+     * @param array<string, string> $bodyParams
+     */
+    private function __construct(string $rawUrl, string $method, array $bodyParams)
     {
         $parsed = parse_url($rawUrl);
         $this->url = $this->cleanUrl($parsed["path"]);

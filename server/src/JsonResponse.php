@@ -16,7 +16,7 @@ class JsonResponse
         $this->dataSource = $dataSource;
     }
 
-    public function outputData()
+    public function outputData(): void
     {
         // TODO: Handle any other headers
         header('Content-Type: application/json');

@@ -42,7 +42,7 @@ class ChiDatabase
      * Get links to random preview videos and the title of their associated content
      * Items are returned in a random order
      * @param int $limit the maximum number of items to return
-     * @return array[] the video URLs and titles
+     * @return array{'title': string, 'preview_video': string}[] the video URLs and titles
      * ```php
      *  $result[n] = [
      *      "title" => string,
@@ -89,7 +89,7 @@ class ChiDatabase
      * Items are returned ordered by title
      * @param int|null $page the page of 20 items to return, or null to return all items
      * @param string|null $type the name of the type of content to return, or null to return all types. Case insensitive
-     * @return array[] the content information
+     * @return array{'title': string, 'abstract': string, 'type': string}[] the content information
      * ```php
      *  $result[n] = [
      *      "title" => string,
