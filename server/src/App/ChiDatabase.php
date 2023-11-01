@@ -160,7 +160,18 @@ class ChiDatabase
      * Run a query to get authors and their affiliations from the database
      * @param string $middle the middle of the query, should be a WHERE clause with a trailing space or empty string
      * @param array<string, string|int> $params the parameters to bind to the query
-     * @return array[] the results of the query
+     * @return array{'author_id': int, 'author_name': string, 'country': string, 'city': string, 'institution': string, 'content': array{'id': int, 'title': string}[]}[] the authors and their affiliations
+     * ```
+     * $result[n] = [
+     *    "author_id" => int,
+     *    "author_name" => string,
+     *    "country" => string,
+     *    "city" => string,
+     *    "institution" => string,
+     *    "content" => [
+     *      [ "id" => int, "title" => string]
+     *    ] // content
+     * ] // result
      */
     private function runAffiliationsQuery(string $middle, array $params): array
     {
@@ -173,13 +184,22 @@ class ChiDatabase
         });
         return $result;
     }
+
+    /**
+     * Get every affiliation in the database
+     * @return array{'author_id': int, 'author_name': string, 'country': string, 'city': string, 'institution': string, 'content': array{'id': int, 'title': string}[]}[] the authors and their affiliations
+     */
     public function getAffiliations(): array
     {
         // No filtering here, so just run the query with no WHERE clause
         return self::runAffiliationsQuery("", []);
     }
 
-    public function getAffiliationsByContent($contentId): array
+    /**
+     * Get affiliations for a specific piece of content
+     * @return array{'author_id': int, 'author_name': string, 'country': string, 'city': string, 'institution': string, 'content': array{'id': int, 'title': string}[]}[] the authors and their affiliations
+     */
+    public function getAffiliationsByContent(int $contentId): array
     {
         return self::runAffiliationsQuery(
             "WHERE affiliation.content = :content_id ",
@@ -187,7 +207,11 @@ class ChiDatabase
         );
     }
 
-    public function getAffiliationsByCountry($countryName): array
+    /**
+     * Get affiliations for a specific country
+     * @return array{'author_id': int, 'author_name': string, 'country': string, 'city': string, 'institution': string, 'content': array{'id': int, 'title': string}[]}[] the authors and their affiliations
+     */
+    public function getAffiliationsByCountry(string $countryName): array
     {
         return self::runAffiliationsQuery(
             "WHERE affiliation.country = :country_name ",
