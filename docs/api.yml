@@ -65,7 +65,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/preview"
 
-  /content/author_and_affiliation:
+  /content/author_affiliation:
     get:
       tags: [Content]
       summary: Get authors and their affiliations

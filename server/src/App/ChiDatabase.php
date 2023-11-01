@@ -84,6 +84,24 @@ class ChiDatabase
         return $result[0]["count"] > 0;
     }
 
+    /**
+     * Does an affiliation with the given country name exist in the database?
+     * NOTE: This DOES mean that there is at least one author with that affiliation
+     * @param string $country the name of the country to check, case insensitive
+     */
+    public function countryExists(string $country): bool
+    {
+        $query = <<<SQL
+        SELECT
+            COUNT(*) AS count
+        FROM affiliation
+        WHERE country = :country COLLATE NOCASE
+        SQL;
+
+        $result = $this->connection->runSql($query, ["country" => $country]);
+        return $result[0]["count"] > 0;
+    }
+
     public const PAGE_SIZE = 20;
     /**
      * Get information about content in the database, includes title, abstract, and the content type
@@ -127,9 +145,6 @@ class ChiDatabase
         return $this->connection->runSql($query, $params);
     }
 
-    // TODO: Check that this works
-    // TODO: Link to the API
-    // TODO: Update API docs
     private const AFFILIATIONS_QUERY_HEAD = <<<SQL
         SELECT
             author.id AS author_id,
@@ -176,7 +191,7 @@ class ChiDatabase
     private function runAffiliationsQuery(string $middle, array $params): array
     {
         // WHERE needs to be between JOIN and GROUP BY, so splice it in the middle
-        $query = self::AFFILIATIONS_QUERY_HEAD . $middle . self::AFFILIATIONS_QUERY_TAIL;
+        $query = self::AFFILIATIONS_QUERY_HEAD . " " . $middle . " " . self::AFFILIATIONS_QUERY_TAIL;
         $result = $this->connection->runSql($query, $params);
         // Decode the content array
         array_walk($result, function (&$row) {
@@ -202,7 +217,7 @@ class ChiDatabase
     public function getAffiliationsByContent(int $contentId): array
     {
         return self::runAffiliationsQuery(
-            "WHERE affiliation.content = :content_id ",
+            "WHERE affiliation.content = :content_id",
             ["content_id" => $contentId]
         );
     }
@@ -214,7 +229,7 @@ class ChiDatabase
     public function getAffiliationsByCountry(string $countryName): array
     {
         return self::runAffiliationsQuery(
-            "WHERE affiliation.country = :country_name ",
+            "WHERE affiliation.country = :country_name COLLATE NOCASE",
             ["country_name" => $countryName
         ]
         );
