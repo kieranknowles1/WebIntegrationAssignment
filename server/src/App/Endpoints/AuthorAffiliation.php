@@ -20,12 +20,12 @@ class AuthorAffiliation extends ChiEndpoint
     {
         if ($key === 'content') {
             if ($this->countryName !== null) {
-                throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Cannot filter by both content_id and country_name");
+                throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Cannot filter by both content and country");
             }
             $this->contentId = \App\ArgumentParser::parseInt($key, $value, 1, PHP_INT_MAX);
         } elseif ($key === 'country') {
             if ($this->contentId !== null) {
-                throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Cannot filter by both content_id and country_name");
+                throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Cannot filter by both content and country");
             }
             $this->countryName = $value;
             if (!$this->getDatabase()->countryExists($this->countryName)) {
