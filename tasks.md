@@ -58,7 +58,7 @@ for each endpoint is given below:
 - [ ] Set the Access-Control-Allow-Origin header
 - [ ] Set the Access-Control-Allow-Methods header
 - [x] All responses from the API that contain data must return this in valid JSON format.
-- [ ] All endpoints created for this task must support the request method GET.
+- [x] All endpoints created for this task must support the request method GET.
 - [ ] Error handling with a relevant HTTP status code and, where appropriate, an error message in JSON format.
   - [x] Requests to invalid endpoints - return 404,
   - [x] use of invalid parameters,
@@ -66,14 +66,14 @@ for each endpoint is given below:
   - [x] invalid values,
   - [x] server errors (e.g. database errors) - return 500
   - [ ] any other error should be responded to
-- [ ] Endpoints and parameter names and values should not be case sensitive.
+- [x] Endpoints and parameter names and values should not be case sensitive.
   - [x] Endpoints should be case insensitive.
   - [x] Parameter names should be case insensitive.
-  - [ ] Parameter values should be case insensitive.
+  - [x] Parameter values should be case insensitive.
 - [ ] Additional endpoints can be created if you wish. Additional parameters can be supported if you
       wish. The endpoints listed below can also return more data than is specified if you wish. Any
       additional endpoints, parameters and data must be appropriate to the purposes of the API.
-- [ ] All endpoints except endpoint 1 must retrieve data from the _chi2023.sqlite_ database.
+- [x] All endpoints except endpoint 1 must retrieve data from the _chi2023.sqlite_ database.
 - [x] The name of the endpoint is what should appear in the URL path, for example the endpoint
       'developer' might have the URL https://nuwebspace.co.uk/kf6012/coursework/api/developer
 - [ ] The full URL for each endpoint should be given in the readme file. For each parameter
@@ -92,14 +92,14 @@ for each endpoint is given below:
   - [x] Do not return content with no preview
   - [x] Return items in a random order
   - [x] Limit parameter
-- [ ] author-and-affiliation
-  - [ ] Return the country, city, and institution each author is affiliated with for each publication they are
+- [x] author-and-affiliation
+  - [x] Return the country, city, and institution each author is affiliated with for each publication they are
         associated with
-  - [ ] Handle authors having multiple affiliations for each item of content
-  - [ ] Handle authors having different affiliation on different items of content
-  - [ ] Content ID parameter, mutually exclusive with country
-  - [ ] Country name parameter, mutually exclusive with content
-  - [ ] Return the author ID, author name, content ID, and content name for each affiliation
+  - [x] Handle authors having multiple affiliations for each item of content
+  - [x] Handle authors having different affiliation on different items of content
+  - [x] Content ID parameter, mutually exclusive with country
+  - [x] Country name parameter, mutually exclusive with content
+  - [x] Return the author ID, author name, content ID, and content name for each affiliation
 - [x] content
   - [x] Return information about all research content
   - [x] return the title, abstract, and content type
