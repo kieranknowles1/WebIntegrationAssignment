@@ -212,11 +212,11 @@ for these pages is given below.
 
 - [ ] A router must be used and each page specified below should represent a distinct route in the
       application.
-- [ ] In addition to the specified pages there must be a ‘404 not found’ page that is displayed when
+- [x] In addition to the specified pages there must be a ‘404 not found’ page that is displayed when
       an invalid route name is used.
 - [x] All pages should have a footer containing your name, student id and the text “Coursework
       assignment for KF6012 Web Application Integration, Northumbria University”.
-- [ ] At least one page should contain an image. This should not be a CSS ‘background image’ but
+- [x] At least one page should contain an image. This should not be a CSS ‘background image’ but
       displayed using React. This could be on any page including the ‘ 404 not found’ page.
 - [ ] Navigating between routes should not trigger unnecessary new fetch requests if that data has
       previously been fetched.

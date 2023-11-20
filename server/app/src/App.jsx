@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import React from 'react'
 
 import Index from './pages/Index'
+import PageNotFound from './pages/PageNotFound'
 
 /**
  * Main app component
@@ -13,6 +14,7 @@ function App () {
   return (
     <Routes>
       <Route path='/' element={<Index />} />
+      <Route path='*' element={<PageNotFound />} />
     </Routes>
   )
 }
