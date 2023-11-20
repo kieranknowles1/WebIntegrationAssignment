@@ -18,6 +18,9 @@ module.exports = {
     'react'
   ],
   rules: {
-    'import/no-absolute-path': 'off'
+    'sort-imports': ['warn', {
+      allowSeparatedGroups: true
+    }],
+    'import/order': ['warn']
   }
 }

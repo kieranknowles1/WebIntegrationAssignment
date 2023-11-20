@@ -1,6 +1,7 @@
-import { Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import React from 'react'
 
+import Countries from './pages/Countries'
 import Index from './pages/Index'
 import PageNotFound from './pages/PageNotFound'
 
@@ -14,6 +15,7 @@ function App () {
   return (
     <Routes>
       <Route path='/' element={<Index />} />
+      <Route path='/countries' element={<Countries />} />
       <Route path='*' element={<PageNotFound />} />
     </Routes>
   )

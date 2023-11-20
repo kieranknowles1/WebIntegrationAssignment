@@ -1,13 +1,13 @@
 import React from 'react'
 
-import cookie from '../assets/cookie.jpeg'
 import blep from '../assets/blep.jpeg'
+import cookie from '../assets/cookie.jpeg'
 
 /**
  * 404 page for the application
  *
  * @author Kieran Knowles
- * @generated Github copilot was used to assist in generating this code
+ * @generated Github copilot was used to assist in writing this code
  */
 export default function PageNotFound () {
   return (
