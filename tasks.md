@@ -214,7 +214,7 @@ for these pages is given below.
       application.
 - [ ] In addition to the specified pages there must be a ‘404 not found’ page that is displayed when
       an invalid route name is used.
-- [ ] All pages should have a footer containing your name, student id and the text “Coursework
+- [x] All pages should have a footer containing your name, student id and the text “Coursework
       assignment for KF6012 Web Application Integration, Northumbria University”.
 - [ ] At least one page should contain an image. This should not be a CSS ‘background image’ but
       displayed using React. This could be on any page including the ‘ 404 not found’ page.
