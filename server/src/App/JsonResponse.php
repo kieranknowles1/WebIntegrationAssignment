@@ -22,6 +22,7 @@ class JsonResponse
     {
         // TODO: Handle any other headers
         header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
         http_response_code($this->dataSource->getResponseCode()->value);
         echo json_encode($this->dataSource->getData());
     }

@@ -55,7 +55,7 @@ for each endpoint is given below:
 
 - [ ] All responses from the API must contain relevant headers, including a relevant HTTP status
       code.
-- [ ] Set the Access-Control-Allow-Origin header
+- [x] Set the Access-Control-Allow-Origin header
 - [ ] Set the Access-Control-Allow-Methods header
 - [x] All responses from the API that contain data must return this in valid JSON format.
 - [x] All endpoints created for this task must support the request method GET.
@@ -235,7 +235,7 @@ The three pages you must implement are specified below:
   - More data or features can be included on this page if you wish.
 
 - [ ] Countries
-  - [ ] This page should list each country represented in the affiliation table in the
+  - [x] This page should list each country represented in the affiliation table in the
         database (giving the name once). This information can be presented as a list or in
         some other way.
   - [ ] There should be a search feature on the page to allow the user to search for the
