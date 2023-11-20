@@ -229,8 +229,8 @@ The three pages you must implement are specified below:
 
 - [ ] Home
   - This is the main landing page of your application. It should include:
-  - [ ] Heading “CHI 2023”
-  - [ ] Menu with links to other pages
+  - [x] Heading “CHI 2023”
+  - [x] Menu with links to other pages
   - [ ] Title and link to a random preview video
   - More data or features can be included on this page if you wish.
 
