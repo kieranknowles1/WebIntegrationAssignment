@@ -8,7 +8,7 @@ import PageNotFound from './pages/PageNotFound'
  * Main app component
  *
  * @author Kieran Knowles
- * @generated Github copilot was used to assist in generating this code
+ * @generated Github copilot was used to assist in writing this code
  */
 function App () {
   return (

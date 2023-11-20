@@ -6,7 +6,7 @@ import Menu from '../components/Menu'
  * Index page
  *
  * @author Kieran Knowles
- * @generated Github copilot was used to assist in generating this code
+ * @generated Github copilot was used to assist in writing this code
  */
 export default function Index () {
   return (

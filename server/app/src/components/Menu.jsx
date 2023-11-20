@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
  * Page selection menu component
  *
  * @author Kieran Knowles
- * @generated Github copilot was used to assist in generating this code
+ * @generated Github copilot was used to assist in writing this code
  */
 export default function Menu () {
   return (
