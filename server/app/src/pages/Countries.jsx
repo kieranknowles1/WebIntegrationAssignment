@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Country from '../components/Country'
+import LoadingDisplay from '../components/LoadingDisplay'
 import getCountries from '../api/getCountries'
 
 /**
@@ -11,8 +12,7 @@ import getCountries from '../api/getCountries'
  */
 function Countres () {
   const [countries, setCountries] = React.useState([])
-  const [error, setError] = React.useState(false)
-  const [loading, setLoading] = React.useState(true)
+  const [status, setStatus] = React.useState('loading')
 
   // TODO: Cache the response when reloading the page
   React.useEffect(() => {
@@ -20,21 +20,18 @@ function Countres () {
       .then(countries => {
         console.log(countries)
         setCountries(countries.map((country, index) => <Country key={index} name={country} />))
+        setStatus('done')
       })
       .catch(err => {
         console.error(err)
-        setError(true)
-      })
-      .finally(() => {
-        setLoading(false)
+        setStatus('error')
       })
   }, [])
 
   return (
     <div>
       <h1>Countres</h1>
-      {loading && <p>Loading...</p>}
-      {error && <p>There was an error loading the countries. See the console for details.</p>}
+      <LoadingDisplay status={status} />
       <ul>{countries}</ul>
     </div>
   )
