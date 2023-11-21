@@ -11,15 +11,23 @@ import getCountries from '../api/getCountries'
  * @generated GitHub Copilot was used to assist in writing this code
  */
 function Countres () {
-  const [countries, setCountries] = React.useState([])
-  const [status, setStatus] = React.useState('loading')
+  /** @type {[string[], function (string[]): void]} */
+  const [allCountries, setAllCountries] = React.useState([])
+  const [query, setQuery] = React.useState('')
+
+  const [countryComponents, setCountryComponents] = React.useState([])
+  React.useEffect(() => {
+    const filtered = allCountries
+      .filter(country => country.toLowerCase().includes(query.toLowerCase()))
+    setCountryComponents(filtered.map((country, index) => <Country key={index} name={country} />))
+  }, [allCountries, query])
 
   // TODO: Cache the response when reloading the page
+  const [status, setStatus] = React.useState('loading')
   React.useEffect(() => {
     getCountries()
       .then(countries => {
-        console.log(countries)
-        setCountries(countries.map((country, index) => <Country key={index} name={country} />))
+        setAllCountries(countries)
         setStatus('done')
       })
       .catch(err => {
@@ -31,8 +39,9 @@ function Countres () {
   return (
     <div>
       <h1>Countres</h1>
+      <input type='text' placeholder='Search' value={query} onChange={e => setQuery(e.target.value)} />
       <LoadingDisplay status={status} />
-      <ul>{countries}</ul>
+      <ul>{countryComponents}</ul>
     </div>
   )
 }

@@ -238,7 +238,7 @@ The three pages you must implement are specified below:
   - [x] This page should list each country represented in the affiliation table in the
         database (giving the name once). This information can be presented as a list or in
         some other way.
-  - [ ] There should be a search feature on the page to allow the user to search for the
+  - [x] There should be a search feature on the page to allow the user to search for the
         name of a country.
   - [ ] More features and functionality can be included if you wish, for example when
         clicking on a country name further relevant information might be shown.
