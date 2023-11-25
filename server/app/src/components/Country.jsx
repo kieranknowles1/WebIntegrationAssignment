@@ -5,6 +5,9 @@ import React from 'react'
  * Country component
  * For use in a `<ul>` element
  *
+ * @param {object} params
+ * @param {string} params.name Name of the country
+ *
  * @author Kieran Knowles
  * @generated GitHub Copilot was used to assist in writing this code
  */

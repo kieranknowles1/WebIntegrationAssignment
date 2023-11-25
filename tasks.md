@@ -210,7 +210,7 @@ requirements concern the code as well as the user interface.
 For task 2.1 you should create a web application with at least 3 pages. A list of general requirements
 for these pages is given below.
 
-- [ ] A router must be used and each page specified below should represent a distinct route in the
+- [x] A router must be used and each page specified below should represent a distinct route in the
       application.
 - [x] In addition to the specified pages there must be a ‘404 not found’ page that is displayed when
       an invalid route name is used.
@@ -227,11 +227,11 @@ for these pages is given below.
 
 The three pages you must implement are specified below:
 
-- [ ] Home
+- [x] Home
   - This is the main landing page of your application. It should include:
   - [x] Heading “CHI 2023”
   - [x] Menu with links to other pages
-  - [ ] Title and link to a random preview video
+  - [x] Title and link to a random preview video
   - More data or features can be included on this page if you wish.
 
 - [ ] Countries
