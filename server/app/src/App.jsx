@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import React from 'react'
 
+import Content from './pages/Content'
 import Countries from './pages/Countries'
 import Index from './pages/Index'
 import PageNotFound from './pages/PageNotFound'
@@ -15,6 +16,7 @@ function App () {
   return (
     <Routes>
       <Route path='/' element={<Index />} />
+      <Route path='/content' element={<Content />} />
       <Route path='/countries' element={<Countries />} />
       <Route path='*' element={<PageNotFound />} />
     </Routes>

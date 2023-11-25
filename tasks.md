@@ -245,13 +245,13 @@ The three pages you must implement are specified below:
 
 - [ ] Content
   - [ ] This page should show details of each item of research content including the
-    - [ ] title,
-    - [ ] abstract
+    - [x] title,
+    - [x] abstract
     - [ ] authors’ names
     - [ ] the authors’ affiliations
-    - [ ] the content type
+    - [x] the content type
     - [ ] whether it has won an award.
-  - [ ] The page should show blocks of 20 items of content
+  - [x] The page should show blocks of 20 items of content
         at a time, with the ability to navigate to further or previous blocks of content.
 
   - [ ] There should also be a 'select' component giving options to view "All content" or
