@@ -34,12 +34,12 @@ export default function Index () {
   }, [])
 
   return (
-    <div>
+    <main>
       <h1>CHI 2023</h1>
       <Menu />
       <LoadingDisplay status={status} />
       {preview && <h2>{preview.title}</h2>}
       {preview && <VideoEmbed link={getEmbedLink(preview.preview_video)} />}
-    </div>
+    </main>
   )
 }

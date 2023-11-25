@@ -171,7 +171,7 @@ may be zero.
 - [ ] The application must be implemented using React. It must be a ‘front-end’ application and not
       use server-side React components. You can use any appropriate build tools and third-party
       components you wish. You should use JavaScript (not TypeScript).
-- [ ] The application must interact with your Web API created for part 1.
+- [x] The application must interact with your Web API created for part 1.
 - [ ] You must submit the source code on Blackboard, not just the build files used for deploying the
       app.
 - [ ] You must not copy text, images, logos or colour schemes from the original CHI 2023
@@ -234,19 +234,24 @@ The three pages you must implement are specified below:
   - [x] Title and link to a random preview video
   - More data or features can be included on this page if you wish.
 
-- [ ] Countries
+- [x] Countries
   - [x] This page should list each country represented in the affiliation table in the
         database (giving the name once). This information can be presented as a list or in
         some other way.
   - [x] There should be a search feature on the page to allow the user to search for the
         name of a country.
-  - [ ] More features and functionality can be included if you wish, for example when
+  - [x] More features and functionality can be included if you wish, for example when
         clicking on a country name further relevant information might be shown.
 
 - [ ] Content
-  - [ ] This page should show details of each item of research content including the title,
-        the abstract, the authors’ names, the authors’ affiliations, the content type and
-        whether it has won an award. The page should show blocks of 20 items of content
+  - [ ] This page should show details of each item of research content including the
+    - [ ] title,
+    - [ ] abstract
+    - [ ] authors’ names
+    - [ ] the authors’ affiliations
+    - [ ] the content type
+    - [ ] whether it has won an award.
+  - [ ] The page should show blocks of 20 items of content
         at a time, with the ability to navigate to further or previous blocks of content.
 
   - [ ] There should also be a 'select' component giving options to view "All content" or

@@ -11,12 +11,12 @@ import cookie from '../assets/cookie.jpeg'
  */
 export default function PageNotFound () {
   return (
-    <div>
+    <main>
       <h1>404: Page not found.</h1>
       <img src={blep} alt='Millie the cat blepping' />
       <figcaption>Millie is very confused why you&apos;re here. (Image credit: Kieran Knowles i.e. myself)</figcaption>
       <p>I have 2 cats, here&apos;s the cat tax for Cookie.</p>
       <img src={cookie} alt='Cookie the cat' />
-    </div>
+    </main>
   )
 }

@@ -37,12 +37,12 @@ function Countres () {
   }, [])
 
   return (
-    <div>
+    <main>
       <h1>Countres</h1>
       <input type='text' placeholder='Search' value={query} onChange={e => setQuery(e.target.value)} />
       <LoadingDisplay status={status} />
       <ul>{countryComponents}</ul>
-    </div>
+    </main>
   )
 }
 
