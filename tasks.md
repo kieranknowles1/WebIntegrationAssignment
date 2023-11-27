@@ -13,9 +13,9 @@ to meet any of these essential requirements your marks for part 1 are unlikely t
 be zero.
 
 - [x] The web API must be deployed on the nuwebspace web server.
-- [ ] The web API must be implemented using object-oriented PHP and must not use a third-party
+- [x] The web API must be implemented using object-oriented PHP and must not use a third-party
       framework or library except the JWT library specified for task 1. 2.
-- [ ] The coursework must use the _chi2023.sqlite_ database provided and must not modify this. The
+- [x] The coursework must use the _chi2023.sqlite_ database provided and must not modify this. The
       _users.sqlite_ database should also be used and can be modified.
 - [ ] Your work must include a readme file giving the full URL for every endpoint implemented and
       clearly listing what parameters are supported and how to use them (see appendix 1).
@@ -62,7 +62,7 @@ for each endpoint is given below:
 - [ ] Error handling with a relevant HTTP status code and, where appropriate, an error message in JSON format.
   - [x] Requests to invalid endpoints - return 404,
   - [x] use of invalid parameters,
-  - [ ] invalid combinations of parameters,
+  - [x] invalid combinations of parameters,
   - [x] invalid values,
   - [x] server errors (e.g. database errors) - return 500
   - [ ] any other error should be responded to
