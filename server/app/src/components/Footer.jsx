@@ -8,7 +8,7 @@ import React from 'react'
  */
 export default function Footer () {
   return (
-    <footer>
+    <footer className='bg-background-topbottom text-foreground-topbottom'>
       <p>Author: Kieran Knowles</p>
       <p>Student ID: w20013000</p>
       <p>Coursework assignment for KF6012 Web Application Integration, Northumbria University</p>
