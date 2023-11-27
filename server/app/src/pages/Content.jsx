@@ -39,7 +39,7 @@ function Content () {
       <button onClick={() => setPage(page - 1)} disabled={page <= 1}>Previous</button>
       <button onClick={() => setPage(page + 1)}>Next</button>
       <LoadingDisplay status={status} />
-      <ul>
+      <ul className='grid sm:grid-cols-1 lg:grid-cols-2 gap-3'>
         {content}
       </ul>
     </main>

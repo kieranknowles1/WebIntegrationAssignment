@@ -19,9 +19,12 @@ export default {
         // 50: '#F2F4F5',
         // 100: '#E4E9EB',
         // 200: '#BEC7CC',
-        // 300: '#99A6AD',
+        // 300
+        listitem: '#99A6AD',
         highlight: '#99A6AD',
+        // 400
         topbottom: '#5B6873',
+        // 500
         default: '#252d35'
         // 600: '#1F2730',
         // 700: '#151E29',
@@ -33,14 +36,17 @@ export default {
         // 50: '#FFFFFF',
         // 100: '#FFFFFF',
         // 200: '#FCFCFC',
-        // 300: '#FAFAFA',
-        topbottom: '#F5F7F5',
-        default: '#eef1ee'
-        // 600: '#C3DBC3',
-        // 700: '#86B586',
-        // 800: '#569156',
-        // 900: '#316E31',
-        // 950: '#154715'
+        // 300: '#F7FAFA',
+        // 400
+        topbottom: '#F5F7F7',
+        // 500
+        default: '#edf1f1',
+        // 600: '#C1DADB',
+        // 700: '#84AFB5',
+        // 800: '#568591'
+        // 900: '#305C6E',
+        // 950
+        listitem: '#143547'
       },
       button: {
         // 50: '#FFFCFA',

@@ -13,7 +13,7 @@ import React from 'react'
  */
 function ContentItem (params) {
   return (
-      <li>
+      <li className='bg-background-listitem text-foreground-listitem rounded-md p-3'>
         {/** // TODO: Am I misusing H2? */}
         <h2>{params.title}</h2>
         <p>{params.abstract}</p>
