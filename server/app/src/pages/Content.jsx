@@ -38,9 +38,9 @@ function Content () {
       <h1>Content</h1>
       {/** Float one left and other right */}
       <div className='flex items-stretch text-3xl'>
-        <button onClick={() => setPage(page - 1)} disabled={page <= 1}>Previous</button>
+        <button className='grow' onClick={() => setPage(page - 1)} disabled={page <= 1}>Previous</button>
         <p className='grow text-center'>Page {page}</p>
-        <button onClick={() => setPage(page + 1)}>Next</button>
+        <button className='grow' onClick={() => setPage(page + 1)}>Next</button>
       </div>
       <LoadingDisplay status={status} />
       <ul className='grid sm:grid-cols-1 lg:grid-cols-2 gap-3'>
