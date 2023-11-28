@@ -7,11 +7,9 @@ import Footer from './components/Footer'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <div className='bg-background-default text-foreground-default min-h-screen'>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+    <Footer />
   </React.StrictMode>
 )

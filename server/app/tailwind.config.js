@@ -25,12 +25,13 @@ export default {
         // 400
         topbottom: '#5B6873',
         // 500
-        default: '#252d35'
+        default: '#252d35',
         // 600: '#1F2730',
         // 700: '#151E29',
         // 800: '#0E1621',
         // 900: '#070D17',
         // 950: '#03070F'
+        button: '#03070F'
       },
       foreground: {
         // 50: '#FFFFFF',
@@ -53,6 +54,7 @@ export default {
         // 100: '#FFFAF5',
         // 200: '#FCECE1',
         // 300: '#FADDCF',
+        disabled: '#FADDCF',
         // 400: '#F7BBAD',
         default: '#f18c89',
         hover: '#DB7370'
