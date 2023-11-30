@@ -15,7 +15,7 @@ tags:
       Information about research content at the conference
   - name: User
     description: |
-      User specific information. All endpoints except `/user/token` require authentication
+      User specific information. Requires authentication with `/authenticate`
 
 paths:
   /content/country:
@@ -140,35 +140,21 @@ paths:
                 items:
                   $ref: "#/components/schemas/contentFull"
 
-  /user/token:
+  /authenticate:
     get:
-      tags: [User]
       summary: Authenticate with a username and password
       description: |
         Returns a token that can be used to authenticate with the API.
         The token is valid for 30 minutes after being issued.
-      parameters:
-        - in: query
-          name: username
-          required: true
-          description: |
-            The username of the user to authenticate
-          schema:
-            type: string
-        - in: query
-          name: password
-          required: true
-          description: |
-            The password of the user to authenticate
-          schema:
-            type: string
+      security: [BasicAuth: []]
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/token"
+                # TODO: Fill in with properties
+                type: object
 
   /user/note:
     get:
@@ -176,7 +162,7 @@ paths:
       summary: Get all notes
       description: |
         Returns all notes associated with the authenticated user
-      parameters: [{ $ref: "#/components/parameters/token" }]
+      security: [BearerAuth: []]
       responses:
         "200":
           description: OK
@@ -192,8 +178,8 @@ paths:
       summary: Create a new note
       description: |
         Creates a new note associated with the specified content and authenticated user
+      security: [BearerAuth: []]
       parameters:
-        - $ref: "#/components/parameters/token"
         - in: query
           name: content
           required: true
@@ -223,8 +209,8 @@ paths:
       summary: Update an existing note
       description: |
         Updates the specified user
+      security: [BearerAuth: []]
       parameters:
-        - $ref: "#/components/parameters/token"
         - in: query
           name: id
           required: true
@@ -248,8 +234,8 @@ paths:
       summary: Delete an existing note
       description: |
         Deletes the specified note
+      security: [BearerAuth: []]
       parameters:
-        - $ref: "#/components/parameters/token"
         - in: query
           name: id
           required: true
@@ -274,24 +260,15 @@ paths:
                 $ref: "#/components/schemas/developerInformation"
 
 components:
-  parameters:
-    token:
-      in: header
-      name: token
-      required: true
-      description: |
-        The token to authenticate with. \
-        This is returned by the `/user/token` endpoint
-      schema:
-        $ref: "#/components/schemas/token"
-
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
-    # TODO: Fill in with actual token
-    token:
-      type: object
-      additionalProperties: false
-      required: [""] # TODO
-
     author:
       type: object
       additionalProperties: false
