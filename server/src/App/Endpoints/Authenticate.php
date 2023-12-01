@@ -2,6 +2,8 @@
 
 namespace App\Endpoints;
 
+use Firebase\JWT\JWT;
+
 /**
  * Endpoint to authenticate a user, returning a JWT token
  *
@@ -14,6 +16,21 @@ class Authenticate extends UserEndpoint
     {
         $headers = $request->getHeaders();
 
-        var_dump($headers);
+        // TODO: Check authorization header is present and formatted correctly
+        // TODO: Check password is correct
+
+        $payload = [
+            "iat" => time(),
+            "exp" => time() + \Settings::TOKEN_VALID_DURATION,
+            "iss" => $_SERVER["HTTP_HOST"],
+            "sub" => "user", // TODO: Put user ID here
+            // TODO: Any other fields to include?
+        ];
+
+        $token = [
+            "token" => JWT::encode($payload, \Settings::SECRET, 'HS256'),
+        ];
+
+        return new ResponseData($token, \App\ResponseCode::OK);
     }
 }

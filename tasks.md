@@ -117,7 +117,7 @@ make a new database table. A list of general requirements for each endpoint is g
 - [ ] A full URL for both endpoints must be given in the readme file and the parameters clearly
       explained (see appendix 1).
 - [ ] When generating a JWT a unique secure key consisting of random characters must be used
-- [ ] An external library 'firebase/php-jwt' introduced on the module can be used for this task
+- [x] An external library 'firebase/php-jwt' introduced on the module can be used for this task
 - [ ] _The user.sqlite_ database should be used. This database can be modified in any way you wish but
       the two example users provided in the accounts table must be able to log in using their
       credentials (see appendix 2).
@@ -131,7 +131,7 @@ See [KF6012 Assessment Brief](KF6012%20-%20CIS%20Assessment%202023-24.pdf) for e
   - [ ] Tokens must contain user ID
   - [ ] Tokens must not contain private data (e.g., password)
   - [ ] Token should not transfer data needed by the client
-  - [ ] Token should be valid for 30 minutes
+  - [x] Token should be valid for 30 minutes
 - [ ] note
   - [ ] GET
     - [ ] Get all notes for a user
