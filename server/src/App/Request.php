@@ -13,7 +13,7 @@ class Request
 {
     public static function fromGlobals(): Request
     {
-        return new Request($_SERVER["REQUEST_URI"], $_SERVER["REQUEST_METHOD"], $_POST);
+        return new Request($_SERVER["REQUEST_URI"], $_SERVER["REQUEST_METHOD"], $_POST, getallheaders());
     }
 
     /** The cleaned requested URL */
@@ -30,6 +30,11 @@ class Request
      * @var array<string, string>
      */
     private array $bodyParams;
+    /**
+     * The headers
+     * @var array<string, string>
+     */
+    private array $headers;
 
     /**
      * Clean the URL to be in lowercase and without any trailing /
@@ -43,8 +48,9 @@ class Request
 
     /**
      * @param array<string, string> $bodyParams
+     * @param array<string, string> $headers
      */
-    private function __construct(string $rawUrl, string $method, array $bodyParams)
+    private function __construct(string $rawUrl, string $method, array $bodyParams, array $headers)
     {
         $parsed = parse_url($rawUrl);
 
@@ -61,6 +67,7 @@ class Request
         $this->queryParams = [];
         parse_str($parsed["query"] ?? "", $this->queryParams);
         $this->bodyParams = $bodyParams;
+        $this->headers = $headers;
     }
 
     public function getUrl(): string
@@ -83,5 +90,11 @@ class Request
     public function getBodyParams(): array
     {
         return $this->bodyParams;
+    }
+
+    /** @return array<string, string> */
+    public function getHeaders(): array
+    {
+        return $this->headers;
     }
 }

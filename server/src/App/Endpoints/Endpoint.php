@@ -19,7 +19,7 @@ abstract class Endpoint implements \App\DataSource
      * @return ResponseData bundled data and status code
      * @throws \App\ClientException if the request is invalid
      */
-    protected function handleGetRequest(): ResponseData
+    protected function handleGetRequest(\App\Request $request): ResponseData
     {
         throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED, "GET is not allowed for this endpoint");
     }
@@ -69,7 +69,7 @@ abstract class Endpoint implements \App\DataSource
 
         // TODO: Handle OPTIONS and other methods
         $response = match ($request->getMethod()) {
-            "GET" => $this->handleGetRequest(),
+            "GET" => $this->handleGetRequest($request),
             default => throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED, "Method '{$request->getMethod()}' is not allowed for this endpoint"),
         };
 

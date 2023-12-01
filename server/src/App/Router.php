@@ -17,6 +17,7 @@ class Router
     public static function route(Request $request): Endpoints\Endpoint
     {
         return match($request->getUrl()) {
+            \Settings::API_ROOT . "authenticate" => new Endpoints\Authenticate(UserDatabase::getInstance()),
             \Settings::API_ROOT . "content/author_affiliation" => new Endpoints\AuthorAffiliation(ChiDatabase::getInstance()),
             \Settings::API_ROOT . "content/country" => new Endpoints\Country(ChiDatabase::getInstance()),
             \Settings::API_ROOT . "content/preview" => new Endpoints\Preview(ChiDatabase::getInstance()),

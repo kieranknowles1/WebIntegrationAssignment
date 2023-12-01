@@ -10,3 +10,6 @@
 spl_autoload_register(function (string $class): void {
     include Settings::SRC_DIR . str_replace('\\', '/', $class) . '.php';
 });
+
+// Register composer autoloader
+require_once Settings::VENDOR_DIR . 'autoload.php';

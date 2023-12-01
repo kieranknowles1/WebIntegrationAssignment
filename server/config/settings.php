@@ -12,6 +12,7 @@ class Settings
 
     public const SERVER_ROOT = '/var/www/html/';
     public const SRC_DIR = self::SERVER_ROOT . 'src/';
+    public const VENDOR_DIR = self::SERVER_ROOT . 'vendor/';
 
     public const CHI_DATABASE_FILE = self::SERVER_ROOT . 'data/chi2023.sqlite';
 
