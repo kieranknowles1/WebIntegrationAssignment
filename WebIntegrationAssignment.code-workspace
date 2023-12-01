@@ -4,5 +4,8 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		// Creating false positives in node_modules. Not using TypeScript, so disabling.
+		"typescript.tsserver.experimental.enableProjectDiagnostics": false,
+	}
 }

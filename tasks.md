@@ -167,8 +167,8 @@ to meet any of these essential requirements your marks for part 2 will be unlike
 may be zero.
 
 
-- [ ] The application must be deployed on the nuwebspace web server.
-- [ ] The application must be implemented using React. It must be a ‘front-end’ application and not
+- [x] The application must be deployed on the nuwebspace web server.
+- [x] The application must be implemented using React. It must be a ‘front-end’ application and not
       use server-side React components. You can use any appropriate build tools and third-party
       components you wish. You should use JavaScript (not TypeScript).
 - [x] The application must interact with your Web API created for part 1.

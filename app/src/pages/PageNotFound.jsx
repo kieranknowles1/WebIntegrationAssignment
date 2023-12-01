@@ -14,9 +14,10 @@ export default function PageNotFound () {
     <main>
       <h1>404: Page not found.</h1>
       <img src={blep} alt='Millie the cat blepping' />
-      <figcaption>Millie is very confused why you&apos;re here. (Image credit: Kieran Knowles i.e. myself)</figcaption>
+      <figcaption>Millie is very confused why you&apos;re here. (Image credit: Kieran Knowles)</figcaption>
       <p>I have 2 cats, here&apos;s the cat tax for Cookie.</p>
-      <img src={cookie} alt='Cookie the cat' />
+      <img src={cookie} alt='Cookie the cat on her back on a bed' />
+      <figcaption>(Image credit: Kieran Knowles)</figcaption>
     </main>
   )
 }
