@@ -22,7 +22,7 @@ class Preview extends ChiEndpoint
         }
     }
 
-    protected function handleGetRequest(): ResponseData
+    protected function handleGetRequest(\App\Request $request): ResponseData
     {
         return new ResponseData($this->getDatabase()->getRandomPreviews($this->limit), \App\ResponseCode::OK);
     }

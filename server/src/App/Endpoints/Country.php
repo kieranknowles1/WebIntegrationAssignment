@@ -11,7 +11,7 @@ namespace App\Endpoints;
  */
 class Country extends ChiEndpoint
 {
-    protected function handleGetRequest(): ResponseData
+    protected function handleGetRequest(\App\Request $request): ResponseData
     {
         return new ResponseData($this->getDatabase()->getCountries(), \App\ResponseCode::OK);
     }

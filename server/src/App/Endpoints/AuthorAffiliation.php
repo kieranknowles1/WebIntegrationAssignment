@@ -36,7 +36,7 @@ class AuthorAffiliation extends ChiEndpoint
         }
     }
 
-    protected function handleGetRequest(): ResponseData
+    protected function handleGetRequest(\App\Request $request): ResponseData
     {
         $data = null;
         if ($this->contentId !== null) {

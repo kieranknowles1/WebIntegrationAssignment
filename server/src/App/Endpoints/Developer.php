@@ -10,7 +10,7 @@ namespace App\Endpoints;
  */
 class Developer extends Endpoint
 {
-    protected function handleGetRequest(): ResponseData
+    protected function handleGetRequest(\App\Request $request): ResponseData
     {
         return new ResponseData([
             'name' => 'Kieran Knowles',

@@ -22,6 +22,7 @@ function Content () {
 
   React.useEffect(() => {
     setStatus('loading')
+    setContent(null)
     getContent(page)
       .then(content => {
         setContent(content.map((item, index) => <ContentItem key={index} {...item} />))

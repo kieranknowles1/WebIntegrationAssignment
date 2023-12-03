@@ -14,7 +14,7 @@ import React from 'react'
 function ContentItem (params) {
   return (
       <li className='bg-background-listitem text-foreground-listitem rounded-md p-3'>
-        {/** // TODO: Am I misusing H2? */}
+        {/** // TODO: Emphasise this and type */}
         <h2>{params.title}</h2>
         <p>{params.abstract}</p>
         <p>{params.type}</p>
