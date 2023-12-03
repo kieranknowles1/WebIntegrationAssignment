@@ -34,19 +34,24 @@ function Content () {
       })
   }, [page])
 
+  // Float one left and other right
+  const pageButtons = (
+    <div className='flex items-stretch text-3xl'>
+      <button className='grow' onClick={() => setPage(page - 1)} disabled={page <= 1}>Previous</button>
+      <p className='grow text-center'>Page {page}</p>
+      <button className='grow' onClick={() => setPage(page + 1)}>Next</button>
+    </div>
+  )
+
   return (
     <main>
       <h1>Content</h1>
-      {/** Float one left and other right */}
-      <div className='flex items-stretch text-3xl'>
-        <button className='grow' onClick={() => setPage(page - 1)} disabled={page <= 1}>Previous</button>
-        <p className='grow text-center'>Page {page}</p>
-        <button className='grow' onClick={() => setPage(page + 1)}>Next</button>
-      </div>
+      {pageButtons}
       <LoadingDisplay status={status} />
       <ul className='grid sm:grid-cols-1 lg:grid-cols-2 gap-3'>
         {content}
       </ul>
+      {pageButtons}
     </main>
   )
 }
