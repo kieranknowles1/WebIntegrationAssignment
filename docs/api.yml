@@ -153,8 +153,10 @@ paths:
           content:
             application/json:
               schema:
-                # TODO: Fill in with properties
                 type: object
+                properties:
+                  token: { type: string }
+                required: [token]
 
   /user/note:
     get:
