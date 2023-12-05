@@ -157,6 +157,9 @@ paths:
                 properties:
                   token: { type: string }
                 required: [token]
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
 
   /user/note:
     get:
@@ -270,6 +273,19 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Unauthorized
+            required: [message]
   schemas:
     author:
       type: object

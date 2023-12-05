@@ -17,7 +17,7 @@ class Token extends UserEndpoint
         $headers = $request->getHeaders();
 
         // TODO: Check authorization header is present and formatted correctly
-        // TODO: Check password is correct
+        // TODO: Check password is correct. Return 401 if not
 
         $payload = [
             "iat" => time(),

@@ -22,4 +22,15 @@
 
         @apply text-background-button;
     }
+
+    /** Submit input. Same styling as button. */
+    input[type="submit"] {
+        @apply bg-button-default;
+        @apply hover:bg-button-hover;
+        @apply disabled:bg-button-disabled;
+
+        @apply rounded-md;
+
+        @apply text-background-button;
+    }
 }
