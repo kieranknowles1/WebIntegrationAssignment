@@ -10,7 +10,7 @@ use Firebase\JWT\JWT;
  * @author Kieran Knowles
  * @generated GitHub Copilot was used to assist in writing this code
  */
-class Authenticate extends UserEndpoint
+class Token extends UserEndpoint
 {
     protected function handleGetRequest(\App\Request $request): ResponseData
     {

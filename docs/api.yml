@@ -15,7 +15,7 @@ tags:
       Information about research content at the conference
   - name: User
     description: |
-      User specific information. Requires authentication with `/authenticate`
+      User specific information. Requires authentication with `/token`
 
 paths:
   /content/country:
@@ -140,7 +140,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/contentFull"
 
-  /authenticate:
+  /token:
     get:
       summary: Authenticate with a username and password
       description: |
