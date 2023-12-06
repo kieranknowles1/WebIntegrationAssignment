@@ -7,7 +7,10 @@ class Note extends UserEndpoint
 {
     protected function handleGetRequest(\App\Request $request): ResponseData
     {
-        Tokens::getTokenUserId($request);
-        throw new \Exception("Note not implemented");
+        $userId = Tokens::getTokenUserId($request);
+        return new ResponseData(
+            $this->getDatabase()->getUserNotes($userId),
+            \App\ResponseCode::OK
+        );
     }
 }

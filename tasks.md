@@ -133,11 +133,11 @@ See [KF6012 Assessment Brief](KF6012%20-%20CIS%20Assessment%202023-24.pdf) for e
   - [x] Token should not transfer data needed by the client
   - [x] Token should be valid for 30 minutes
 - [ ] note
-  - [ ] GET
-    - [ ] Get all notes for a user
+  - [x] GET
+    - [x] Get all notes for a user
     - [x] Users must be authenticated with a valid JWT token
-    - [ ] Return the note ID, content ID, and note text
-    - [ ] Only return notes for the user specified in the token
+    - [x] Return the note ID, content ID, and note text
+    - [x] Only return notes for the user specified in the token
   - [ ] POST
     - [ ] Create a new note
     - [ ] Take the content ID and the note text as parameters

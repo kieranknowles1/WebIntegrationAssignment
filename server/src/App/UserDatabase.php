@@ -29,7 +29,8 @@ class UserDatabase
     }
 
     /**
-     * Get a user by their email address
+     * Get a user by their email address.
+     * Returns null if the user does not exist
      * @return ?array{
      *   'id': int,
      *   'name': string,
@@ -47,5 +48,25 @@ class UserDatabase
         } else {
             return $result[0];
         }
+    }
+
+    /**
+     * Get all notes for a user
+     * NOTE: This will return an empty array if the user does not exist or has no notes
+     * @return array{
+     *   'id': int,
+     *   'content_id': int,
+     *   'text': string,
+     * }[]
+     */
+    public function getUserNotes(int $userId): array
+    {
+        return $this->connection->runSql("
+            SELECT id, content_id, text
+                FROM note
+            WHERE user_id = :userId
+        ", [
+            "userId" => $userId,
+        ]);
     }
 }
