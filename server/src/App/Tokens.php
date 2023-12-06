@@ -28,7 +28,7 @@ abstract class Tokens
      * @return int The user ID the token was issued to
      */
     public static function getTokenUserId(Request $request): int {
-        $token = $request->getHeaders()["Authorization"] ?? null;
+        $token = $request->getHeaders()["authorization"] ?? null;
 
         if ($token === null) {
             throw new ClientException(ResponseCode::UNAUTHORIZED, "No token provided");

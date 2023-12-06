@@ -70,7 +70,10 @@ class Request
         $this->queryParams = [];
         parse_str($parsed["query"] ?? "", $this->queryParams);
         $this->bodyParams = $bodyParams;
-        $this->headers = $headers;
+        $this->headers = [];
+        foreach ($headers as $key => $value) {
+            $this->headers[strtolower($key)] = $value;
+        }
 
         $this->authUser = $authUser;
         $this->authPassword = $authPassword;
@@ -98,7 +101,10 @@ class Request
         return $this->bodyParams;
     }
 
-    /** @return array<string, string> */
+    /**
+     * Get the lowercased headers
+     * @return array<string, string>
+     * */
     public function getHeaders(): array
     {
         return $this->headers;
