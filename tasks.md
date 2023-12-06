@@ -135,7 +135,7 @@ See [KF6012 Assessment Brief](KF6012%20-%20CIS%20Assessment%202023-24.pdf) for e
 - [ ] note
   - [ ] GET
     - [ ] Get all notes for a user
-    - [ ] Users must be authenticated with a valid JWT token
+    - [x] Users must be authenticated with a valid JWT token
     - [ ] Return the note ID, content ID, and note text
     - [ ] Only return notes for the user specified in the token
   - [ ] POST

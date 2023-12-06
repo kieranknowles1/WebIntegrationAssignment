@@ -35,17 +35,10 @@ class Token extends UserEndpoint
             throw new \App\ClientException(\App\ResponseCode::UNAUTHORIZED, self::INVALID_CREDENTIALS_MESSAGE);
         }
 
-        $payload = [
-            "iat" => time(),
-            "nbf" => time(),
-            "exp" => time() + \Settings::TOKEN_VALID_DURATION,
-            "iss" => $_SERVER["HTTP_HOST"],
-            "sub" => $userObj["id"],
-            // TODO: Any other fields to include?
-        ];
+
 
         $token = [
-            "token" => JWT::encode($payload, \Settings::SECRET, 'HS256'),
+            "token" => \App\Tokens::issueToken($userObj["id"]),
         ];
 
         return new ResponseData($token, \App\ResponseCode::OK);
