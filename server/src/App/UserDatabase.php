@@ -16,7 +16,7 @@ class UserDatabase
     public static function getInstance(): UserDatabase
     {
         if (self::$instance === null) {
-            self::$instance = new UserDatabase(new DatabaseConnection(\Settings::CHI_DATABASE_FILE));
+            self::$instance = new UserDatabase(new DatabaseConnection(\Settings::USER_DATABASE_FILE));
         }
         return self::$instance;
     }
@@ -26,5 +26,26 @@ class UserDatabase
     private function __construct(DatabaseConnection $connection)
     {
         $this->connection = $connection;
+    }
+
+    /**
+     * Get a user by their email address
+     * @return ?array{
+     *   'id': int,
+     *   'name': string,
+     *   'email': string,
+     *   'password': string,
+     * }
+     */
+    public function getUserByEmail(string $email): ?array
+    {
+        $result = $this->connection->runSql("SELECT * FROM account WHERE email = :email", [
+            "email" => $email,
+        ]);
+        if (count($result) === 0) {
+            return null;
+        } else {
+            return $result[0];
+        }
     }
 }

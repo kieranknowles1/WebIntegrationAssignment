@@ -15,6 +15,7 @@ class Settings
     public const VENDOR_DIR = self::SERVER_ROOT . 'vendor/';
 
     public const CHI_DATABASE_FILE = self::SERVER_ROOT . 'data/chi2023.sqlite';
+    public const USER_DATABASE_FILE = self::SERVER_ROOT . 'data/users.sqlite';
 
     public const API_ROOT = '/api/';
 
