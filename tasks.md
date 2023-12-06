@@ -125,12 +125,12 @@ make a new database table. A list of general requirements for each endpoint is g
 #### Endpoints
 See [KF6012 Assessment Brief](KF6012%20-%20CIS%20Assessment%202023-24.pdf) for endpoint details
 
-- [ ] token
-  - [ ] Accept a username and password in the headers
-  - [ ] If username and password are valid, create return a JWT token
-  - [ ] Tokens must contain user ID
-  - [ ] Tokens must not contain private data (e.g., password)
-  - [ ] Token should not transfer data needed by the client
+- [x] token
+  - [x] Accept a username and password in the headers
+  - [x] If username and password are valid, create return a JWT token
+  - [x] Tokens must contain user ID
+  - [x] Tokens must not contain private data (e.g., password)
+  - [x] Token should not transfer data needed by the client
   - [x] Token should be valid for 30 minutes
 - [ ] note
   - [ ] GET

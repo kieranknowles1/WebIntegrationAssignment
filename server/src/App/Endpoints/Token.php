@@ -37,6 +37,7 @@ class Token extends UserEndpoint
 
         $payload = [
             "iat" => time(),
+            "nbf" => time(),
             "exp" => time() + \Settings::TOKEN_VALID_DURATION,
             "iss" => $_SERVER["HTTP_HOST"],
             "sub" => $userObj["id"],
