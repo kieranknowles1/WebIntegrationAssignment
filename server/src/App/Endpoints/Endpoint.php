@@ -14,6 +14,9 @@ abstract class Endpoint implements \App\DataSource
     private \App\ResponseCode $code;
     private bool $handledRequest = false;
 
+    /** @var string[] */
+    private array $headers = [];
+
     /**
      * Get the data returned by the endpoint
      * @return ResponseData bundled data and status code
@@ -75,6 +78,7 @@ abstract class Endpoint implements \App\DataSource
 
         $this->data = $response->getData();
         $this->code = $response->getCode();
+        $this->headers = $response->getHeaders();
     }
 
     public function getResponseCode(): \App\ResponseCode
@@ -87,5 +91,11 @@ abstract class Endpoint implements \App\DataSource
     {
         assert($this->handledRequest, "getData called before handleRequest");
         return $this->data;
+    }
+
+    public function getExtraHeaders(): array
+    {
+        assert($this->handledRequest, "getExtraHeaders called before handleRequest");
+        return $this->headers;
     }
 }

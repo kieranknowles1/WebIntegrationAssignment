@@ -13,7 +13,7 @@ class Request
 {
     public static function fromGlobals(): Request
     {
-        return new Request($_SERVER["REQUEST_URI"], $_SERVER["REQUEST_METHOD"], $_POST, getallheaders());
+        return new Request($_SERVER["REQUEST_URI"], $_SERVER["REQUEST_METHOD"], $_POST, getallheaders(), $_SERVER["PHP_AUTH_USER"] ?? null, $_SERVER["PHP_AUTH_PW"] ?? null);
     }
 
     /** The cleaned requested URL */
@@ -36,6 +36,9 @@ class Request
      */
     private array $headers;
 
+    private ?string $authUser;
+    private ?string $authPassword;
+
     /**
      * Clean the URL to be in lowercase and without any trailing /
      */
@@ -50,7 +53,7 @@ class Request
      * @param array<string, string> $bodyParams
      * @param array<string, string> $headers
      */
-    private function __construct(string $rawUrl, string $method, array $bodyParams, array $headers)
+    private function __construct(string $rawUrl, string $method, array $bodyParams, array $headers, ?string $authUser, ?string $authPassword)
     {
         $parsed = parse_url($rawUrl);
 
@@ -68,6 +71,9 @@ class Request
         parse_str($parsed["query"] ?? "", $this->queryParams);
         $this->bodyParams = $bodyParams;
         $this->headers = $headers;
+
+        $this->authUser = $authUser;
+        $this->authPassword = $authPassword;
     }
 
     public function getUrl(): string
@@ -96,5 +102,15 @@ class Request
     public function getHeaders(): array
     {
         return $this->headers;
+    }
+
+    public function getAuthUser(): ?string
+    {
+        return $this->authUser;
+    }
+
+    public function getAuthPassword(): ?string
+    {
+        return $this->authPassword;
     }
 }

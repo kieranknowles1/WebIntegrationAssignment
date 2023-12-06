@@ -18,11 +18,19 @@ class JsonResponse
         $this->dataSource = $dataSource;
     }
 
-    public function outputData(): void
+    public function outputHeaders(): void
     {
-        // TODO: Handle any other headers
         header('Content-Type: application/json');
         header('Access-Control-Allow-Origin: *');
+        http_response_code($this->dataSource->getResponseCode()->value);
+        foreach ($this->dataSource->getExtraHeaders() as $header) {
+            header($header);
+        }
+    }
+
+    public function outputData(): void
+    {
+        $this->outputHeaders();
         http_response_code($this->dataSource->getResponseCode()->value);
         echo json_encode($this->dataSource->getData());
     }

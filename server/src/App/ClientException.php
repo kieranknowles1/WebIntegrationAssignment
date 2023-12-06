@@ -13,12 +13,19 @@ class ClientException extends \RuntimeException
     private ResponseCode $responseCode;
     private string $detail;
 
-    public function __construct(ResponseCode $code, string $detail)
+    /** @var string[] */
+    private array $headers;
+
+    /**
+     * @param string[] $headers
+     */
+    public function __construct(ResponseCode $code, string $detail, array $headers = [])
     {
         parent::__construct(ResponseCode::getMessage($code));
 
         $this->responseCode = $code;
         $this->detail = $detail;
+        $this->headers = $headers;
     }
 
     /** Get the HTTP response code of the exception */
@@ -30,5 +37,13 @@ class ClientException extends \RuntimeException
     public function getDetail(): string
     {
         return $this->detail;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getHeaders(): array
+    {
+        return $this->headers;
     }
 }

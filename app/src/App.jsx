@@ -6,9 +6,9 @@ import Countries from './pages/Countries'
 import Index from './pages/Index'
 import PageNotFound from './pages/PageNotFound'
 
+import Login from './components/Login'
 /** @typedef {import('./contexts/UserContext').UserContextValue} UserContextValue */
 import UserContext from './contexts/UserContext'
-import Login from './components/Login'
 
 /**
  * Main app component

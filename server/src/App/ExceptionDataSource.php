@@ -47,4 +47,18 @@ class ExceptionDataSource implements DataSource
             ];
         }
     }
+
+    /**
+     * @return string[]
+     */
+    public function getExtraHeaders(): array
+    {
+        if ($this->exception instanceof ClientException) {
+            /** @var ClientException */
+            $clientException = $this->exception;
+            return $clientException->getHeaders();
+        } else {
+            return [];
+        }
+    }
 }

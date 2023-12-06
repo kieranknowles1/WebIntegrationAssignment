@@ -12,11 +12,17 @@ class ResponseData
 {
     private mixed $data;
     private \App\ResponseCode $code;
+    /** @var string[] */
+    private array $headers;
 
-    public function __construct(mixed $data, \App\ResponseCode $code)
+    /**
+     * @param string[] $headers
+     */
+    public function __construct(mixed $data, \App\ResponseCode $code, array $headers = [])
     {
         $this->data = $data;
         $this->code = $code;
+        $this->headers = $headers;
     }
 
     public function getData(): mixed
@@ -27,5 +33,13 @@ class ResponseData
     public function getCode(): \App\ResponseCode
     {
         return $this->code;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getHeaders(): array
+    {
+        return $this->headers;
     }
 }

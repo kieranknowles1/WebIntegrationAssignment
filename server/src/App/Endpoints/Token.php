@@ -14,10 +14,17 @@ class Token extends UserEndpoint
 {
     protected function handleGetRequest(\App\Request $request): ResponseData
     {
-        $headers = $request->getHeaders();
-
         // TODO: Check authorization header is present and formatted correctly
         // TODO: Check password is correct. Return 401 if not
+
+        $user = $request->getAuthUser();
+        $password = $request->getAuthPassword();
+        if ($user === null || $password === null) {
+            throw new \App\ClientException(\App\ResponseCode::UNAUTHORIZED, "Username or password not provided");
+        }
+
+        echo "User: $user\n";
+        echo "Password: $password\n";
 
         $payload = [
             "iat" => time(),
