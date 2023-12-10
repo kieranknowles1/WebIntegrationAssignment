@@ -18,13 +18,15 @@ function ContentItem (params) {
         <h2>{params.title}</h2>
         <p>{params.abstract}</p>
         <p>{params.type}</p>
+        {params.award && <p>⭐ {params.award}</p>}
       </li>
   )
 }
 ContentItem.propTypes = {
   title: PropTypes.string.isRequired,
-  abstract: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired
+  abstract: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  award: PropTypes.string,
 }
 
 export default ContentItem

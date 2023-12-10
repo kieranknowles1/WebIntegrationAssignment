@@ -313,7 +313,6 @@ components:
     contentFull:
       type: object
       additionalProperties: false
-      required: ["title", "type"]
       properties:
         title:
           type: string
@@ -326,6 +325,11 @@ components:
             The main reason is that they are better is that you won't get null pointer exceptions
         type:
           $ref: "#/components/schemas/contentType"
+        award:
+          type: string
+          nullable: true
+          example: Best Paper
+      required: [title, abstract, type, award]
 
     contentType:
       type: string

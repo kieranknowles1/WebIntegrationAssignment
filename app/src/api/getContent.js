@@ -1,8 +1,10 @@
 /**
  * @typedef {Object} Content
  * @property {string} title The title of the content.
- * @property {string} abstract A short description of the content.
+ * NOTE: Some rows have null abstracts in the database.
+ * @property {string|null} abstract A short description of the content.
  * @property {string} type The type of content. e.g., 'Paper'
+ * @property {string|null} award The award the content won, if any. e.g., 'Best Paper'
  */
 
 /**

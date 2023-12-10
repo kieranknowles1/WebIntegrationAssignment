@@ -13,6 +13,11 @@
         @apply text-center;
     }
 
+    h2 {
+        @apply text-2xl;
+        @apply font-bold;
+    }
+
     button {
         @apply bg-button-default;
         @apply hover:bg-button-hover;

@@ -250,7 +250,7 @@ The three pages you must implement are specified below:
     - [ ] authors’ names
     - [ ] the authors’ affiliations
     - [x] the content type
-    - [ ] whether it has won an award.
+    - [x] whether it has won an award.
   - [x] The page should show blocks of 20 items of content
         at a time, with the ability to navigate to further or previous blocks of content.
 

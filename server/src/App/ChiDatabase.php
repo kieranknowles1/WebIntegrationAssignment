@@ -36,7 +36,7 @@ class ChiDatabase
     {
         $result = $this->connection->runSql("SELECT DISTINCT country FROM affiliation ORDER BY country");
         // Map to a flat array of country names
-        return array_map(fn ($row) => $row["country"], $result);
+        return array_map(fn($row) => $row["country"], $result);
     }
 
     /**
@@ -108,14 +108,11 @@ class ChiDatabase
      * Items are returned ordered by title
      * @param int|null $page the page of 20 items to return, or null to return all items
      * @param string|null $type the name of the type of content to return, or null to return all types. Case insensitive
-     * @return array{'title': string, 'abstract': string, 'type': string}[] the content information
-     * ```php
-     *  $result[n] = [
-     *      "title" => string,
-     *      "abstract" => string,
-     *      "type" => string
-     *  ];
-     * ```
+     * @return array{
+     *     'title': string,
+     *     'abstract': ?string,
+     *     'award': ?string,
+     *     'type': string}[] the content information
      */
     public function getContent(?int $page, ?string $type)
     {
@@ -124,9 +121,12 @@ class ChiDatabase
         SELECT
             content.title,
             content.abstract,
-            type.name AS type
+            type.name AS type,
+            award.name AS award
         FROM content
         JOIN type ON content.type = type.id
+        LEFT JOIN content_has_award ON content.id = content_has_award.content
+        LEFT JOIN award ON award.id = content_has_award.award
         SQL;
 
         $params = [];
