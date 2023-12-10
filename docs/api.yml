@@ -140,6 +140,24 @@ paths:
                 items:
                   $ref: "#/components/schemas/contentFull"
 
+  /content/types:
+    get:
+      tags: [Content]
+      summary: Get all content types
+      description: |
+        Returns all content types that are defined in the database
+        Types are not guaranteed to be used by any content
+        Data is returned in alphabetical order
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/contentType"
+
   /token:
     get:
       summary: Authenticate with a username and password

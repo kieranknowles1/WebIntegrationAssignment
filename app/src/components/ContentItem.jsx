@@ -26,7 +26,7 @@ ContentItem.propTypes = {
   title: PropTypes.string.isRequired,
   abstract: PropTypes.string,
   type: PropTypes.string.isRequired,
-  award: PropTypes.string,
+  award: PropTypes.string
 }
 
 export default ContentItem

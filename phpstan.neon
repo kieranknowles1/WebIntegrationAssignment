@@ -2,3 +2,6 @@ parameters:
   level: max
   paths:
   - server
+  # Ignore vendor directory
+  excludes_analyse:
+  - vendor

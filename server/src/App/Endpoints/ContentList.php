@@ -20,7 +20,8 @@ class ContentList extends ChiEndpoint
             $this->page = \App\ArgumentParser::parseInt($key, $value, 1, PHP_INT_MAX);
         } elseif ($key === 'type') {
             $this->type = $value;
-            if (!$this->getDatabase()->typeExists($this->type)) {
+            $validTypes = $this->getDatabase()->getContentTypes();
+            if (!\App\ArrayUtil::ciContains($validTypes, $value)) {
                 throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Type '$value' does not exist");
             }
         } else {

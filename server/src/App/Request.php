@@ -8,7 +8,6 @@ namespace App;
  * @author Kieran Knowles
  * @generated GitHub Copilot was used to assist in writing this code
  */
-
 class Request
 {
     public static function fromGlobals(): Request

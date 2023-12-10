@@ -254,7 +254,7 @@ The three pages you must implement are specified below:
   - [x] The page should show blocks of 20 items of content
         at a time, with the ability to navigate to further or previous blocks of content.
 
-  - [ ] There should also be a 'select' component giving options to view "All content" or
+  - [x] There should also be a 'select' component giving options to view "All content" or
         specific types of content such as "Papers", "Posters" etc. If a specific type of
         content is selected then that data must still be presented in blocks of 20.
 

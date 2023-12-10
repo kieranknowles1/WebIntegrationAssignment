@@ -4,6 +4,12 @@ namespace App;
 
 use Firebase\JWT\JWT;
 
+/**
+ * Helper class for working with tokens
+ *
+ * @author Kieran Knowles
+ * @generated GitHub Copilot was used to assist in writing this code
+ */
 abstract class Tokens
 {
     private function __construct() {}
@@ -27,7 +33,8 @@ abstract class Tokens
      * @throws ClientException if the token is invalid. Message will provide details
      * @return int The user ID the token was issued to
      */
-    public static function getTokenUserId(Request $request): int {
+    public static function getTokenUserId(Request $request): int
+    {
         $token = $request->getHeaders()["authorization"] ?? null;
 
         if ($token === null) {

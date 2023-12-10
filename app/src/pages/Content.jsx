@@ -1,10 +1,11 @@
 import React from 'react'
 
+import LoadingDisplay, { getHighestStatus } from '../components/LoadingDisplay'
 import ContentItem from '../components/ContentItem'
-import LoadingDisplay from '../components/LoadingDisplay'
 
 /** @typedef {import('../api/getContent').Content} Content */
 import getContent from '../api/getContent'
+import getContentTypes from '../api/getContentTypes'
 
 /**
  * Content page
@@ -13,26 +14,52 @@ import getContent from '../api/getContent'
  * @generated GitHub Copilot was used to assist in writing this code
  */
 function Content () {
-  const [status, setStatus] = React.useState('loading')
-  /** @type {[Content, function (Content): void]} */
-  const [content, setContent] = React.useState(null)
+  const [contentStatus, setContentStatus] = React.useState('loading')
+  /** @type {[ContentItem[], function (ContentItem[]): void]} */
+  const [content, setContent] = React.useState([])
+
+  const [contentTypesStatus, setContentTypesStatus] = React.useState('loading')
+  /** @type {[string[], function (string[]): void]} */
+  const [types, setTypes] = React.useState([])
 
   // TODO: Keep previous pages in memory
   const [page, setPage] = React.useState(1)
+  const [selectedType, setSelectedType] = React.useState(null)
 
   React.useEffect(() => {
-    setStatus('loading')
-    setContent(null)
-    getContent(page)
+    setContentStatus('loading')
+    setContent([])
+    console.log(selectedType)
+    getContent(page, selectedType)
       .then(content => {
         setContent(content.map((item, index) => <ContentItem key={index} {...item} />))
-        setStatus('done')
+        setContentStatus('done')
       })
       .catch(err => {
         console.error(err)
-        setStatus('error')
+        setContentStatus('error')
       })
-  }, [page])
+  }, [page, selectedType])
+
+  React.useEffect(() => {
+    setContentTypesStatus('loading')
+    getContentTypes()
+      .then(types => {
+        setTypes(types)
+        setContentTypesStatus('done')
+      })
+      .catch(err => {
+        console.error(err)
+        setContentTypesStatus('error')
+      })
+  }, [])
+
+  /** @param {React.ChangeEvent<HTMLSelectElement>} e */
+  function updateSelectedType (e) {
+    const value = e.target.value === '' ? null : e.target.value
+    setSelectedType(value)
+    setPage(1)
+  }
 
   // Float one left and other right
   const pageButtons = (
@@ -46,8 +73,13 @@ function Content () {
   return (
     <main>
       <h1>Content</h1>
+      <select onChange={updateSelectedType} className='bg-background-button'>
+        {/* NOTE: value={null} is not supported by React, so we use an empty string instead */}
+        <option value={''} selected>All content</option>
+        {types.map(type => <option key={type} value={type}>{type}</option>)}
+      </select>
       {pageButtons}
-      <LoadingDisplay status={status} />
+      <LoadingDisplay status={getHighestStatus([contentStatus, contentTypesStatus])} />
       <ul className='grid sm:grid-cols-1 lg:grid-cols-2 gap-3'>
         {content}
       </ul>

@@ -1,6 +1,19 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+/** @typedef {'loading'|'error'|'done'} LoadingStatus */
+
+/**
+ * Get the highest status in the order error > loading > done
+ * I.e., any error is an error, any loading and no error is loading, and all done is done.
+ * @param {LoadingStatus[]} statuses
+ */
+export function getHighestStatus (statuses) {
+  if (statuses.includes('error')) return 'error'
+  if (statuses.includes('loading')) return 'loading'
+  return 'done'
+}
+
 /**
  * LoadingDisplay component
  * Display a loading message while the page is loading that disappears when the page is loaded, or changes to an error message if there was an error.

@@ -67,22 +67,34 @@ class ChiDatabase
     }
 
     /**
-     * Does a content type with the given name exist in the database?
+     * Get all content types declared in the `type` table, ordered alphabetically
      * NOTE: This does not necessarily mean that there is any content of that type
-     * @param string $type the name of the type to check, case insensitive
+     * @return string[]
      */
-    public function typeExists(string $type): bool
+    public function getContentTypes(): array
     {
-        $query = <<<SQL
-        SELECT
-            COUNT(*) AS count
-        FROM type
-        WHERE name = :type COLLATE NOCASE
-        SQL;
-
-        $result = $this->connection->runSql($query, ["type" => $type]);
-        return $result[0]["count"] > 0;
+        $result = $this->connection->runSql("SELECT name FROM type ORDER BY name");
+        // Map to a flat array of type names
+        return array_map(fn($row) => $row["name"], $result);
     }
+
+    // /**
+    //  * Does a content type with the given name exist in the database?
+    //  * NOTE: This does not necessarily mean that there is any content of that type
+    //  * @param string $type the name of the type to check, case insensitive
+    //  */
+    // public function typeExists(string $type): bool
+    // {
+    //     $query = <<<SQL
+    //     SELECT
+    //         COUNT(*) AS count
+    //     FROM type
+    //     WHERE name = :type COLLATE NOCASE
+    //     SQL;
+
+    //     $result = $this->connection->runSql($query, ["type" => $type]);
+    //     return $result[0]["count"] > 0;
+    // }
 
     /**
      * Does an affiliation with the given country name exist in the database?
