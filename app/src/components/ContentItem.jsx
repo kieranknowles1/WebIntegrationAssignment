@@ -1,5 +1,9 @@
+import { Dialog } from '@headlessui/react'
 import PropTypes from 'prop-types'
 import React from 'react'
+
+import ContentAuthorList from './ContentAuthorList'
+import ModalDialog from './ModalDialog'
 
 /** @typedef {import('../api/getContent').Content} Content */
 
@@ -12,17 +16,24 @@ import React from 'react'
  * @generated GitHub Copilot was used to assist in writing this code
  */
 function ContentItem (params) {
+  const [isOpen, setOpen] = React.useState(false)
+
   return (
-      <li className='bg-background-listitem text-foreground-listitem rounded-md p-3'>
+      <button className='bg-background-listitem text-foreground-listitem rounded-md p-3 text-left' onClick={() => setOpen(true)}>
         {/** // TODO: Emphasise this and type */}
-        <h2>{params.title}</h2>
+        <h2 className='text-center'>{params.title}</h2>
         <p>{params.abstract}</p>
-        <p>{params.type}</p>
-        {params.award && <p>⭐ {params.award}</p>}
-      </li>
+        <p className='text-center'>{params.type}</p>
+        {params.award && <p className='text-center'>⭐ {params.award}</p>}
+        <ModalDialog isOpen={isOpen} setOpen={setOpen}>
+          <Dialog.Title className='text-center'>{params.title}</Dialog.Title>
+          <ContentAuthorList contentId={params.id} />
+        </ModalDialog>
+      </button>
   )
 }
 ContentItem.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   abstract: PropTypes.string,
   type: PropTypes.string.isRequired,
