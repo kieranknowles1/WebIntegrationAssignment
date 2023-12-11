@@ -1,19 +1,17 @@
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 /**
- * Page selection menu component
+ * Page selection menu component.
+ * Pass in an array of objects with name and path properties to
+ * define the menu items.
  *
  * @author Kieran Knowles
  * @generated Github copilot was used to assist in writing this code
  */
-export default function Menu () {
-  const items = [
-    { name: 'Home', path: '/' },
-    { name: 'Countries', path: '/countries' },
-    { name: 'Content', path: '/content' }
-  ]
-  const itemsJsx = items.map((item) => {
+export default function NavMenu (props) {
+  const itemsJsx = props.items.map((item) => {
     return (
       <li className='hover:bg-background-highlight' key={item.name}>
         <Link to={item.path}>{item.name}</Link>
@@ -28,4 +26,10 @@ export default function Menu () {
       </ul>
     </nav>
   )
+}
+NavMenu.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired
+  }))
 }

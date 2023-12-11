@@ -1,7 +1,6 @@
 import React from 'react'
 
 import LoadingDisplay from '../components/LoadingDisplay'
-import Menu from '../components/Menu'
 import VideoEmbed from '../components/VideoEmbed'
 
 /** @typedef {import('../api/getPreview').Preview} Preview */
@@ -36,7 +35,6 @@ export default function Index () {
   return (
     <main>
       <h1>CHI 2023</h1>
-      <Menu />
       <LoadingDisplay status={status} />
       {preview && <h2>{preview.title}</h2>}
       {preview && <VideoEmbed link={getEmbedLink(preview.preview_video)} />}
