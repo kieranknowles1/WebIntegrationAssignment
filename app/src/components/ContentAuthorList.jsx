@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { getContentAuthorAffiliations } from '../api/getAuthorAffiliations'
+
 import AuthorItem from './AuthorItem'
 import LoadingDisplay from './LoadingDisplay'
 
@@ -14,11 +16,23 @@ function ContentAuthorList (props) {
   const [status, setStatus] = React.useState('loading')
   const [authors, setAuthors] = React.useState([])
 
+  React.useEffect(() => {
+    getContentAuthorAffiliations(props.contentId)
+      .then(authors => {
+        setAuthors(authors)
+        setStatus('done')
+      })
+      .catch(() => setStatus('error'))
+  }, [props.contentId])
+
   return (
-    <ul>
-      <LoadingDisplay status={status} />
-      {authors.map(author => <AuthorItem key={author.id} {...author} />)}
-    </ul>
+    <div>
+      <h3>Authors:</h3>
+      <ul>
+        <LoadingDisplay status={status} />
+        {authors.map(author => <AuthorItem key={author.id} {...author} />)}
+      </ul>
+    </div>
   )
 }
 ContentAuthorList.propTypes = {

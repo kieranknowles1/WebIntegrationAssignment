@@ -121,6 +121,7 @@ class ChiDatabase
      * @param int|null $page the page of 20 items to return, or null to return all items
      * @param string|null $type the name of the type of content to return, or null to return all types. Case insensitive
      * @return array{
+     *     'id': int,
      *     'title': string,
      *     'abstract': ?string,
      *     'award': ?string,
@@ -131,6 +132,7 @@ class ChiDatabase
 
         $query = <<<SQL
         SELECT
+            content.id,
             content.title,
             content.abstract,
             type.name AS type,

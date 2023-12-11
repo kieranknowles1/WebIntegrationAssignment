@@ -11,13 +11,12 @@ import React from 'react'
 function AuthorItem (props) {
   return (
     <li>
-      <p>{props.name}</p>
-      <p>{props.institution}, {props.city}, {props.country}</p>
+      <p>{props.author_name} - {props.institution}, {props.city}, {props.country}</p>
     </li>
   )
 }
 AuthorItem.propTypes = {
-  name: PropTypes.string.isRequired,
+  author_name: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   institution: PropTypes.string.isRequired

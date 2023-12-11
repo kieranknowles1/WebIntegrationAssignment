@@ -20,7 +20,7 @@ function ModalDialog (props) {
       <div className='fixed inset-0 bg-black/30' aria-hidden />
       {/* Fullscreen container to center the dialog */}
       <div className='fixed inset-0 flex w-screen h-screen items-center justify-center p-4'>
-        <Dialog.Panel className='w-full max-w-lg rounded bg-background-listitem text-foreground-listitem'>
+        <Dialog.Panel className='w-full max-w-xl rounded bg-background-listitem text-foreground-listitem'>
           {props.children}
         </Dialog.Panel>
       </div>

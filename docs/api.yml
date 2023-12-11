@@ -332,6 +332,8 @@ components:
       type: object
       additionalProperties: false
       properties:
+        id:
+          type: integer
         title:
           type: string
           example: Why nullable types are better than null
@@ -347,7 +349,7 @@ components:
           type: string
           nullable: true
           example: Best Paper
-      required: [title, abstract, type, award]
+      required: [id, title, abstract, type, award]
 
     contentType:
       type: string
@@ -382,15 +384,42 @@ components:
 
     affiliationInformation:
       type: object
-      additionalProperties: false
-      required: ["author", "content"]
       properties:
-        author:
-          $ref: "#/components/schemas/author"
+        author_id:
+          type: number
+          description: The unique identifier for the author.
+        author_name:
+          type: string
+          description: The name of the author.
+        country:
+          type: string
+          description: The country where the author is affiliated.
+        city:
+          type: string
+          description: The city where the author is located.
+        institution:
+          type: string
+          description: The institution to which the author is affiliated.
         content:
           type: array
           items:
-            $ref: "#/components/schemas/contentBrief"
+            type: object
+            properties:
+              id:
+                type: number
+                description: The unique identifier for the content.
+              title:
+                type: string
+                description: The title of the content.
+      additionalProperties: false
+      required:
+        - author_id
+        - author_name
+        - country
+        - city
+        - institution
+        - content
+
 
     note:
       type: object

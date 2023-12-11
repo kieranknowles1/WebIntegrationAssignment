@@ -243,12 +243,12 @@ The three pages you must implement are specified below:
   - [x] More features and functionality can be included if you wish, for example when
         clicking on a country name further relevant information might be shown.
 
-- [ ] Content
-  - [ ] This page should show details of each item of research content including the
+- [x] Content
+  - [x] This page should show details of each item of research content including the
     - [x] title,
     - [x] abstract
-    - [ ] authors’ names
-    - [ ] the authors’ affiliations
+    - [x] authors’ names
+    - [x] the authors’ affiliations
     - [x] the content type
     - [x] whether it has won an award.
   - [x] The page should show blocks of 20 items of content

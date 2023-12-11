@@ -1,5 +1,6 @@
 /**
  * @typedef {Object} Content
+ * @property {number} id The unique identifier for the content.
  * @property {string} title The title of the content.
  * NOTE: Some rows have null abstracts in the database.
  * @property {string|null} abstract A short description of the content.
