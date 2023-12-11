@@ -6,13 +6,11 @@ import React from 'react'
  * @author Kieran Knowles
  * @generated Github Copilot was used to assist in writing this code.
  *
- * @typedef {Object} UserContextObject
+ * @typedef {Object} User
  * @property {string} token The user's JWT token.
  */
 
-/** @typedef {UserContextObject | null} UserContextValue */
-
-/** @type {React.Context<UserContextValue>} */
+/** @type {React.Context<User | null>} */
 const UserContext = React.createContext(null)
 
 export default UserContext

@@ -7,7 +7,7 @@ import Index from './pages/Index'
 import PageNotFound from './pages/PageNotFound'
 
 import Login from './components/Login'
-/** @typedef {import('./contexts/UserContext').UserContextValue} UserContextValue */
+/** @typedef {import('./contexts/UserContext').User} User */
 import UserContext from './contexts/UserContext'
 
 /**
@@ -17,7 +17,7 @@ import UserContext from './contexts/UserContext'
  * @generated Github copilot was used to assist in writing this code
  */
 function App () {
-  /** @type [UserContextValue, function (UserContextValue): void] */
+  /** @type [User | null, function (User | null): void] */
   const [userContext, setUserContext] = React.useState(null)
 
   return (
