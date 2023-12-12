@@ -294,7 +294,7 @@ The following features should be implemented:
   - [ ] The user should be able to type a short note (limiting the note to around 250 characters is acceptable
         if you wish) regarding an individual item of content.
   - [ ] This note should be saved by the API.
-  - [ ] Logged in users should be able to see notes they have previously created.
+  - [x] Logged in users should be able to see notes they have previously created.
     - [ ] Should be able to edit existing notes.
     - [ ] Should be able to delete notes.
-  - [ ] Users should only be able to see, edit or delete their own notes, not those made by other people.
+  - [x] Users should only be able to see, edit or delete their own notes, not those made by other people.

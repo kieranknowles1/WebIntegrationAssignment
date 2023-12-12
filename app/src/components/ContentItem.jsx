@@ -2,7 +2,7 @@ import { Dialog } from '@headlessui/react'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import ContentAuthorList from './ContentAuthorList'
+import ContentDetails from './ContentDetails'
 import ModalDialog from './ModalDialog'
 
 /** @typedef {import('../api/getContent').Content} Content */
@@ -27,7 +27,7 @@ function ContentItem (params) {
         {params.award && <p className='text-center'>⭐ {params.award}</p>}
         <ModalDialog isOpen={isOpen} setOpen={setOpen}>
           <Dialog.Title className='text-center'>{params.title}</Dialog.Title>
-          <ContentAuthorList contentId={params.id} />
+          <ContentDetails contentId={params.id} />
         </ModalDialog>
       </button>
   )

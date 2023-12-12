@@ -53,20 +53,22 @@ class UserDatabase
     /**
      * Get all notes for a user
      * NOTE: This will return an empty array if the user does not exist or has no notes
+     * @param int $contentId If set, only notes for this content will be returned
      * @return array{
      *   'id': int,
      *   'content_id': int,
      *   'text': string,
      * }[]
      */
-    public function getUserNotes(int $userId): array
+    public function getUserNotes(int $userId, ?int $contentId): array
     {
         return $this->connection->runSql("
             SELECT id, content_id, text
                 FROM note
-            WHERE user_id = :userId
+            WHERE user_id = :userId AND (:contentId IS NULL OR content_id = :contentId)
         ", [
             "userId" => $userId,
+            "contentId" => $contentId,
         ]);
     }
 }
