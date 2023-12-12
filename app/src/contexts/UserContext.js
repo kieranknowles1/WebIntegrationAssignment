@@ -12,6 +12,14 @@ export function tryGetUserFromLocalStorage () {
   return JSON.parse(user)
 }
 
+export function pushUserToLocalStorage (user) {
+  localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(user))
+}
+
+export function removeUserFromLocalStorage () {
+  localStorage.removeItem(LOCAL_STORAGE_USER_KEY)
+}
+
 /**
  * Context for the logged in user. Will be null if the user is not logged in.
  *

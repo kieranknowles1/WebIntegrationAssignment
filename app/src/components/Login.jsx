@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import UserContext, { LOCAL_STORAGE_USER_KEY } from '../contexts/UserContext'
+import UserContext, { pushUserToLocalStorage, removeUserFromLocalStorage } from '../contexts/UserContext'
 import getToken, { InvalidCredentialsError } from '../api/getToken'
 
 /**
@@ -16,18 +16,17 @@ function Login (props) {
   const [username, setUsername] = React.useState('')
   const [password, setPassword] = React.useState('')
 
-  function doLogin () {
+  function handleLogin () {
     // TODO: Get token from API and handle any errors. Using
     // dummy data for now.
     getToken(username, password)
       .then(data => {
         props.setUserContext(data)
+        pushUserToLocalStorage(data)
 
         // Clear the form
         setUsername('')
         setPassword('')
-
-        localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(data))
       })
       .catch(err => {
         if (err instanceof InvalidCredentialsError) {
@@ -41,6 +40,11 @@ function Login (props) {
       })
   }
 
+  function handleLogout () {
+    props.setUserContext(null)
+    removeUserFromLocalStorage()
+  }
+
   return (
     <div>
       {context === null
@@ -52,11 +56,11 @@ function Login (props) {
             <label>Password:
               <input type='password' className='text-background-button' value={password} onChange={e => setPassword(e.target.value)} />
             </label>
-            <input type='submit' value='Login' onClick={e => { e.preventDefault(); doLogin() }} />
+            <input type='submit' value='Login' onClick={e => { e.preventDefault(); handleLogin() }} />
           </form>
           )
         : (
-          <button onClick={() => props.setUserContext(null)}>Logout</button>
+          <button onClick={handleLogout}>Logout</button>
           )}
     </div>
   )
