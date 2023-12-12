@@ -2,7 +2,8 @@ import React from 'react'
 
 import Country from '../components/Country'
 import LoadingDisplay from '../components/LoadingDisplay'
-import getCountries from '../api/getCountries'
+
+import DataFetcherContext from '../contexts/DataFetcherContext'
 
 /**
  * Countres page
@@ -15,6 +16,8 @@ function Countres () {
   const [allCountries, setAllCountries] = React.useState([])
   const [query, setQuery] = React.useState('')
 
+  const fetcher = React.useContext(DataFetcherContext)
+
   const [countryComponents, setCountryComponents] = React.useState([])
   React.useEffect(() => {
     const filtered = allCountries
@@ -22,17 +25,13 @@ function Countres () {
     setCountryComponents(filtered.map((country, index) => <Country key={index} name={country} />))
   }, [allCountries, query])
 
-  // TODO: Cache the response when reloading the page
-  const [status, setStatus] = React.useState('loading')
   React.useEffect(() => {
-    getCountries()
+    fetcher.countries.get()
       .then(countries => {
         setAllCountries(countries)
-        setStatus('done')
       })
       .catch(err => {
         console.error(err)
-        setStatus('error')
       })
   }, [])
 
@@ -40,7 +39,7 @@ function Countres () {
     <main>
       <h1>Countres</h1>
       <input type='text' placeholder='Search' value={query} onChange={e => setQuery(e.target.value)} />
-      <LoadingDisplay status={status} />
+      <LoadingDisplay status={fetcher.countries.status} />
       <ul>{countryComponents}</ul>
     </main>
   )

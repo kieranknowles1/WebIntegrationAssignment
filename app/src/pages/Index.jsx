@@ -8,6 +8,8 @@ import getPreview from '../api/getPreview'
 
 import getEmbedLink from '../utils/getEmbedLink'
 
+import DataFetcherContext from '../contexts/DataFetcherContext'
+
 /**
  * Index page
  *
@@ -15,27 +17,25 @@ import getEmbedLink from '../utils/getEmbedLink'
  * @generated Github copilot was used to assist in writing this code
  */
 export default function Index () {
-  const [status, setStatus] = React.useState('loading')
+  const fetcher = React.useContext(DataFetcherContext)
+
   /** @type {[Preview, function (Preview): void]} */
   const [preview, setPreview] = React.useState(null)
 
-  // TODO: Cache the response when reloading the page
   React.useEffect(() => {
-    getPreview(1)
+    fetcher.preview.get()
       .then(preview => {
-        setPreview(preview[0])
-        setStatus('done')
+        setPreview(preview)
       })
       .catch(err => {
         console.error(err)
-        setStatus('error')
       })
   }, [])
 
   return (
     <main>
       <h1>CHI 2023</h1>
-      <LoadingDisplay status={status} />
+      <LoadingDisplay status={fetcher.preview.status} />
       {preview && <h2>{preview.title}</h2>}
       {preview && <VideoEmbed link={getEmbedLink(preview.preview_video)} />}
     </main>
