@@ -6,10 +6,9 @@ import Countries from './pages/Countries'
 import Index from './pages/Index'
 import PageNotFound from './pages/PageNotFound'
 
+import UserContext, { tryGetUserFromLocalStorage } from './contexts/UserContext'
 import Login from './components/Login'
 import NavMenu from './components/NavMenu'
-/** @typedef {import('./contexts/UserContext').User} User */
-import UserContext from './contexts/UserContext'
 
 const navRoutes = [
   { path: '/', element: <Index />, name: 'Home' },
@@ -34,8 +33,7 @@ function toRoutes (routes) {
  * @generated Github copilot was used to assist in writing this code
  */
 function App () {
-  /** @type [User | null, function (User | null): void] */
-  const [userContext, setUserContext] = React.useState(null)
+  const [userContext, setUserContext] = React.useState(tryGetUserFromLocalStorage())
 
   return (
     <UserContext.Provider value={userContext}>

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import UserContext, { LOCAL_STORAGE_USER_KEY } from '../contexts/UserContext'
 import getToken, { InvalidCredentialsError } from '../api/getToken'
-import UserContext from '../contexts/UserContext'
 
 /**
  * Login component
@@ -21,13 +21,13 @@ function Login (props) {
     // dummy data for now.
     getToken(username, password)
       .then(data => {
-        props.setUserContext({
-          token: data.token
-        })
+        props.setUserContext(data)
 
         // Clear the form
         setUsername('')
         setPassword('')
+
+        localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(data))
       })
       .catch(err => {
         if (err instanceof InvalidCredentialsError) {
