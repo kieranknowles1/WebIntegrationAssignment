@@ -4,8 +4,6 @@ import LoadingDisplay from '../components/LoadingDisplay'
 import VideoEmbed from '../components/VideoEmbed'
 
 /** @typedef {import('../api/getPreview').Preview} Preview */
-import getPreview from '../api/getPreview'
-
 import getEmbedLink from '../utils/getEmbedLink'
 
 import DataFetcherContext from '../contexts/DataFetcherContext'

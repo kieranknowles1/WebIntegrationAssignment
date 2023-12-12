@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import getToken, { InvalidCredentialsError } from '../api/getToken'
 import UserContext from '../contexts/UserContext'
 
 /**
@@ -18,9 +19,26 @@ function Login (props) {
   function doLogin () {
     // TODO: Get token from API and handle any errors. Using
     // dummy data for now.
-    props.setUserContext({
-      token: 'Dummy token'
-    })
+    getToken(username, password)
+      .then(data => {
+        props.setUserContext({
+          token: data.token
+        })
+
+        // Clear the form
+        setUsername('')
+        setPassword('')
+      })
+      .catch(err => {
+        if (err instanceof InvalidCredentialsError) {
+          alert('Invalid username or password.')
+        } else {
+          // User will expect something to happen, so give a message that explains it
+          // isn't their fault.
+          console.error(err)
+          alert('An error occurred while logging in. Please try again later.')
+        }
+      })
   }
 
   return (
@@ -28,7 +46,7 @@ function Login (props) {
       {context === null
         ? (
           <form>
-            <label>Username:
+            <label>Email:
               <input type='text' className='text-background-button' value={username} onChange={e => setUsername(e.target.value)} />
             </label>
             <label>Password:

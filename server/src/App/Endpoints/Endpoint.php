@@ -64,6 +64,14 @@ abstract class Endpoint implements \App\DataSource
         }
     }
 
+    protected function handleOptionsRequest(\App\Request $request): ResponseData
+    {
+        return new ResponseData(null, \App\ResponseCode::OK, [
+            'Access-Control-Allow-Headers: Authorization',
+            'Access-Control-Allow-Methods: GET, OPTIONS',
+        ]);
+    }
+
     final public function handleRequest(\App\Request $request): void
     {
         assert(!$this->handledRequest, "handleRequest called more than once");
@@ -72,6 +80,7 @@ abstract class Endpoint implements \App\DataSource
 
         // TODO: Handle OPTIONS and other methods
         $response = match ($request->getMethod()) {
+            "OPTIONS" => $this->handleOptionsRequest($request),
             "GET" => $this->handleGetRequest($request),
             default => throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED, "Method '{$request->getMethod()}' is not allowed for this endpoint"),
         };
