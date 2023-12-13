@@ -5,7 +5,9 @@ RewriteEngine On
 
 # Allow access to the whitelisted subdirectories, case-insensitive
 RewriteRule api/ - [NC,L]
+RewriteRule api - [NC,L]
 RewriteRule app/ - [NC,L]
+RewriteRule app - [NC,L]
 
 # Return 404 for all other requests
 RewriteRule ^ - [R=404,L]
