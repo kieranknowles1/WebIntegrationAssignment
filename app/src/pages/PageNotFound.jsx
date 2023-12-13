@@ -1,6 +1,10 @@
 import React from 'react'
 
+// Ignore errors about these images not being modules. Don't think I can fix
+// otherwise without a .d.ts file
+// @ts-ignore
 import blep from '../assets/blep.jpeg'
+// @ts-ignore
 import cookie from '../assets/cookie.jpeg'
 
 /**

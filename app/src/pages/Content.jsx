@@ -16,7 +16,7 @@ import getContentTypes from '../api/getContentTypes'
  */
 function Content () {
   const [contentStatus, setContentStatus] = React.useState(/** @type {LoadingStatus} */ ('loading'))
-  const [content, setContent] = React.useState(/** @type {ContentItem[]} */ ([]))
+  const [content, setContent] = React.useState(/** @type {Content[]} */ ([]))
 
   const [contentTypesStatus, setContentTypesStatus] = React.useState(/** @type {LoadingStatus} */ ('loading'))
   const [types, setTypes] = React.useState(/** @type {string[]} */ ([]))
@@ -31,7 +31,7 @@ function Content () {
     console.log(selectedType)
     getContent(page, selectedType)
       .then(content => {
-        setContent(content.map((item, index) => <ContentItem key={index} {...item} />))
+        setContent(content)
         setContentStatus('done')
       })
       .catch(err => {
@@ -55,7 +55,7 @@ function Content () {
 
   /** @param {React.ChangeEvent<HTMLSelectElement>} e */
   function updateSelectedType (e) {
-    const value = e.target.value === '' ? null : e.target.value
+    const value = e.target.value === '' ? undefined : e.target.value
     setSelectedType(value)
     setPage(1)
   }
@@ -80,7 +80,7 @@ function Content () {
       {pageButtons}
       <LoadingDisplay status={getHighestStatus([contentStatus, contentTypesStatus])} />
       <ul className='grid sm:grid-cols-1 lg:grid-cols-2 gap-3'>
-        {content}
+        {content.map(item => <ContentItem key={item.id} {...item} />)}
       </ul>
       {pageButtons}
     </main>

@@ -17,8 +17,7 @@ import DataFetcherContext from '../contexts/DataFetcherContext'
 export default function Index () {
   const fetcher = React.useContext(DataFetcherContext)
 
-  /** @type {[Preview, function (Preview): void]} */
-  const [preview, setPreview] = React.useState(null)
+  const [preview, setPreview] = React.useState(/** @type {Preview | undefined} */ (undefined))
 
   React.useEffect(() => {
     fetcher.preview.get()

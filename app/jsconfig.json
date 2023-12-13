@@ -5,21 +5,22 @@
         "target": "ES2016",
         "checkJs": true,
 
-        // These can be enabled progressively
-        // "strictBindCallApply": true,
+        // These can be enabled progressively. Some would be nice to have, but
+        // are unwieldy to handle with JSDoc.
+        "strictBindCallApply": true,
         // I can't handle null after using C#
         "strictNullChecks": true,
-        // "strictFunctionTypes": true,
-        // "strictPropertyInitialization": true,
+        "strictFunctionTypes": true,
+        "strictPropertyInitialization": true,
+        // Mainly affects component props. PropTypes inference is good enough.
         // "noImplicitAny": true,
-        // "noImplicitThis": true,
-        // "noImplicitReturns": true,
-        // "noUnusedLocals": true,
-        // "noUnusedParameters": true,
-        // "noFallthroughCasesInSwitch": true,
-        // "noImplicitOverride": true,
+        "noImplicitThis": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
         // "noPropertyAccessFromIndexSignature": true,
-
     },
     "exclude": [
         "node_modules"
