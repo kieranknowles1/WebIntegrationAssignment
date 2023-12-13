@@ -4,7 +4,7 @@ import InvalidTokenError from '../errors/InvalidTokenError.js'
  * @typedef {Object} Note
  * @property {number} id The ID of the note.
  * @property {number} content_id The ID of the content the note is for.
- * @property {string} content The content of the note.
+ * @property {string} text The content of the note.
  */
 
 /**
@@ -19,8 +19,9 @@ import InvalidTokenError from '../errors/InvalidTokenError.js'
  * @returns {Promise<Note[]>} A promise that resolves to an array of country names.
  */
 export default async function getNotes (token, contentId = undefined) {
+  /** @type {Record<string, string>} */
   const paramsObj = {}
-  if (contentId !== undefined && contentId !== null) paramsObj.contentId = contentId
+  if (contentId !== undefined && contentId !== null) paramsObj.contentId = contentId.toString()
 
   const params = new URLSearchParams(paramsObj)
 

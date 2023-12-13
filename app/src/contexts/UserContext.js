@@ -31,6 +31,6 @@ export function removeUserFromLocalStorage () {
  */
 
 /** @type {React.Context<User | null>} */
-const UserContext = React.createContext(null)
+const UserContext = React.createContext(/** @type {User | null} */ (null))
 
 export default UserContext

@@ -50,7 +50,7 @@ function ContentDetails (props) {
       <h3>Authors:</h3>
       <ul>
         <LoadingDisplay status={status} />
-        {authors.map(author => <AuthorItem key={author.id} {...author} />)}
+        {authors.map(author => <AuthorItem key={author.author_id} {...author} />)}
       </ul>
 
       {/* TODO: Implement */}

@@ -1,5 +1,6 @@
 import React from 'react'
 
+/** @typedef {import('../components/LoadingDisplay').LoadingStatus} LoadingStatus */
 import LoadingDisplay, { getHighestStatus } from '../components/LoadingDisplay'
 import ContentItem from '../components/ContentItem'
 
@@ -14,17 +15,15 @@ import getContentTypes from '../api/getContentTypes'
  * @generated GitHub Copilot was used to assist in writing this code
  */
 function Content () {
-  const [contentStatus, setContentStatus] = React.useState('loading')
-  /** @type {[ContentItem[], function (ContentItem[]): void]} */
-  const [content, setContent] = React.useState([])
+  const [contentStatus, setContentStatus] = React.useState(/** @type {LoadingStatus} */ ('loading'))
+  const [content, setContent] = React.useState(/** @type {ContentItem[]} */ ([]))
 
-  const [contentTypesStatus, setContentTypesStatus] = React.useState('loading')
-  /** @type {[string[], function (string[]): void]} */
-  const [types, setTypes] = React.useState([])
+  const [contentTypesStatus, setContentTypesStatus] = React.useState(/** @type {LoadingStatus} */ ('loading'))
+  const [types, setTypes] = React.useState(/** @type {string[]} */ ([]))
 
   // TODO: Keep previous pages in memory
   const [page, setPage] = React.useState(1)
-  const [selectedType, setSelectedType] = React.useState(null)
+  const [selectedType, setSelectedType] = React.useState(/** @type {string | undefined} */ (undefined))
 
   React.useEffect(() => {
     setContentStatus('loading')

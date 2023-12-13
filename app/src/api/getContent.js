@@ -21,8 +21,9 @@
  * @returns {Promise<Content[]>} A promise that resolves to an array of content.
  */
 export default async function getPreviews (page = undefined, type = undefined) {
+  /** @type {Record<string, string>} */
   const paramsObj = {}
-  if (page !== undefined && page !== null) paramsObj.page = page
+  if (page !== undefined && page !== null) paramsObj.page = page.toString()
   if (type !== undefined && type !== null) paramsObj.type = type
 
   const params = new URLSearchParams(paramsObj)

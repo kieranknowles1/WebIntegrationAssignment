@@ -16,7 +16,10 @@
  * @returns {Promise<Preview[]>} A promise that resolves to an array of country names.
  */
 export default async function getPreviews (limit = undefined) {
-  const params = new URLSearchParams(limit !== undefined ? { limit } : {})
+  /** @type {Record<string, string>} */
+  const paramsObj = {}
+  if (limit !== undefined && limit !== null) paramsObj.limit = limit.toString()
+  const params = new URLSearchParams(paramsObj)
   return fetch('https://w20013000.nuwebspace.co.uk/api/content/preview?' + params)
     .then(res => res.json())
 }

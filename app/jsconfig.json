@@ -2,7 +2,7 @@
     "compilerOptions": {
         "module": "CommonJS",
         "jsx": "react",
-        "target": "ES6",
+        "target": "ES2016",
         "checkJs": true,
 
         // These can be enabled progressively

@@ -29,6 +29,7 @@ be included in a public repository, but is included here for the purposes of thi
 ### Web App
 While not written in TypeScript, the web app is checked by VS Code's TypeScript language server configured in
 `./app/jsconfig.json`. This allows for type checking through inferred types and JSDoc comments without depending on
-the TypeScript compiler.
+the TypeScript compiler. The only strict option enabled is `strictNullChecks` as the other options would be unwieldy
+to implement in JSDoc comments.
 
 The app's code is lined using ESLint with the StandardJS ruleset. This is configured in `./app/.eslintrc.cjs`.

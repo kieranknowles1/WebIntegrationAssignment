@@ -12,17 +12,14 @@ import DataFetcherContext from '../contexts/DataFetcherContext'
  * @generated GitHub Copilot was used to assist in writing this code
  */
 function Countres () {
-  /** @type {[string[], function (string[]): void]} */
-  const [allCountries, setAllCountries] = React.useState([])
+  const [allCountries, setAllCountries] = React.useState(/** @type {string[]} */ ([]))
   const [query, setQuery] = React.useState('')
 
   const fetcher = React.useContext(DataFetcherContext)
 
-  const [countryComponents, setCountryComponents] = React.useState([])
+  const [filteredCountries, setFilteredCountries] = React.useState(/** @type {string[]} */ ([]))
   React.useEffect(() => {
-    const filtered = allCountries
-      .filter(country => country.toLowerCase().includes(query.toLowerCase()))
-    setCountryComponents(filtered.map((country, index) => <Country key={index} name={country} />))
+    setFilteredCountries(allCountries.filter(country => country.toLowerCase().includes(query.toLowerCase())))
   }, [allCountries, query])
 
   React.useEffect(() => {
@@ -40,7 +37,7 @@ function Countres () {
       <h1>Countres</h1>
       <input type='text' placeholder='Search' value={query} onChange={e => setQuery(e.target.value)} />
       <LoadingDisplay status={fetcher.countries.status} />
-      <ul>{countryComponents}</ul>
+      <ul>{filteredCountries.map(country => <Country key={country} name={country} />)}</ul>
     </main>
   )
 }

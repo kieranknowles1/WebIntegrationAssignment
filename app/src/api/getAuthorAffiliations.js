@@ -21,9 +21,10 @@ async function getAuthorAffiliationsImpl (content, country) {
     throw new Error('content and country are mutually exclusive')
   }
 
+  /** @type {Record<string, string>} */
   const paramsObj = {}
   if (content !== undefined) {
-    paramsObj.content = content
+    paramsObj.content = content.toString()
   } else if (country !== undefined) {
     paramsObj.country = country
   }
@@ -42,7 +43,7 @@ async function getAuthorAffiliationsImpl (content, country) {
  * @returns {Promise<AuthorAffiliation[]>} A promise that resolves to an array of country names.
  */
 export async function getAllAuthorAffiliations () {
-  return getAuthorAffiliationsImpl()
+  return getAuthorAffiliationsImpl(undefined, undefined)
 }
 
 /**

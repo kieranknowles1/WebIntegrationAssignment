@@ -1,3 +1,5 @@
+/** @typedef {import('../components/LoadingDisplay').LoadingStatus} LoadingStatus */
+
 /**
  * Class that fetches data from the API and caches it after the first fetch.
  * @template T The type of data returned by `fetcher`.
@@ -8,12 +10,14 @@
 export default class Fetcher {
   /** @type {T | null} */
   _data = null
+  /** @type {LoadingStatus} */
   _status = 'loading'
-  /** @type {() => Promise<T>} */
-  _fetcher = null
 
   get status () { return this._status }
 
+  /**
+   * @param {() => Promise<T>} fetcher A function that fetches the data from the API.
+   */
   constructor (fetcher) {
     this._fetcher = fetcher
   }
