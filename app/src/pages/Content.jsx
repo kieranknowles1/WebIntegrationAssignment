@@ -73,9 +73,9 @@ function Content () {
   return (
     <main>
       <h1>Content</h1>
-      <select onChange={updateSelectedType} className='bg-background-button'>
+      <select onChange={updateSelectedType} className='bg-background-button' defaultValue='' >
         {/* NOTE: value={null} is not supported by React, so we use an empty string instead */}
-        <option value={''} selected>All content</option>
+        <option value={''}>All content</option>
         {types.map(type => <option key={type} value={type}>{type}</option>)}
       </select>
       {pageButtons}

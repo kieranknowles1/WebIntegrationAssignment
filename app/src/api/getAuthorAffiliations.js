@@ -1,6 +1,6 @@
 /**
- * @typedef {Object} AuthorAffiliation
  * @generated ChatGPT was used to generate this type from an example response.
+ * @typedef {Object} AuthorAffiliation
  * @property {number} author_id - The unique identifier for the author.
  * @property {string} author_name - The name of the author.
  * @property {string} country - The country where the author is affiliated.

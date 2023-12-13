@@ -16,7 +16,7 @@ import InvalidTokenError from '../errors/InvalidTokenError.js'
  * @generated Github Copilot was used to assist in writing this code.
  * @param {string} token The token to use to authenticate with the API.
  * @param {number | undefined} contentId The ID of the content to get notes for. If undefined, returns all notes.
- * @returns {Promise<string[]>} A promise that resolves to an array of country names.
+ * @returns {Promise<Note[]>} A promise that resolves to an array of country names.
  */
 export default async function getNotes (token, contentId = undefined) {
   const paramsObj = {}

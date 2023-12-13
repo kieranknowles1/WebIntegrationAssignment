@@ -29,6 +29,8 @@ export default async function getToken (email, password) {
   }).then(res => {
     if (res.status === 401) {
       throw new InvalidCredentialsError()
+    } else if (res.status !== 200) {
+      throw new Error('Unexpected status code: ' + res.status)
     }
     return res
   }).then(res => res.json())

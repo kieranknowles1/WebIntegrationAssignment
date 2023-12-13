@@ -20,6 +20,9 @@ cd server
 composer install
 ```
 
+Similarly, the `users.sqlite` file is not included and must be created manually from the `users.schema.sql` file in the
+`./server/data` directory.
+
 The private key for token signing is included in `./server/config/settings.php`. Note that this would normally not
 be included in a public repository, but is included here for the purposes of this assignment.
 

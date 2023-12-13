@@ -2,10 +2,13 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import UserContext from '../contexts/UserContext'
+/** @typedef {import('../api/getAuthorAffiliations').AuthorAffiliation} AuthorAffiliation */
 import { getContentAuthorAffiliations } from '../api/getAuthorAffiliations'
+/** @typedef {import('../api/getNotes').Note} Note */
 import getNotes from '../api/getNotes'
 
 import AuthorItem from './AuthorItem'
+/** @typedef {import('./LoadingDisplay').LoadingStatus} LoadingStatus */
 import LoadingDisplay from './LoadingDisplay'
 import Note from './Note'
 
@@ -18,10 +21,10 @@ import Note from './Note'
 function ContentDetails (props) {
   const context = React.useContext(UserContext)
 
-  const [status, setStatus] = React.useState('loading')
-  const [authors, setAuthors] = React.useState([])
+  const [status, setStatus] = React.useState(/** @type {LoadingStatus} */ ('loading'))
+  const [authors, setAuthors] = React.useState(/** @type {AuthorAffiliation[]} */ ([]))
 
-  const [notes, setNotes] = React.useState([])
+  const [notes, setNotes] = React.useState(/** @type {Note[]} */ ([]))
 
   React.useEffect(() => {
     getContentAuthorAffiliations(props.contentId)
@@ -33,13 +36,14 @@ function ContentDetails (props) {
   }, [props.contentId])
 
   React.useEffect(() => {
+    if (context === null) return
     getNotes(context.token, props.contentId)
       .then(notes => {
         setNotes(notes)
       })
       // TODO: Log out user if token is invalid
       .catch(() => setStatus('error'))
-  }, [context.token, props.contentId])
+  }, [context && context.token, props.contentId])
 
   return (
     <div>
