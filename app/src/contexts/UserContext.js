@@ -12,10 +12,17 @@ export function tryGetUserFromLocalStorage () {
   return JSON.parse(user)
 }
 
+/**
+ * Stores the user in local storage.
+ * @param {User} user The user to store.
+ */
 export function pushUserToLocalStorage (user) {
   localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(user))
 }
 
+/**
+ * Clears the user from local storage.
+ */
 export function removeUserFromLocalStorage () {
   localStorage.removeItem(LOCAL_STORAGE_USER_KEY)
 }
@@ -30,7 +37,6 @@ export function removeUserFromLocalStorage () {
  * @property {string} token The user's JWT token.
  */
 
-/** @type {React.Context<User | null>} */
 const UserContext = React.createContext(/** @type {User | null} */ (null))
 
 export default UserContext

@@ -10,16 +10,6 @@ import UserContext, { tryGetUserFromLocalStorage } from './contexts/UserContext'
 import Login from './components/Login'
 import NavMenu from './components/NavMenu'
 
-const navRoutes = [
-  { path: '/', element: <Index />, name: 'Home' },
-  { path: '/countries', element: <Countries />, name: 'Countries' },
-  { path: '/content', element: <Content />, name: 'Content' }
-]
-
-const nonNavRoutes = [
-  { path: '*', element: <PageNotFound /> }
-]
-
 function toRoutes (routes) {
   return routes.map(route =>
     <Route key={route.path} path={route.path} element={route.element} />
@@ -34,6 +24,22 @@ function toRoutes (routes) {
  */
 function App () {
   const [userContext, setUserContext] = React.useState(tryGetUserFromLocalStorage())
+
+  function handleTokenRejected () {
+    setUserContext(null)
+    // NOTE: This will show twice due to React.StrictMode. This will not happen in production
+    alert('Login expired or invalid, please log in again')
+  }
+
+  const navRoutes = [
+    { path: '/', element: <Index />, name: 'Home' },
+    { path: '/countries', element: <Countries />, name: 'Countries' },
+    { path: '/content', element: <Content handleTokenRejected={handleTokenRejected} />, name: 'Content' }
+  ]
+
+  const nonNavRoutes = [
+    { path: '*', element: <PageNotFound /> }
+  ]
 
   return (
     <UserContext.Provider value={userContext}>

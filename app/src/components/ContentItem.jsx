@@ -10,24 +10,22 @@ import ModalDialog from './ModalDialog'
 /**
  * ContentItem component
  *
- * @param {Content} params
- *
  * @author Kieran Knowles
  * @generated GitHub Copilot was used to assist in writing this code
  */
-function ContentItem (params) {
+function ContentItem (props) {
   const [isOpen, setOpen] = React.useState(false)
 
   return (
       <button className='bg-background-listitem text-foreground-listitem rounded-md p-3 text-left' onClick={() => setOpen(true)}>
         {/** // TODO: Emphasise this and type */}
-        <h2 className='text-center'>{params.title}</h2>
-        <p>{params.abstract}</p>
-        <p className='text-center'>{params.type}</p>
-        {params.award && <p className='text-center'>⭐ {params.award}</p>}
+        <h2 className='text-center'>{props.title}</h2>
+        <p>{props.abstract}</p>
+        <p className='text-center'>{props.type}</p>
+        {props.award && <p className='text-center'>⭐ {props.award}</p>}
         <ModalDialog isOpen={isOpen} setOpen={setOpen}>
-          <Dialog.Title className='text-center'>{params.title}</Dialog.Title>
-          <ContentDetails contentId={params.id} />
+          <Dialog.Title className='text-center'>{props.title}</Dialog.Title>
+          <ContentDetails contentId={props.id} handleTokenRejected={props.handleTokenRejected} />
         </ModalDialog>
       </button>
   )
@@ -37,7 +35,8 @@ ContentItem.propTypes = {
   title: PropTypes.string.isRequired,
   abstract: PropTypes.string,
   type: PropTypes.string.isRequired,
-  award: PropTypes.string
+  award: PropTypes.string,
+  handleTokenRejected: PropTypes.func.isRequired
 }
 
 export default ContentItem

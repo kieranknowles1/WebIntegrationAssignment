@@ -42,7 +42,10 @@ function ContentDetails (props) {
         setNotes(notes)
       })
       // TODO: Log out user if token is invalid
-      .catch(() => setStatus('error'))
+      .catch(() => {
+        props.handleTokenRejected()
+        setStatus('error')
+      })
   }, [context && context.token, props.contentId])
 
   return (
@@ -72,7 +75,8 @@ function ContentDetails (props) {
   )
 }
 ContentDetails.propTypes = {
-  contentId: PropTypes.number.isRequired
+  contentId: PropTypes.number.isRequired,
+  handleTokenRejected: PropTypes.func.isRequired
 }
 
 export default ContentDetails

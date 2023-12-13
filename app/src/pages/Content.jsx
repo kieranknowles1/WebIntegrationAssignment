@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 /** @typedef {import('../components/LoadingDisplay').LoadingStatus} LoadingStatus */
@@ -14,7 +15,7 @@ import getContentTypes from '../api/getContentTypes'
  * @author Kieran Knowles
  * @generated GitHub Copilot was used to assist in writing this code
  */
-function Content () {
+function Content (props) {
   const [contentStatus, setContentStatus] = React.useState(/** @type {LoadingStatus} */ ('loading'))
   const [content, setContent] = React.useState(/** @type {Content[]} */ ([]))
 
@@ -80,11 +81,14 @@ function Content () {
       {pageButtons}
       <LoadingDisplay status={getHighestStatus([contentStatus, contentTypesStatus])} />
       <ul className='grid sm:grid-cols-1 lg:grid-cols-2 gap-3'>
-        {content.map(item => <ContentItem key={item.id} {...item} />)}
+        {content.map(item => <ContentItem key={item.id} {...item} handleTokenRejected={props.handleTokenRejected} />)}
       </ul>
       {pageButtons}
     </main>
   )
+}
+Content.propTypes = {
+  handleTokenRejected: PropTypes.func.isRequired
 }
 
 export default Content
