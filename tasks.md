@@ -277,14 +277,14 @@ both features the following requirements should be met:
 
 The following features should be implemented:
 
-- [ ] Sign in/out
+- [x] Sign in/out
   - [x] It must be possible to sign into the application. Authorisation should be handled by
         the backend Web API.
   - [x] Once a user is authenticated they should have the ability to
         sign out.
   - [x] The JWT returned by the Web API should be stored in an appropriate way
         by the browser.
-  - [ ] If a user is signed in but their request is rejected by the Web API
+  - [x] If a user is signed in but their request is rejected by the Web API
         (e.g. if they have an expired token) they should be prompted to sign in again.
   - [x] When a user signs out the token should no longer be stored by the browser.
   - [x] Relevant error messages should be displayed when there are unsuccessful attempts to sign in.

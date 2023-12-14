@@ -48,6 +48,18 @@ function ContentDetails (props) {
       })
   }, [context && context.token, props.contentId])
 
+  const [noteText, setNoteText] = React.useState('')
+  /** @param {React.FormEvent} e */
+  function handleCreateNote (e) {
+    e.preventDefault()
+
+    // TODO: Make POST request to create note
+    const id = Math.random()
+
+    setNotes([...notes, { id, content_id: props.contentId, text: noteText }])
+    setNoteText('')
+  }
+
   return (
     <div>
       <h3>Authors:</h3>
@@ -59,14 +71,24 @@ function ContentDetails (props) {
       {/* TODO: Implement */}
       {context !== null
         ? (
-          <>
+          <div className='border border-black'>
             <h3>Notes:</h3>
             <LoadingDisplay status={status} />
             {status === 'done' && notes.length === 0 && <p>No notes found</p>}
             <ul>
               {notes.map(note => <Note key={note.id} text={note.text} />)}
             </ul>
-          </>
+            <form onSubmit={handleCreateNote}>
+              <label>Make a note:
+                <textarea
+                  value={noteText}
+                  onChange={e => setNoteText(e.target.value)}
+                  required
+                  className='w-full h-32'
+              /></label>
+              <input type='submit' value='Save Note' />
+            </form>
+          </div>
           )
         : (
           <p>Please log in to view or create notes</p>

@@ -9,7 +9,9 @@ import React from 'react'
  */
 function Note (props) {
   return (
-    <li>{props.text}</li>
+    <li className='border-solid border-2 border-gray-400'>
+      {props.text}
+    </li>
   )
 }
 Note.propTypes = {
