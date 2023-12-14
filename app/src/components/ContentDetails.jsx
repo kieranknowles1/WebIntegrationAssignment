@@ -76,7 +76,7 @@ function ContentDetails (props) {
             <LoadingDisplay status={status} />
             {status === 'done' && notes.length === 0 && <p>No notes found</p>}
             <ul>
-              {notes.map(note => <Note key={note.id} text={note.text} />)}
+              {notes.map(note => <Note key={note.id} id={note.id} text={note.text} />)}
             </ul>
             <form onSubmit={handleCreateNote}>
               <label>Make a note:
