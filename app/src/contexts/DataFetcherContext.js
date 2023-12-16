@@ -4,6 +4,7 @@ import Fetcher from '../utils/Fetcher'
 import getCountries from '../api/getCountries'
 /** @typedef {import('../api/getContent').Content} Content */
 import getContent from '../api/getContent'
+import getContentCounts from '../api/getContentCounts'
 import getContentTypes from '../api/getContentTypes'
 /** @typedef {import('../api/getPreview').Preview} Preview */
 import getPreviews from '../api/getPreview'
@@ -23,6 +24,8 @@ const DataFetcherContext = React.createContext({
     const previews = await getPreviews()
     return previews[0]
   }),
+
+  contentCount: new Fetcher(getContentCounts),
 
   contentTypes: new Fetcher(getContentTypes),
 

@@ -24,6 +24,9 @@ function Content (props) {
   const [contentTypesStatus, setContentTypesStatus] = React.useState(/** @type {LoadingStatus} */ ('loading'))
   const [types, setTypes] = React.useState(/** @type {string[]} */ ([]))
 
+  const [totalPagesStatus, setTotalPagesStatus] = React.useState(/** @type {LoadingStatus} */ ('loading'))
+  const [totalPages, setTotalPages] = React.useState(/** @type {Map<string | undefined, number>} */ (new Map()))
+
   React.useEffect(() => {
     setContentStatus('loading')
     setContent([])
@@ -52,6 +55,24 @@ function Content (props) {
       })
   }, [])
 
+  React.useEffect(() => {
+    setTotalPagesStatus('loading')
+    fetcher.contentCount.get()
+      .then(result => {
+        const map = new Map()
+        map.set(undefined, Math.ceil(result.total / PAGE_SIZE))
+        for (const type of result.counts) {
+          map.set(type.type, Math.ceil(type.count / PAGE_SIZE))
+        }
+        setTotalPages(map)
+        setTotalPagesStatus('done')
+      })
+      .catch(err => {
+        console.error(err)
+        setTotalPagesStatus('error')
+      })
+  }, [])
+
   /** @param {React.ChangeEvent<HTMLSelectElement>} e */
   function updateSelectedType (e) {
     const value = e.target.value === '' ? undefined : e.target.value
@@ -64,8 +85,7 @@ function Content (props) {
     <div className='flex items-stretch text-3xl'>
       <button className='grow' onClick={() => props.setPage(props.page - 1)} disabled={props.page <= 1}>Previous</button>
       <p className='grow text-center'>Page {props.page}</p>
-      {/* TODO: Add an endpoint to get the total number of pages */}
-      <button className='grow' onClick={() => props.setPage(props.page + 1)} disabled={content.length < PAGE_SIZE}>Next</button>
+      <button className='grow' onClick={() => props.setPage(props.page + 1)} disabled={props.page >= (totalPages.get(props.selectedType) || 1)}>Next</button>
     </div>
   )
 
@@ -78,7 +98,7 @@ function Content (props) {
         {types.map(type => <option key={type} value={type}>{type}</option>)}
       </select>
       {pageButtons}
-      <LoadingDisplay status={getHighestStatus([contentStatus, contentTypesStatus])} />
+      <LoadingDisplay status={getHighestStatus([contentStatus, contentTypesStatus, totalPagesStatus])} />
       <ul className='grid sm:grid-cols-1 lg:grid-cols-2 gap-3'>
         {content.map(item => <ContentItem key={item.id} {...item} handleTokenRejected={props.handleTokenRejected} />)}
       </ul>

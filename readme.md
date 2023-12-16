@@ -38,3 +38,4 @@ Component properties are checked using PropTypes, TypeScript uses this to
 check that the properties are passed and are of the correct type.
 
 The app's code is lined using ESLint with the StandardJS ruleset. This is configured in `./app/.eslintrc.cjs`.
+As this ruleset checks for undefined variables, there is no need to add `'use strict'` to the top of each file.
