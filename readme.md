@@ -26,7 +26,7 @@ Similarly, the `users.sqlite` file is not included and must be created manually 
 The private key for token signing is included in `./server/config/settings.php`. Note that this would normally not
 be included in a public repository, but is included here for this assignment.
 
-PHPStan is used to check the API's code and is configured in `./phpstan.neon`
+PHPStan is used to check the API's code and is configured in `./server/phpstan.neon`
 to use the highest level of strictness with features such as type and nullability checks enabled.
 
 ### Web App

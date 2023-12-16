@@ -104,6 +104,38 @@ paths:
                 items:
                   $ref: "#/components/schemas/affiliationInformation"
 
+  /content/count:
+    get:
+      tags: [Content]
+      summary: Get the number of content items by type
+      description: |
+        Returns the number of content items by type. \
+        Includes types that have no content items.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  total:
+                    type: integer
+                    description: The total number of content items
+                  types:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: false
+                      properties:
+                        type:
+                          $ref: "#/components/schemas/contentType"
+                        count:
+                          type: integer
+                          description: The number of content items of this type
+                      required: [type, count]
+
   /content/list:
     get:
       tags: [Content]

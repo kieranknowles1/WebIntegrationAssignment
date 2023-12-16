@@ -114,6 +114,28 @@ class ChiDatabase
         return $result[0]["count"] > 0;
     }
 
+    /**
+     * Get the number of content items in the database by type
+     * @return array{
+     *  'type': string,
+     *  'count': int
+     * }[] the content counts
+     */
+    public function getContentCounts(): array
+    {
+        $query = <<<SQL
+        SELECT
+            type.name AS type,
+            COUNT(content.id) AS count
+        -- Select from type and left join to get types with no content
+        FROM type
+        LEFT JOIN content ON content.type = type.id
+        GROUP BY type.id
+        SQL;
+
+        return $this->connection->runSql($query);
+    }
+
     public const PAGE_SIZE = 20;
     /**
      * Get information about content in the database, includes title, abstract, and the content type
