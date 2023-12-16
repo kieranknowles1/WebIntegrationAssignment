@@ -5,9 +5,8 @@ import React from 'react'
 import LoadingDisplay, { getHighestStatus } from '../components/LoadingDisplay'
 import ContentItem from '../components/ContentItem'
 
+import DataFetcherContext from '../contexts/DataFetcherContext'
 /** @typedef {import('../api/getContent').Content} Content */
-import getContent from '../api/getContent'
-import getContentTypes from '../api/getContentTypes'
 
 /**
  * Content page
@@ -16,21 +15,23 @@ import getContentTypes from '../api/getContentTypes'
  * @generated GitHub Copilot was used to assist in writing this code
  */
 function Content (props) {
+  const fetcher = React.useContext(DataFetcherContext)
+
   const [contentStatus, setContentStatus] = React.useState(/** @type {LoadingStatus} */ ('loading'))
   const [content, setContent] = React.useState(/** @type {Content[]} */ ([]))
 
   const [contentTypesStatus, setContentTypesStatus] = React.useState(/** @type {LoadingStatus} */ ('loading'))
   const [types, setTypes] = React.useState(/** @type {string[]} */ ([]))
 
-  // TODO: Keep previous pages in memory
+  // TODO: Retain selected page and type when navigating away and back
   const [page, setPage] = React.useState(1)
   const [selectedType, setSelectedType] = React.useState(/** @type {string | undefined} */ (undefined))
 
   React.useEffect(() => {
     setContentStatus('loading')
     setContent([])
-    console.log(selectedType)
-    getContent(page, selectedType)
+
+    fetcher.content(page, selectedType).get()
       .then(content => {
         setContent(content)
         setContentStatus('done')
@@ -43,7 +44,7 @@ function Content (props) {
 
   React.useEffect(() => {
     setContentTypesStatus('loading')
-    getContentTypes()
+    fetcher.contentTypes.get()
       .then(types => {
         setTypes(types)
         setContentTypesStatus('done')
