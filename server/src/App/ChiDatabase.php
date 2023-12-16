@@ -175,7 +175,7 @@ class ChiDatabase
         if ($page !== null) {
             $query .= " LIMIT :limit OFFSET :offset";
             $params["limit"] = self::PAGE_SIZE;
-            $params["offset"] = $page * self::PAGE_SIZE;
+            $params["offset"] = ($page - 1) * self::PAGE_SIZE;
         }
 
         return $this->connection->runSql($query, $params);
