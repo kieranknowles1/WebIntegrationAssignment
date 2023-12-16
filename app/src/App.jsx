@@ -31,10 +31,24 @@ function App () {
     alert('Login expired or invalid, please log in again')
   }
 
+  const [contentPage, setContentPage] = React.useState(1)
+  const [contentType, setContentType] = React.useState(undefined)
+
   const navRoutes = [
     { path: '/', element: <Index />, name: 'Home' },
     { path: '/countries', element: <Countries />, name: 'Countries' },
-    { path: '/content', element: <Content handleTokenRejected={handleTokenRejected} />, name: 'Content' }
+    {
+      path: '/content',
+      element:
+        <Content
+          handleTokenRejected={handleTokenRejected}
+          page={contentPage}
+          setPage={setContentPage}
+          selectedType={contentType}
+          setSelectedType={setContentType}
+        />,
+      name: 'Content'
+    }
   ]
 
   const nonNavRoutes = [

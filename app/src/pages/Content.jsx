@@ -7,6 +7,7 @@ import ContentItem from '../components/ContentItem'
 
 import DataFetcherContext from '../contexts/DataFetcherContext'
 /** @typedef {import('../api/getContent').Content} Content */
+import { PAGE_SIZE } from '../api/getContent'
 
 /**
  * Content page
@@ -23,15 +24,11 @@ function Content (props) {
   const [contentTypesStatus, setContentTypesStatus] = React.useState(/** @type {LoadingStatus} */ ('loading'))
   const [types, setTypes] = React.useState(/** @type {string[]} */ ([]))
 
-  // TODO: Retain selected page and type when navigating away and back
-  const [page, setPage] = React.useState(1)
-  const [selectedType, setSelectedType] = React.useState(/** @type {string | undefined} */ (undefined))
-
   React.useEffect(() => {
     setContentStatus('loading')
     setContent([])
 
-    fetcher.content(page, selectedType).get()
+    fetcher.content(props.page, props.selectedType).get()
       .then(content => {
         setContent(content)
         setContentStatus('done')
@@ -40,7 +37,7 @@ function Content (props) {
         console.error(err)
         setContentStatus('error')
       })
-  }, [page, selectedType])
+  }, [props.page, props.selectedType])
 
   React.useEffect(() => {
     setContentTypesStatus('loading')
@@ -58,23 +55,24 @@ function Content (props) {
   /** @param {React.ChangeEvent<HTMLSelectElement>} e */
   function updateSelectedType (e) {
     const value = e.target.value === '' ? undefined : e.target.value
-    setSelectedType(value)
-    setPage(1)
+    props.setSelectedType(value)
+    props.setPage(1)
   }
 
   // Float one left and other right
   const pageButtons = (
     <div className='flex items-stretch text-3xl'>
-      <button className='grow' onClick={() => setPage(page - 1)} disabled={page <= 1}>Previous</button>
-      <p className='grow text-center'>Page {page}</p>
-      <button className='grow' onClick={() => setPage(page + 1)}>Next</button>
+      <button className='grow' onClick={() => props.setPage(props.page - 1)} disabled={props.page <= 1}>Previous</button>
+      <p className='grow text-center'>Page {props.page}</p>
+      {/* TODO: Add an endpoint to get the total number of pages */}
+      <button className='grow' onClick={() => props.setPage(props.page + 1)} disabled={content.length < PAGE_SIZE}>Next</button>
     </div>
   )
 
   return (
     <main>
       <h1>Content</h1>
-      <select onChange={updateSelectedType} className='bg-background-button' defaultValue='' >
+      <select onChange={updateSelectedType} className='bg-background-button' value={props.selectedType || ''}>
         {/* NOTE: value={null} is not supported by React, so we use an empty string instead */}
         <option value={''}>All content</option>
         {types.map(type => <option key={type} value={type}>{type}</option>)}
@@ -89,7 +87,11 @@ function Content (props) {
   )
 }
 Content.propTypes = {
-  handleTokenRejected: PropTypes.func.isRequired
+  handleTokenRejected: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
+  selectedType: PropTypes.string,
+  setSelectedType: PropTypes.func.isRequired
 }
 
 export default Content

@@ -8,6 +8,8 @@
  * @property {string|null} award The award the content won, if any. e.g., 'Best Paper'
  */
 
+export const PAGE_SIZE = 20
+
 /**
  * Binding for the `/api/content/list` endpoint.
  *
@@ -16,7 +18,7 @@
  * @author Kieran Knowles
  * @generated Github Copilot was used to assist in writing this code.
  *
- * @param {number | undefined} page The page of 20 results to return. If undefined, returns all results.
+ * @param {number | undefined} page The page of `PAGE_SIZE` results to return. If undefined, returns all results.
  * @param {string | undefined} type The type of content to return. If undefined, returns all types.
  * @returns {Promise<Content[]>} A promise that resolves to an array of content.
  */
