@@ -227,7 +227,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/note"
-        # TODO: Not authorized response
+        "401":
+          $ref: "#/components/responses/Unauthorized"
     post:
       tags: [User]
       summary: Create a new note
@@ -258,7 +259,9 @@ paths:
                 type: integer
                 description: |
                   The id of the note that was created
-    # TODO: Not authorized response
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
     put:
       tags: [User]
       summary: Update an existing note
@@ -283,7 +286,9 @@ paths:
       responses:
         "204":
           description: No Content
-        # TODO: Error responses
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
     delete:
       tags: [User]
       summary: Delete an existing note
@@ -301,6 +306,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "401":
+          $ref: "#/components/responses/Unauthorized"
 
   /developer:
     get:
@@ -357,8 +364,7 @@ components:
           type: integer
         title:
           type: string
-          # TODO: Mando probably isn't the best example
-          example: The Mandalorian
+          example: How example values can be whatever you want
 
     contentFull:
       type: object
@@ -464,7 +470,5 @@ components:
           type: integer
         text:
           type: string
-          # TODO: Mando again
           example: |
-            This is a note about the Mandalorian
-            I think it's a pretty good show
+            This seems like a really interesting paper, but I can't be bothered to read it.

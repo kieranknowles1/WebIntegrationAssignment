@@ -17,8 +17,6 @@ function Login (props) {
   const [password, setPassword] = React.useState('')
 
   function handleLogin () {
-    // TODO: Get token from API and handle any errors. Using
-    // dummy data for now.
     getToken(username, password)
       .then(data => {
         props.setUserContext(data)

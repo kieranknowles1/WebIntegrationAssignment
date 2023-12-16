@@ -18,11 +18,10 @@ function ContentItem (props) {
 
   return (
       <button className='bg-background-listitem text-foreground-listitem rounded-md p-3 text-left' onClick={() => setOpen(true)}>
-        {/** // TODO: Emphasise this and type */}
         <h2 className='text-center'>{props.title}</h2>
         <p>{props.abstract}</p>
-        <p className='text-center'>{props.type}</p>
-        {props.award && <p className='text-center'>⭐ {props.award}</p>}
+        <p className='text-center font-bold'>{props.type}</p>
+        {props.award && <p className='text-center font-bold'>⭐ {props.award}</p>}
         <ModalDialog isOpen={isOpen} setOpen={setOpen}>
           <Dialog.Title className='text-center'>{props.title}</Dialog.Title>
           <ContentDetails contentId={props.id} handleTokenRejected={props.handleTokenRejected} />

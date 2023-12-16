@@ -41,7 +41,6 @@ function ContentDetails (props) {
       .then(notes => {
         setNotes(notes)
       })
-      // TODO: Log out user if token is invalid
       .catch(() => {
         props.handleTokenRejected()
         setStatus('error')

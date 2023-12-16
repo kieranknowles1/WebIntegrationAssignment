@@ -6,7 +6,7 @@ import Countries from './pages/Countries'
 import Index from './pages/Index'
 import PageNotFound from './pages/PageNotFound'
 
-import UserContext, { tryGetUserFromLocalStorage } from './contexts/UserContext'
+import UserContext, { removeUserFromLocalStorage, tryGetUserFromLocalStorage } from './contexts/UserContext'
 import Login from './components/Login'
 import NavMenu from './components/NavMenu'
 
@@ -27,6 +27,7 @@ function App () {
 
   function handleTokenRejected () {
     setUserContext(null)
+    removeUserFromLocalStorage()
     // NOTE: This will show twice due to React.StrictMode. This will not happen in production
     alert('Login expired or invalid, please log in again')
   }
