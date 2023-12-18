@@ -7,10 +7,13 @@ import { getContentAuthorAffiliations } from '../api/getAuthorAffiliations'
 /** @typedef {import('../api/getNotes').Note} Note */
 import getNotes from '../api/getNotes'
 
-import AuthorItem from './AuthorItem'
+import InvalidTokenError from '../errors/InvalidTokenError'
+import postNote from '../api/postNote'
 /** @typedef {import('./LoadingDisplay').LoadingStatus} LoadingStatus */
 import LoadingDisplay from './LoadingDisplay'
 import Note from './Note'
+
+import AuthorItem from './AuthorItem'
 
 /**
  * ContentAuthorList component
@@ -52,11 +55,24 @@ function ContentDetails (props) {
   function handleCreateNote (e) {
     e.preventDefault()
 
-    // TODO: Make POST request to create note
-    const id = Math.random()
+    if (context === null) {
+      alert('Please log in to create notes')
+      return
+    }
 
-    setNotes([...notes, { id, content_id: props.contentId, text: noteText }])
-    setNoteText('')
+    postNote(context.token, props.contentId, noteText)
+      .then(id => {
+        setNotes([...notes, { id, content_id: props.contentId, text: noteText }])
+        setNoteText('')
+      })
+      .catch(err => {
+        if (err instanceof InvalidTokenError) {
+          props.handleTokenRejected()
+        } else {
+          console.error(err)
+          alert('Failed to create note')
+        }
+      })
   }
 
   return (
@@ -66,8 +82,6 @@ function ContentDetails (props) {
         <LoadingDisplay status={status} />
         {authors.map(author => <AuthorItem key={author.author_id} {...author} />)}
       </ul>
-
-      {/* TODO: Implement */}
       {context !== null
         ? (
           <div className='border border-black'>

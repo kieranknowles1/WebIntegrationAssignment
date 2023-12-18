@@ -12,7 +12,19 @@ class Request
 {
     public static function fromGlobals(): Request
     {
-        return new Request($_SERVER["REQUEST_URI"], $_SERVER["REQUEST_METHOD"], $_POST, getallheaders(), $_SERVER["PHP_AUTH_USER"] ?? null, $_SERVER["PHP_AUTH_PW"] ?? null);
+        $body = file_get_contents("php://input");
+        if ($body === false) {
+            throw new \InvalidArgumentException("Failed to read request body");
+        }
+
+        return new Request(
+            $_SERVER["REQUEST_URI"], // rawUrl
+            $_SERVER["REQUEST_METHOD"], // method
+            $body, // body
+            getallheaders(), // headers
+            $_SERVER["PHP_AUTH_USER"] ?? null, // authUser
+            $_SERVER["PHP_AUTH_PW"] ?? null // authPassword
+        );
     }
 
     /** The cleaned requested URL */
@@ -24,11 +36,9 @@ class Request
      * @var array<string, string>
      */
     private array $queryParams;
-    /**
-     * The body parameters
-     * @var array<string, string>
-     */
-    private array $bodyParams;
+    /** The body of the request. Expected format depends on the endpoint */
+    private string $body;
+
     /**
      * The headers
      * @var array<string, string>
@@ -49,10 +59,9 @@ class Request
     }
 
     /**
-     * @param array<string, string> $bodyParams
      * @param array<string, string> $headers
      */
-    private function __construct(string $rawUrl, string $method, array $bodyParams, array $headers, ?string $authUser, ?string $authPassword)
+    private function __construct(string $rawUrl, string $method, string $body, array $headers, ?string $authUser, ?string $authPassword)
     {
         $parsed = parse_url($rawUrl);
 
@@ -68,7 +77,7 @@ class Request
         $this->method = $method;
         $this->queryParams = [];
         parse_str($parsed["query"] ?? "", $this->queryParams);
-        $this->bodyParams = $bodyParams;
+        $this->body = $body;
         $this->headers = [];
         foreach ($headers as $key => $value) {
             $this->headers[strtolower($key)] = $value;
@@ -94,10 +103,9 @@ class Request
         return $this->queryParams;
     }
 
-    /** @return array<string, string> */
-    public function getBodyParams(): array
+    public function getBody(): string
     {
-        return $this->bodyParams;
+        return $this->body;
     }
 
     /**

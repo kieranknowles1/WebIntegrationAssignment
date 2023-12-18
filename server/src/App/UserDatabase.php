@@ -53,6 +53,7 @@ class UserDatabase
     /**
      * Get all notes for a user
      * NOTE: This will return an empty array if the user does not exist or has no notes
+     * @param int $userId The ID of the user to get notes for
      * @param int $contentId If set, only notes for this content will be returned
      * @return array{
      *   'id': int,
@@ -70,5 +71,25 @@ class UserDatabase
             "userId" => $userId,
             "contentId" => $contentId,
         ]);
+    }
+
+    /**
+     * Create a new note for a user and a piece of content
+     * @param int $userId The ID of the user to create the note for
+     * @param int $contentId The ID of the content to create the note for
+     * @param string $text The text of the note
+     * @return string The ID of the new note
+     */
+    public function createNote(int $userId, int $contentId, string $text): string
+    {
+        $this->connection->runSql("
+             INSERT INTO note (user_id, content_id, text)
+             VALUES (:userId, :contentId, :text)
+         ", [
+            "userId" => $userId,
+            "contentId" => $contentId,
+            "text" => $text,
+        ]);
+        return $this->connection->getLastInsertId();
     }
 }

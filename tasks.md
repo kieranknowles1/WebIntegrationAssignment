@@ -138,11 +138,11 @@ See [KF6012 Assessment Brief](KF6012%20-%20CIS%20Assessment%202023-24.pdf) for e
     - [x] Users must be authenticated with a valid JWT token
     - [x] Return the note ID, content ID, and note text
     - [x] Only return notes for the user specified in the token
-  - [ ] POST
-    - [ ] Create a new note
-    - [ ] Take the content ID and the note text as parameters
-    - [ ] Users must be authenticated with a valid JWT token
-    - [ ] Return the new note ID
+  - [x] POST
+    - [x] Create a new note
+    - [x] Take the content ID and the note text as parameters
+    - [x] Users must be authenticated with a valid JWT token
+    - [x] Return the new note ID
   - [ ] PUT
     - [ ] Update an existing note
     - [ ] Take the note ID and the note text as parameters
@@ -290,10 +290,10 @@ The following features should be implemented:
   - [x] Relevant error messages should be displayed when there are unsuccessful attempts to sign in.
 
 - [ ] Notes
-  - [ ] Signed in users must be able to add notes about items of content.
-  - [ ] The user should be able to type a short note (limiting the note to around 250 characters is acceptable
+  - [x] Signed in users must be able to add notes about items of content.
+  - [x] The user should be able to type a short note (limiting the note to around 250 characters is acceptable
         if you wish) regarding an individual item of content.
-  - [ ] This note should be saved by the API.
+  - [x] This note should be saved by the API.
   - [x] Logged in users should be able to see notes they have previously created.
     - [ ] Should be able to edit existing notes.
     - [ ] Should be able to delete notes.

@@ -243,13 +243,13 @@ paths:
             The id of the content to create a note for
           schema:
             type: integer
-        - in: query
-          name: text
-          required: true
-          description: |
-            The text of the note
-          schema:
-            type: string
+      requestBody:
+        description: The text of the note
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/noteRequestBody"
       responses:
         "200":
           description: OK
@@ -276,13 +276,13 @@ paths:
             The id of the note to update
           schema:
             type: integer
-        - in: query
-          name: text
-          required: true
-          description: |
-            The new text of the note
-          schema:
-            type: string
+      requestBody:
+        description: The new text of the note
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/noteRequestBody"
       responses:
         "204":
           description: No Content
@@ -468,6 +468,16 @@ components:
           type: integer
         content_id:
           type: integer
+        text:
+          type: string
+          example: |
+            This seems like a really interesting paper, but I can't be bothered to read it.
+
+    noteRequestBody:
+      type: object
+      additionalProperties: false
+      required: ["text"]
+      properties:
         text:
           type: string
           example: |

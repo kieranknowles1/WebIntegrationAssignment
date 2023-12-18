@@ -26,4 +26,38 @@ class Note extends UserEndpoint
             ['Access-Control-Allow-Headers: Authorization']
         );
     }
+
+    protected function handlePostRequest(\App\Request $request): ResponseData
+    {
+        if ($this->contentId === null) {
+            throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Missing required query parameter 'contentid'");
+        }
+
+        $userId = Tokens::getTokenUserId($request);
+
+        $body = json_decode($request->getBody(), true);
+        if ($body === null) {
+            throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Request body is not valid JSON");
+        }
+        if (!is_array($body)) {
+            throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Request body expected to be an object");
+        }
+        if (!isset($body['text'])) {
+            throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Missing required field 'text'");
+        }
+        if (!is_string($body['text'])) {
+            throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Field 'text' expected to be a string");
+        }
+
+        $id = $this->getDatabase()->createNote(
+            $userId,
+            $this->contentId,
+            $body['text']
+        );
+
+        return new ResponseData(
+            $id,
+            \App\ResponseCode::OK,
+        );
+    }
 }

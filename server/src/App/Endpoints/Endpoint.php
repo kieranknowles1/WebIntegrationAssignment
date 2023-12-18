@@ -42,7 +42,6 @@ abstract class Endpoint implements \App\DataSource
         throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED, "DELETE is not allowed for this endpoint");
     }
 
-    // TODO: 2 functions or 1 function with a parameter?
     /**
      * Parse a GET parameter and check that it is valid
      * @param string $key the lower case name of the parameter
@@ -54,28 +53,12 @@ abstract class Endpoint implements \App\DataSource
         throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Unknown parameter '$key'");
     }
 
-    // TODO: Am i using POST parameters at all? Would also remove Request::bodyParams
-    /**
-     * Parse a POST parameter and check that it is valid
-     * @param string $key the lower case name of the parameter
-     * @param string $value the value of the parameter
-     * @throws \App\ClientException if the parameter is invalid
-     */
-    protected function parseBodyParameter(string $method, string $key, string $value): void
-    {
-        throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Unknown parameter '$key'");
-    }
-
     private function parseParameters(\App\Request $request): void
     {
         $queryParams = $request->getQueryParams();
-        $bodyParameters = $request->getBodyParams();
 
         foreach ($queryParams as $key => $value) {
             $this->parseQueryParameter($request->getMethod(), strtolower($key), $value);
-        }
-        foreach ($bodyParameters as $key => $value) {
-            $this->parseBodyParameter($request->getMethod(), strtolower($key), $value);
         }
     }
 
