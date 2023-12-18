@@ -27,6 +27,21 @@ abstract class Endpoint implements \App\DataSource
         throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED, "GET is not allowed for this endpoint");
     }
 
+    protected function handlePostRequest(\App\Request $request): ResponseData
+    {
+        throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED, "POST is not allowed for this endpoint");
+    }
+
+    protected function handlePutRequest(\App\Request $request): ResponseData
+    {
+        throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED, "PUT is not allowed for this endpoint");
+    }
+
+    protected function handleDeleteRequest(\App\Request $request): ResponseData
+    {
+        throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED, "DELETE is not allowed for this endpoint");
+    }
+
     // TODO: 2 functions or 1 function with a parameter?
     /**
      * Parse a GET parameter and check that it is valid
@@ -34,7 +49,7 @@ abstract class Endpoint implements \App\DataSource
      * @param string $value the value of the parameter
      * @throws \App\ClientException if the parameter is invalid
      */
-    protected function parseQueryParameter(string $key, string $value): void
+    protected function parseQueryParameter(string $method, string $key, string $value): void
     {
         throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Unknown parameter '$key'");
     }
@@ -46,7 +61,7 @@ abstract class Endpoint implements \App\DataSource
      * @param string $value the value of the parameter
      * @throws \App\ClientException if the parameter is invalid
      */
-    protected function parseBodyParameter(string $key, string $value): void
+    protected function parseBodyParameter(string $method, string $key, string $value): void
     {
         throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Unknown parameter '$key'");
     }
@@ -57,10 +72,10 @@ abstract class Endpoint implements \App\DataSource
         $bodyParameters = $request->getBodyParams();
 
         foreach ($queryParams as $key => $value) {
-            $this->parseQueryParameter(strtolower($key), $value);
+            $this->parseQueryParameter($request->getMethod(), strtolower($key), $value);
         }
         foreach ($bodyParameters as $key => $value) {
-            $this->parseBodyParameter(strtolower($key), $value);
+            $this->parseBodyParameter($request->getMethod(), strtolower($key), $value);
         }
     }
 
@@ -68,6 +83,7 @@ abstract class Endpoint implements \App\DataSource
     {
         return new ResponseData(null, \App\ResponseCode::OK, [
             'Access-Control-Allow-Headers: Authorization',
+            // TODO: Get which methods are allowed from the endpoint
             'Access-Control-Allow-Methods: GET, OPTIONS',
         ]);
     }
@@ -78,10 +94,12 @@ abstract class Endpoint implements \App\DataSource
 
         $this->parseParameters($request);
 
-        // TODO: Handle OPTIONS and other methods
         $response = match ($request->getMethod()) {
-            "OPTIONS" => $this->handleOptionsRequest($request),
+            "DELETE" => $this->handleDeleteRequest($request),
             "GET" => $this->handleGetRequest($request),
+            "OPTIONS" => $this->handleOptionsRequest($request),
+            "POST" => $this->handlePostRequest($request),
+            "PUT" => $this->handlePutRequest($request),
             default => throw new \App\ClientException(\App\ResponseCode::METHOD_NOT_ALLOWED, "Method '{$request->getMethod()}' is not allowed for this endpoint"),
         };
 

@@ -16,7 +16,7 @@ class AuthorAffiliation extends ChiEndpoint
     private ?int $contentId = null;
     private ?string $countryName = null;
 
-    protected function parseQueryParameter(string $key, string $value): void
+    protected function parseQueryParameter(string $method, string $key, string $value): void
     {
         if ($key === 'content') {
             if ($this->countryName !== null) {
@@ -32,7 +32,7 @@ class AuthorAffiliation extends ChiEndpoint
                 throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Country '$value' does not exist in the database");
             }
         } else {
-            parent::parseQueryParameter($key, $value);
+            parent::parseQueryParameter($method, $key, $value);
         }
     }
 

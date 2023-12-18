@@ -8,12 +8,12 @@ class Note extends UserEndpoint
 {
     private ?int $contentId = null;
 
-    protected function parseQueryParameter(string $key, string $value): void
+    protected function parseQueryParameter(string $method, string $key, string $value): void
     {
         if ($key === 'contentid') {
             $this->contentId = \App\ArgumentParser::parseInt($key, $value, 1, PHP_INT_MAX);
         } else {
-            parent::parseQueryParameter($key, $value);
+            parent::parseQueryParameter($method, $key, $value);
         }
     }
 

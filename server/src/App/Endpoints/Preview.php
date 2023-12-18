@@ -13,12 +13,12 @@ class Preview extends ChiEndpoint
 {
     private int $limit = PHP_INT_MAX;
 
-    protected function parseQueryParameter(string $key, string $value): void
+    protected function parseQueryParameter(string $method, string $key, string $value): void
     {
         if ($key === 'limit') {
             $this->limit = \App\ArgumentParser::parseInt($key, $value, 1, PHP_INT_MAX);
         } else {
-            parent::parseQueryParameter($key, $value);
+            parent::parseQueryParameter($method, $key, $value);
         }
     }
 

@@ -19,7 +19,10 @@ function Note (props) {
   }
 
   function handleDelete () {
-    // TODO: Confirm delete
+    if (!window.confirm('Are you sure you want to delete this note?')) {
+      return
+    }
+
     // TODO: Make DELETE request to delete note
     // TODO: Remove self from notes
     alert(`Delete note ${props.id}`)

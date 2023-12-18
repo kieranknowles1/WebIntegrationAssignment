@@ -14,7 +14,7 @@ class ContentList extends ChiEndpoint
     private ?int $page = null;
     private ?string $type = null;
 
-    protected function parseQueryParameter(string $key, string $value): void
+    protected function parseQueryParameter(string $method, string $key, string $value): void
     {
         if ($key === 'page') {
             $this->page = \App\ArgumentParser::parseInt($key, $value, 1, PHP_INT_MAX);
@@ -25,7 +25,7 @@ class ContentList extends ChiEndpoint
                 throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Type '$value' does not exist");
             }
         } else {
-            parent::parseQueryParameter($key, $value);
+            parent::parseQueryParameter($method, $key, $value);
         }
     }
 

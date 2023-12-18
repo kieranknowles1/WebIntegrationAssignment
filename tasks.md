@@ -267,11 +267,11 @@ both features the following requirements should be met:
 
 - [ ] The features listed below can be presented as pages within the application or as components
       within existing pages. The features should be consistent with the overall design of the app.
-- [ ] A signed in user should remain signed in when navigating within the application.
-- [ ] Information should be stored using a cookie or local-storage so that if the user closes the
+- [x] A signed in user should remain signed in when navigating within the application.
+- [x] Information should be stored using a cookie or local-storage so that if the user closes the
       browser they are still signed in when they revisit the application.
-- [ ] When a user signs out, the application should not retain data about that user.
-- [ ] Confidential data about a user must not be logged in the console.
+- [x] When a user signs out, the application should not retain data about that user.
+- [x] Confidential data about a user must not be logged in the console.
 - [ ] Additional related features and functionality can be included if these would be meaningful in a
       real-world, public-facing application.
 
