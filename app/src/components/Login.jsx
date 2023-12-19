@@ -43,11 +43,13 @@ function Login (props) {
     removeUserFromLocalStorage()
   }
 
+  const CONTAINER_STYLE = 'flex flex-col md:flex-row md:justify-end'
+
   return (
     <div>
       {context === null
         ? (
-          <form className='flex flex-col md:flex-row md:justify-end'>
+          <form className={CONTAINER_STYLE}>
             <label>Email:
               <input type='text' className='text-background-button' value={username} onChange={e => setUsername(e.target.value)} />
             </label>
@@ -58,7 +60,9 @@ function Login (props) {
           </form>
           )
         : (
-          <button onClick={handleLogout}>Logout</button>
+          <div className={CONTAINER_STYLE}>
+            <button onClick={handleLogout} className='md:float-right'>Logout</button>
+          </div>
           )}
     </div>
   )
