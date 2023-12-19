@@ -30,8 +30,16 @@ class JsonResponse
 
     public function outputData(): void
     {
+        $data = $this->dataSource->getData();
+        $responseCode = $this->dataSource->getResponseCode();
         $this->outputHeaders();
-        http_response_code($this->dataSource->getResponseCode()->value);
-        echo json_encode($this->dataSource->getData());
+        http_response_code($responseCode->value);
+        if ($data !== null) {
+            echo json_encode($data);
+        } else {
+            if ($responseCode !== ResponseCode::NO_CONTENT) {
+                throw new \Exception("Data is null but response code is not 204");
+            }
+        }
     }
 }
