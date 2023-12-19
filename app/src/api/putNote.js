@@ -1,32 +1,36 @@
 import InvalidTokenError from '../errors/InvalidTokenError.js'
 
 /**
- * Binding for deletes to the `/api/user/note` endpoint.
+ * Binding for puts to the `/api/user/note` endpoint.
  *
- * Delete a note by its ID.
+ * Updates a note by its ID.
  *
  * @author Kieran Knowles
  * @generated Github Copilot was used to assist in writing this code.
  * @param {string} token The token to use to authenticate with the API.
- * @param {number} noteId The ID of the note to delete. Must belong to the user who owns the token.
- * @returns {Promise<void>} A promise that resolves when the note has been deleted. No value is returned.
+ * @param {number} noteId The ID of the note to update. Must belong to the user who owns the token.
+ * @param {string} text The content of the note.
+ * @returns {Promise<void>} A promise that resolves when the note has been updated. No value is returned.
  */
-export default async function deleteNote (token, noteId) {
+export default async function putNote (token, noteId, text) {
   const params = new URLSearchParams({
     noteId: noteId.toString()
   })
 
   return fetch('https://w20013000.nuwebspace.co.uk/api/user/note?' + params, {
-    method: 'DELETE',
+    method: 'PUT',
     headers: new Headers({
       Authorization: 'Bearer ' + token
+    }),
+    body: JSON.stringify({
+      text
     })
   }).then(res => {
     if (res.status === 401) {
       throw new InvalidTokenError()
     }
     if (res.status !== 204) {
-      throw new Error('Failed to delete note')
+      throw new Error('Failed to edit note')
     }
     // Nothing to return
   })

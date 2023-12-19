@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import deleteNote from '../api/deleteNote'
-import UserContext from '../contexts/UserContext'
-import useNotNullContext from '../utils/useNotNullContext'
+
 import InvalidTokenError from '../errors/InvalidTokenError'
+import UserContext from '../contexts/UserContext'
+import deleteNote from '../api/deleteNote'
+import useNotNullContext from '../utils/useNotNullContext'
+import putNote from '../api/putNote'
 
 /**
  * Note component
@@ -15,14 +17,41 @@ function Note (props) {
   // Shouldn't be possible to get here without being logged in
   const context = useNotNullContext(UserContext)
 
+  const [editing, setEditing] = React.useState(false)
+  const [editText, setEditText] = React.useState(props.text)
+
   const newLinesText = props.text
     .split('\n')
     .map((line, i) => <React.Fragment key={i}>{line}<br /></React.Fragment>)
 
-  function handleEdit () {
-    // TODO: textarea to edit
-    // TODO: Make PUT request to edit note
-    alert(`Edit note ${props.id}`)
+  function handleEditStart () {
+    setEditing(true)
+    setEditText(props.text)
+  }
+
+  function handleEditSubmit (e) {
+    e.preventDefault()
+
+    // TODO: PUT new note text
+    putNote(context.token, props.id, editText)
+      .then(() => {
+        setEditing(false)
+        props.setAllNotes(props.allNotes.map(note => {
+          if (note.id === props.id) {
+            return { ...note, text: editText }
+          } else {
+            return note
+          }
+        }))
+      })
+      .catch(err => {
+        if (err instanceof InvalidTokenError) {
+          props.handleTokenRejected()
+        } else {
+          console.error(err)
+          alert('Failed to edit note')
+        }
+      })
   }
 
   function handleDelete () {
@@ -47,9 +76,30 @@ function Note (props) {
 
   return (
     <li className='border border-gray-950'>
-      <button className='float-right' onClick={handleDelete}>Delete</button>
-      <button className='float-right' onClick={handleEdit}>Edit</button>
-      <p>{newLinesText}</p>
+      {editing
+        ? (
+          <>
+            <form onSubmit={handleEditSubmit}>
+              <label>New text:
+                <textarea
+                  value={editText}
+                  onChange={e => setEditText(e.target.value)}
+                  required
+                  className='w-full h-32'
+                />
+              </label>
+              <input type='submit' value='Save' />
+              <button onClick={() => setEditing(false)}>Cancel</button>
+            </form>
+          </>
+          )
+        : (
+          <>
+            <button className='float-right' onClick={handleDelete}>Delete</button>
+            <button className='float-right' onClick={handleEditStart}>Edit</button>
+            <p>{newLinesText}</p>
+          </>
+          )}
     </li>
   )
 }

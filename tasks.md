@@ -143,10 +143,10 @@ See [KF6012 Assessment Brief](KF6012%20-%20CIS%20Assessment%202023-24.pdf) for e
     - [x] Take the content ID and the note text as parameters
     - [x] Users must be authenticated with a valid JWT token
     - [x] Return the new note ID
-  - [ ] PUT
-    - [ ] Update an existing note
-    - [ ] Take the note ID and the note text as parameters
-    - [ ] Users must be authenticated with a valid JWT token
+  - [x] PUT
+    - [x] Update an existing note
+    - [x] Take the note ID and the note text as parameters
+    - [x] Users must be authenticated with a valid JWT token
   - [x] DELETE
     - [x] Delete an existing note
     - [x] Take the note ID as a parameter
@@ -289,12 +289,12 @@ The following features should be implemented:
   - [x] When a user signs out the token should no longer be stored by the browser.
   - [x] Relevant error messages should be displayed when there are unsuccessful attempts to sign in.
 
-- [ ] Notes
+- [x] Notes
   - [x] Signed in users must be able to add notes about items of content.
   - [x] The user should be able to type a short note (limiting the note to around 250 characters is acceptable
         if you wish) regarding an individual item of content.
   - [x] This note should be saved by the API.
   - [x] Logged in users should be able to see notes they have previously created.
-    - [ ] Should be able to edit existing notes.
-    - [ ] Should be able to delete notes.
+    - [x] Should be able to edit existing notes.
+    - [x] Should be able to delete notes.
   - [x] Users should only be able to see, edit or delete their own notes, not those made by other people.

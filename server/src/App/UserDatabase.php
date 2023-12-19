@@ -94,9 +94,35 @@ class UserDatabase
     }
 
     /**
+     * Update a note with a given ID and belonging to a given user
+     * @param int $userId The ID of the user to update the note for
+     * @param int $noteId The ID of the note to update
+     * @param string $text The new text of the note
+     * @throws ClientException If the note does not exist or does not belong to the user
+     */
+    public function updateNoteText(int $userId, int $noteId, string $text): void
+    {
+        $rowsAffected = $this->connection->runUpdateSql("
+            UPDATE note
+            SET text = :text
+            WHERE id = :noteId AND user_id = :userId
+        ", [
+            "noteId" => $noteId,
+            "userId" => $userId,
+            "text" => $text,
+        ]);
+
+        // If no rows were affected, the note did not exist or did not belong to the user
+        if ($rowsAffected === 0) {
+            throw new ClientException(ResponseCode::NOT_FOUND, "Note not found or does not belong to user");
+        }
+    }
+
+    /**
      * Delete a note with a given ID and belonging to a given user
      * @param int $userId The ID of the user to delete the note for
      * @param int $noteId The ID of the note to delete
+     * @throws ClientException If the note does not exist or does not belong to the user
      */
     public function deleteNote(int $userId, int $noteId): void
     {
