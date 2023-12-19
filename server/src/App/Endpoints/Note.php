@@ -12,7 +12,7 @@ class Note extends UserEndpoint
 
     protected function parseQueryParameter(string $method, string $key, string $value): void
     {
-        if ($method === 'GET' && $key === 'contentid') {
+        if (($method === 'GET' || $method === 'POST') && $key === 'contentid') {
             $this->contentId = \App\ArgumentParser::parseInt($key, $value, 1, PHP_INT_MAX);
         } elseif ($method === 'DELETE' && $key === 'noteid') {
             $this->noteId = \App\ArgumentParser::parseInt($key, $value, 1, PHP_INT_MAX);
