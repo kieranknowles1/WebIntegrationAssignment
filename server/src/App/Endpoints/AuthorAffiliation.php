@@ -49,4 +49,9 @@ class AuthorAffiliation extends ChiEndpoint
 
         return new ResponseData($data, \App\ResponseCode::OK);
     }
+
+    protected function getSupportedMethods(): array
+    {
+        return ['GET'];
+    }
 }

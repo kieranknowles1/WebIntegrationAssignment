@@ -83,4 +83,9 @@ class Note extends UserEndpoint
             \App\ResponseCode::NO_CONTENT,
         );
     }
+
+    protected function getSupportedMethods(): array
+    {
+        return ['GET', 'POST', 'DELETE', 'PUT'];
+    }
 }

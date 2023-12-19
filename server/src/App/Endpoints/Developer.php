@@ -17,4 +17,9 @@ class Developer extends Endpoint
             'student_id' => 'w20013000',
         ], \App\ResponseCode::OK);
     }
+
+    protected function getSupportedMethods(): array
+    {
+        return ['GET'];
+    }
 }

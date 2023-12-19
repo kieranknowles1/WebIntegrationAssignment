@@ -47,4 +47,9 @@ class Token extends UserEndpoint
 
         return new ResponseData($token, \App\ResponseCode::OK, self::AUTH_HEADERS);
     }
+
+    protected function getSupportedMethods(): array
+    {
+        return ["GET"];
+    }
 }

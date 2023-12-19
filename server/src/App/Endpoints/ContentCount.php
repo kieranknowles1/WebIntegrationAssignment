@@ -23,4 +23,9 @@ class ContentCount extends ChiEndpoint
             \App\ResponseCode::OK
         );
     }
+
+    protected function getSupportedMethods(): array
+    {
+        return ['GET'];
+    }
 }

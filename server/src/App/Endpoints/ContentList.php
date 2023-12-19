@@ -33,4 +33,9 @@ class ContentList extends ChiEndpoint
     {
         return new ResponseData($this->getDatabase()->getContent($this->page, $this->type), \App\ResponseCode::OK);
     }
+
+    protected function getSupportedMethods(): array
+    {
+        return ['GET'];
+    }
 }

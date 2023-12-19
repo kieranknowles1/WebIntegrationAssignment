@@ -15,4 +15,9 @@ class Country extends ChiEndpoint
     {
         return new ResponseData($this->getDatabase()->getCountries(), \App\ResponseCode::OK);
     }
+
+    protected function getSupportedMethods(): array
+    {
+        return ['GET'];
+    }
 }

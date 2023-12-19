@@ -43,6 +43,13 @@ abstract class Endpoint implements \App\DataSource
     }
 
     /**
+     * Get the methods supported by this endpoint
+     * NOTE: All endpoints implicitly support OPTIONS
+     * @return string[] the supported methods
+     */
+    abstract protected function getSupportedMethods(): array;
+
+    /**
      * Parse a GET parameter and check that it is valid
      * @param string $key the lower case name of the parameter
      * @param string $value the value of the parameter
@@ -64,10 +71,9 @@ abstract class Endpoint implements \App\DataSource
 
     protected function handleOptionsRequest(\App\Request $request): ResponseData
     {
-        return new ResponseData(null, \App\ResponseCode::OK, [
+        return new ResponseData(null, \App\ResponseCode::NO_CONTENT, [
             'Access-Control-Allow-Headers: Authorization',
-            // TODO: Get which methods are allowed from the endpoint
-            'Access-Control-Allow-Methods: GET, OPTIONS, POST, PUT, DELETE',
+            'Access-Control-Allow-Methods: OPTIONS, ' . implode(', ', $this->getSupportedMethods()),
         ]);
     }
 

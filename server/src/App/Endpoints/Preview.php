@@ -26,4 +26,9 @@ class Preview extends ChiEndpoint
     {
         return new ResponseData($this->getDatabase()->getRandomPreviews($this->limit), \App\ResponseCode::OK);
     }
+
+    protected function getSupportedMethods(): array
+    {
+        return ['GET'];
+    }
 }

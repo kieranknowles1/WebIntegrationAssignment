@@ -15,4 +15,9 @@ class ContentTypes extends ChiEndpoint
     {
         return new ResponseData($this->getDatabase()->getContentTypes(), \App\ResponseCode::OK);
     }
+
+    protected function getSupportedMethods(): array
+    {
+        return ['GET'];
+    }
 }
