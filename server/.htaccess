@@ -9,6 +9,8 @@ RewriteRule api - [NC,L]
 RewriteRule app/ - [NC,L]
 RewriteRule app - [NC,L]
 
+RewriteRule redoc-static.html - [NC,L]
+
 # NOTE: Paths without trailing slashes redirect to the servers hostname. Trying to
 # prevent this causes a 403 error, not sure how to fix this.
 

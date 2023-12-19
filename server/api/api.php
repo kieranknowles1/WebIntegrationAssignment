@@ -12,8 +12,14 @@ require_once "../config/settings.php";
 require_once "../config/autoloader.php";
 require_once "../config/exceptionhandler.php";
 
-$request = App\Request::fromGlobals();
-$endpoint = App\Router::route($request);
-$endpoint->handleRequest($request);
-$response = new App\JsonResponse($endpoint);
-$response->outputData();
+try {
+    $request = App\Request::fromGlobals();
+    $endpoint = App\Router::route($request);
+    $endpoint->handleRequest($request);
+    $response = new App\JsonResponse($endpoint);
+    $response->outputData();
+} catch (App\ClientException $e) {
+    $response = new App\JsonResponse(new App\ExceptionDataSource($e));
+    $response->outputData();
+}
+// Other exceptions (500) are handled by the exception handler

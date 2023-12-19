@@ -16,6 +16,7 @@ class Settings
 
     public const CHI_DATABASE_FILE = self::SERVER_ROOT . 'data/chi2023.sqlite';
     public const USER_DATABASE_FILE = self::SERVER_ROOT . 'data/users.sqlite';
+    public const ERROR_LOG_FILE = self::SERVER_ROOT . 'data/error.log';
 
     public const API_ROOT = '/api/';
 

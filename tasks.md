@@ -17,7 +17,7 @@ be zero.
       framework or library except the JWT library specified for task 1. 2.
 - [x] The coursework must use the _chi2023.sqlite_ database provided and must not modify this. The
       _users.sqlite_ database should also be used and can be modified.
-- [ ] Your work must include a readme file giving the full URL for every endpoint implemented and
+- [x] Your work must include a readme file giving the full URL for every endpoint implemented and
       clearly listing what parameters are supported and how to use them (see appendix 1).
 
 ### Quality requirements for part 1
@@ -76,7 +76,7 @@ for each endpoint is given below:
 - [x] All endpoints except endpoint 1 must retrieve data from the _chi2023.sqlite_ database.
 - [x] The name of the endpoint is what should appear in the URL path, for example the endpoint
       'developer' might have the URL https://nuwebspace.co.uk/kf6012/coursework/api/developer
-- [ ] The full URL for each endpoint should be given in the readme file. For each parameter
+- [x] The full URL for each endpoint should be given in the readme file. For each parameter
       supported there should also be a clear example (see appendix 1).
 - [x] An endpoint should work whether or not there is a trailing slash at the end of the URL.
 
@@ -114,7 +114,7 @@ make a new database table. A list of general requirements for each endpoint is g
 
 - [x] All general requirements for task 1.1 must be met except regarding the request methods.
 - [x] The endpoints for this task should support appropriate request methods, not limited to GET
-- [ ] A full URL for both endpoints must be given in the readme file and the parameters clearly
+- [x] A full URL for both endpoints must be given in the readme file and the parameters clearly
       explained (see appendix 1).
 - [x] When generating a JWT a unique secure key consisting of random characters must be used
 - [x] An external library 'firebase/php-jwt' introduced on the module can be used for this task
@@ -172,7 +172,7 @@ may be zero.
       use server-side React components. You can use any appropriate build tools and third-party
       components you wish. You should use JavaScript (not TypeScript).
 - [x] The application must interact with your Web API created for part 1.
-- [ ] You must submit the source code on Blackboard, not just the build files used for deploying the
+- [x] You must submit the source code on Blackboard, not just the build files used for deploying the
       app.
 - [x] You must not copy text, images, logos or colour schemes from the original CHI 2023
       conference website or any related sources.

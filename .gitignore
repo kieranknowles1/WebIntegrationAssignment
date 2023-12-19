@@ -26,6 +26,7 @@ vendor
 
 # Compiler output
 server/app
+redoc-static.html
 
 # Database
 # NOTE: This should be *.sqlite, but want to keep chi2023.sqlite in its original format

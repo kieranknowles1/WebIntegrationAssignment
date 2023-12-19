@@ -4,7 +4,12 @@ info:
   description: |
     API for the Web Integration Assignment \
     Author: Kieran Knowles \
-    Generated with assistance from GitHub Copilot
+    Generated with assistance from GitHub Copilot \
+
+    Usage: \
+    All endpoints are hosted at https://w20013000.nuwebspace.co.uk/api \
+    Paths along with methods are documented on the right hand side of the page \
+    Clicking on a path will expand it to the full path on the server \
   version: "1.0"
 
 servers: [{ url: https://w20013000.nuwebspace.co.uk/api }]

@@ -13,7 +13,20 @@ set_exception_handler(function (Throwable $exception): void {
     $response = new \App\JsonResponse($dataSource);
     $response->outputData();
 
-    // TODO: Log exception to a file
+    // Open or create the log file
+    $logFile = fopen(\Settings::ERROR_LOG_FILE, "a");
+    // Can't do much if the log file can't be opened
+    if ($logFile !== false) {
+        fwrite($logFile, json_encode([
+            'timestamp' => time(),
+            'message' => $exception->getMessage(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+            'stacktrace' => $exception->getTrace(),
+        ]));
+        fwrite($logFile, "\n");
+        fclose($logFile);
+    }
 });
 
 /**
