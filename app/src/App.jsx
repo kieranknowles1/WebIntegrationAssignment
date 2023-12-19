@@ -58,9 +58,7 @@ function App () {
 
   return (
     <UserContext.Provider value={userContext}>
-      <div className='float-right'>
-        <Login setUserContext={setUserContext} />
-      </div><br />
+      <Login setUserContext={setUserContext} />
       <NavMenu items={navRoutes} />
       <Routes>
         {toRoutes(navRoutes)}

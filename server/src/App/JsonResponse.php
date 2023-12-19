@@ -2,7 +2,6 @@
 
 namespace App;
 
-// TODO: Set code 204 if there is no data and don't set the Content-Type header
 /**
  * A response from an endpoint encoded as JSON
  *
@@ -20,7 +19,10 @@ class JsonResponse
 
     public function outputHeaders(): void
     {
-        header('Content-Type: application/json');
+        // Content-Type is meaningless for 204 No Content.
+        if ($this->dataSource->getResponseCode() !== ResponseCode::NO_CONTENT) {
+            header('Content-Type: application/json');
+        }
         header('Access-Control-Allow-Origin: *');
         http_response_code($this->dataSource->getResponseCode()->value);
         foreach ($this->dataSource->getExtraHeaders() as $header) {
@@ -32,14 +34,18 @@ class JsonResponse
     {
         $data = $this->dataSource->getData();
         $responseCode = $this->dataSource->getResponseCode();
+
+        // 204 must be sent when there is no body and must not be sent when there is a body
+        if ($responseCode === ResponseCode::NO_CONTENT && $data !== null) {
+            throw new \LogicException("Response code is 204 No Content but data is not null");
+        } elseif ($responseCode !== ResponseCode::NO_CONTENT && $data === null) {
+            throw new \LogicException("Response code is not 204 No Content but data is null");
+        }
+
         $this->outputHeaders();
         http_response_code($responseCode->value);
         if ($data !== null) {
             echo json_encode($data);
-        } else {
-            if ($responseCode !== ResponseCode::NO_CONTENT) {
-                throw new \Exception("Data is null but response code is not 204");
-            }
         }
     }
 }

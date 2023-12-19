@@ -10,9 +10,10 @@ require_once "autoloader.php";
  */
 set_exception_handler(function (Throwable $exception): void {
     $dataSource = new \App\ExceptionDataSource($exception);
-    // TODO: Centralise access to the response object
     $response = new \App\JsonResponse($dataSource);
     $response->outputData();
+
+    // TODO: Log exception to a file
 });
 
 /**

@@ -47,7 +47,7 @@ function Login (props) {
     <div>
       {context === null
         ? (
-          <form>
+          <form className='flex flex-col md:flex-row md:justify-end'>
             <label>Email:
               <input type='text' className='text-background-button' value={username} onChange={e => setUsername(e.target.value)} />
             </label>

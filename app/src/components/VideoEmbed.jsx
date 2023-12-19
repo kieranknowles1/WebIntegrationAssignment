@@ -17,6 +17,8 @@ function VideoEmbed (props) {
     <iframe
         width="560"
         height="315"
+        // Avoid overflow if on a small screen
+        className='max-w-full'
         src={props.link}
         title="YouTube video player"
         allow="fullscreen" />

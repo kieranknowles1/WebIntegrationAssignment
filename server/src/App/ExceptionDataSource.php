@@ -38,12 +38,11 @@ class ExceptionDataSource implements DataSource
                 'detail' => $clientException->getDetail(),
             ];
         } else {
-            // TODO: Should I be returning all this information?
+            // Don't leak internal details to the client
+            // This will be logged internally, just return a generic error
             return [
-                'error' => $this->exception->getMessage(),
-                'file' => $this->exception->getFile(),
-                'line' => $this->exception->getLine(),
-                'trace' => $this->exception->getTrace(),
+                'error' => 'Internal server error',
+                'detail' => 'An internal server error occurred',
             ];
         }
     }

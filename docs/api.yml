@@ -449,6 +449,8 @@ components:
               title:
                 type: string
                 description: The title of the content.
+            additionalProperties: false
+            required: [id, title]
       additionalProperties: false
       required:
         - author_id

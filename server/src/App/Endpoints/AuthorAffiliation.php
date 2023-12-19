@@ -2,8 +2,6 @@
 
 namespace App\Endpoints;
 
-// TODO: Update API docs
-
 /**
  * Endpoint to get previews of random content from the CHI database
  * Results are ordered randomly and content without a preview video is excluded

@@ -32,7 +32,6 @@ function Note (props) {
   function handleEditSubmit (e) {
     e.preventDefault()
 
-    // TODO: PUT new note text
     putNote(context.token, props.id, editText)
       .then(() => {
         setEditing(false)

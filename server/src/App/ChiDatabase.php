@@ -2,7 +2,6 @@
 
 namespace App;
 
-// TODO: Should I put the queries in the endpoint classes and remove this?
 /**
  * Interface for the `chi2023.sqlite` database
  *

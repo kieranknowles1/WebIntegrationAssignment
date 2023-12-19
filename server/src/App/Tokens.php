@@ -22,7 +22,6 @@ abstract class Tokens
             "exp" => time() + \Settings::TOKEN_VALID_DURATION,
             "iss" => $_SERVER["HTTP_HOST"],
             "sub" => $userId,
-            // TODO: Any other fields to include?
         ];
 
         return JWT::encode($payload, \Settings::SECRET, 'HS256');

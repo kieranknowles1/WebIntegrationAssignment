@@ -9,5 +9,8 @@ RewriteRule api - [NC,L]
 RewriteRule app/ - [NC,L]
 RewriteRule app - [NC,L]
 
+# NOTE: Paths without trailing slashes redirect to the servers hostname. Trying to
+# prevent this causes a 403 error, not sure how to fix this.
+
 # Return 404 for all other requests
 RewriteRule ^ - [R=404,L]

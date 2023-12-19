@@ -2,6 +2,7 @@
 
 /**
  * Class that fetches data from the API and caches it after the first fetch.
+ * If a fetch fails, it will be retried on the next call to `get` and the promise will be rejected.
  * @template T The type of data returned by `fetcher`.
  *
  * @author Kieran Knowles
@@ -36,6 +37,7 @@ export default class Fetcher {
       this._status = 'done'
     } catch (err) {
       this._status = 'error'
+      // This is an async function, so throwing acts the same as reject(err)
       throw err
     }
 

@@ -99,6 +99,7 @@ function Content (props) {
       </select>
       {pageButtons}
       <LoadingDisplay status={getHighestStatus([contentStatus, contentTypesStatus, totalPagesStatus])} />
+      {contentStatus === 'done' && content.length === 0 && <p>No content found</p>}
       <ul className='grid sm:grid-cols-1 lg:grid-cols-2 gap-3'>
         {content.map(item => <ContentItem key={item.id} {...item} handleTokenRejected={props.handleTokenRejected} />)}
       </ul>
