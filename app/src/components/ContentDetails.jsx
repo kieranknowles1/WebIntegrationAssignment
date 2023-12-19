@@ -84,8 +84,12 @@ function ContentDetails (props) {
       <h3>Authors:</h3>
       <ul>
         <LoadingDisplay status={status} />
-        {/* //TODO: Author may appear multiple times on the same paper */}
-        {authors.map(author => <AuthorItem key={author.author_id} {...author} />)}
+        {/*
+          NOTE: Authors can appear multiple times with different affiliations.
+          No primary key, so can't use it as a React key.
+          Content is static, so index isn't a problem.
+        */}
+        {authors.map((author, index) => <AuthorItem key={index} {...author} />)}
       </ul>
       {context !== null
         ? (
