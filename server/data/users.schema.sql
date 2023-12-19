@@ -3,7 +3,7 @@ PRAGMA foreign_keys = OFF;
 
 -- Exported from users.sqlite
 DROP TABLE IF EXISTS account;
-CREATE TABLE IF NOT EXISTS account (
+CREATE TABLE account (
 	id	INTEGER NOT NULL UNIQUE,
 	name	TEXT,
 	email	TEXT UNIQUE,
@@ -17,13 +17,17 @@ INSERT INTO account VALUES
 
 -- New data
 DROP TABLE IF EXISTS note;
-CREATE TABLE IF NOT EXISTS note (
+CREATE TABLE note (
 	id INTEGER NOT NULL PRIMARY KEY,
 	user_id INTEGER NOT NULL REFERENCES account(id),
 	-- NOTE: Can't use REFERENCES here as content is in a different database
 	content_id INTEGER NOT NULL,
 	text TEXT NOT NULL
 );
+
+-- All searches will be by user_id and maybe content_id, so indexes on those
+CREATE INDEX index_note_by_user_id ON note (user_id);
+CREATE INDEX index_note_by_user_id_and_content_id ON note (user_id, content_id);
 
 -- Dummy note data
 INSERT INTO note
