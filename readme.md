@@ -19,6 +19,8 @@ https://w20013000.nuwebspace.co.uk/app/
 ## Additional Information
 
 ### API
+The source code for the API is located in the `./server` directory.
+
 The firebase-jwt package is included in the `.gitignore` file and must be installed manually if cloning this repository
 using the following command:
 ```bash
@@ -64,6 +66,8 @@ the following format:
 ```
 
 ### Web App
+The source code for the web app is located in the `./app` directory.
+
 While not written in TypeScript, the web app is checked by VS Code's TypeScript language server configured in
 `./app/jsconfig.json`. This allows for type checking through inferred types and JSDoc comments without depending on
 the TypeScript compiler. Most strict checks are enabled, with the exception of `noImplicitAny` as it would be unwieldy to implement with JSDoc comments.
