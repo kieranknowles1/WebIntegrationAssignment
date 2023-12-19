@@ -67,7 +67,7 @@ abstract class Endpoint implements \App\DataSource
         return new ResponseData(null, \App\ResponseCode::OK, [
             'Access-Control-Allow-Headers: Authorization',
             // TODO: Get which methods are allowed from the endpoint
-            'Access-Control-Allow-Methods: GET, OPTIONS',
+            'Access-Control-Allow-Methods: GET, OPTIONS, POST, PUT, DELETE',
         ]);
     }
 
@@ -75,7 +75,11 @@ abstract class Endpoint implements \App\DataSource
     {
         assert(!$this->handledRequest, "handleRequest called more than once");
 
-        $this->parseParameters($request);
+        // Browser sends OPTIONS request before any request with custom headers i.e. Authorization
+        // We don't care about any parameters here, so don't parse them
+        if ($request->getMethod() !== "OPTIONS") {
+            $this->parseParameters($request);
+        }
 
         $response = match ($request->getMethod()) {
             "DELETE" => $this->handleDeleteRequest($request),

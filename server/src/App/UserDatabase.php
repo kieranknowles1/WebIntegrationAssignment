@@ -92,4 +92,27 @@ class UserDatabase
         ]);
         return $this->connection->getLastInsertId();
     }
+
+    /**
+     * Delete a note with a given ID and belonging to a given user
+     * @param int $userId The ID of the user to delete the note for
+     * @param int $noteId The ID of the note to delete
+     */
+    public function deleteNote(int $userId, int $noteId): void
+    {
+        $rowsAffected = $this->connection->runUpdateSql("
+            DELETE FROM note
+            WHERE id = :noteId AND user_id = :userId
+        ", [
+            "noteId" => $noteId,
+            "userId" => $userId,
+        ]);
+
+        // If no rows were affected, the note did not exist or did not belong to the user
+        if ($rowsAffected === 0) {
+            throw new ClientException(ResponseCode::NOT_FOUND, "Note not found or does not belong to user");
+        }
+
+        // note.id is a primary key, so it should be impossible for more than one row to be affected
+    }
 }

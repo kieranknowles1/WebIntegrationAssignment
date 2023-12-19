@@ -44,8 +44,12 @@ function ContentDetails (props) {
       .then(notes => {
         setNotes(notes)
       })
-      .catch(() => {
-        props.handleTokenRejected()
+      .catch(err => {
+        if (err instanceof InvalidTokenError) {
+          props.handleTokenRejected()
+        } else {
+          console.error(err)
+        }
         setStatus('error')
       })
   }, [context && context.token, props.contentId])
@@ -80,6 +84,7 @@ function ContentDetails (props) {
       <h3>Authors:</h3>
       <ul>
         <LoadingDisplay status={status} />
+        {/* //TODO: Author may appear multiple times on the same paper */}
         {authors.map(author => <AuthorItem key={author.author_id} {...author} />)}
       </ul>
       {context !== null
@@ -89,7 +94,7 @@ function ContentDetails (props) {
             <LoadingDisplay status={status} />
             {status === 'done' && notes.length === 0 && <p>No notes found</p>}
             <ul>
-              {notes.map(note => <Note key={note.id} id={note.id} text={note.text} />)}
+              {notes.map(note => <Note key={note.id} id={note.id} text={note.text} allNotes={notes} setAllNotes={setNotes} handleTokenRejected={props.handleTokenRejected} />)}
             </ul>
             <form onSubmit={handleCreateNote}>
               <label>Make a note:

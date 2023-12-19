@@ -12,6 +12,7 @@ namespace App;
 enum ResponseCode: int
 {
     case OK = 200;
+    case NO_CONTENT = 204;
 
     case BAD_REQUEST = 400;
     case UNAUTHORIZED = 401;
@@ -25,6 +26,7 @@ enum ResponseCode: int
         // NOTE: PHPStan checks that this is exhaustive, so no need for a default case
         return match ($code) {
             ResponseCode::OK => "OK",
+            ResponseCode::NO_CONTENT => "No Content",
 
             ResponseCode::BAD_REQUEST => "Bad Request",
             ResponseCode::UNAUTHORIZED => "Unauthorized",

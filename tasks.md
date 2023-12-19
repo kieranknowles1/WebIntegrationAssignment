@@ -147,10 +147,10 @@ See [KF6012 Assessment Brief](KF6012%20-%20CIS%20Assessment%202023-24.pdf) for e
     - [ ] Update an existing note
     - [ ] Take the note ID and the note text as parameters
     - [ ] Users must be authenticated with a valid JWT token
-  - [ ] DELETE
-    - [ ] Delete an existing note
-    - [ ] Take the note ID as a parameter
-    - [ ] Users must be authenticated with a valid JWT token
+  - [x] DELETE
+    - [x] Delete an existing note
+    - [x] Take the note ID as a parameter
+    - [x] Users must be authenticated with a valid JWT token
 
 # Part 2 : Web application
 

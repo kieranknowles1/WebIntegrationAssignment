@@ -8,10 +8,14 @@ class Note extends UserEndpoint
 {
     private ?int $contentId = null;
 
+    private ?int $noteId = null;
+
     protected function parseQueryParameter(string $method, string $key, string $value): void
     {
-        if ($key === 'contentid') {
+        if ($method === 'GET' && $key === 'contentid') {
             $this->contentId = \App\ArgumentParser::parseInt($key, $value, 1, PHP_INT_MAX);
+        } elseif ($method === 'DELETE' && $key === 'noteid') {
+            $this->noteId = \App\ArgumentParser::parseInt($key, $value, 1, PHP_INT_MAX);
         } else {
             parent::parseQueryParameter($method, $key, $value);
         }
@@ -58,6 +62,25 @@ class Note extends UserEndpoint
         return new ResponseData(
             $id,
             \App\ResponseCode::OK,
+        );
+    }
+
+    protected function handleDeleteRequest(\App\Request $request): ResponseData
+    {
+        if ($this->noteId === null) {
+            throw new \App\ClientException(\App\ResponseCode::BAD_REQUEST, "Missing required query parameter 'noteid'");
+        }
+
+        $userId = Tokens::getTokenUserId($request);
+
+        $this->getDatabase()->deleteNote(
+            $userId,
+            $this->noteId
+        );
+
+        return new ResponseData(
+            null,
+            \App\ResponseCode::NO_CONTENT,
         );
     }
 }
